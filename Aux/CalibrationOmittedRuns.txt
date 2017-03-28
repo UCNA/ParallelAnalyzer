@@ -1,11 +1,9 @@
-18749 Has a residual of -146.109 on the Bismuth peak. This is also a reference run so I'm not sure 
-	what would cause something like this. There is a note in our run log here at UK which says 
-	the Bi pulser peak is very spread out and the lower and upper peaks are indistinguishable.
-	Is this a reason to get rid of PMTW4 for run period 7?
 
-Removing PMTW4 from run period 7...
-
-19232 I believe is way off the chart at least on the west side... I'll check into this
 
 For Run period 4, I am only using runs 17871-17922 as these were normal calibration run. After 
 	17922 the runs become long runs with the sources not being moved.
+
+
+
+
+

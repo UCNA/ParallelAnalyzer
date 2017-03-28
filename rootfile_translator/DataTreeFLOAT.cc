@@ -6,11 +6,13 @@ DataTreeFLOAT::DataTreeFLOAT() : inputFile(NULL), outputFile(NULL), inputTree(NU
 };
 
 DataTreeFLOAT::~DataTreeFLOAT() {
-  delete UCN_Mon_1_Rate; delete UCN_Mon_2_Rate; delete UCN_Mon_3_Rate; delete UCN_Mon_4_Rate; 
+  //if (UCN_Mon_1_Rate) delete UCN_Mon_1_Rate;  
+  //if (UCN_Mon_2_Rate) delete UCN_Mon_2_Rate;
+  //if (UCN_Mon_3_Rate) delete UCN_Mon_3_Rate;
+  //if (UCN_Mon_4_Rate) delete UCN_Mon_4_Rate; 
   if (outputTree) delete outputTree;
-  if (outputFile) {outputFile->Close();  delete outputFile;}
-  if (inputTree) delete inputTree;
-  if (inputFile) { inputFile->Close(); delete inputFile;}
+  if (outputFile) delete outputFile;
+  if (inputFile) delete inputFile;
 };
 
 void DataTreeFLOAT::makeOutputTree(std::string outputFileName, std::string outputTreeName) {
@@ -38,10 +40,10 @@ void DataTreeFLOAT::makeOutputTree(std::string outputFileName, std::string outpu
   outputTree->Branch("yEmpm",&yE,"center/F:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/F:height");
   outputTree->Branch("xWmpm",&xW,"center/F:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/F:height");
   outputTree->Branch("yWmpm",&yW,"center/F:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/F:height");
-  outputTree->Branch("Cathodes_Ex",&Cathodes_Ex,"Cathodes_Ex/F");
-  outputTree->Branch("Cathodes_Ey",&Cathodes_Ey,"Cathodes_Ey/F");
-  outputTree->Branch("Cathodes_Wx",&Cathodes_Wx,"Cathodes_Wx/F");
-  outputTree->Branch("Cathodes_Wy",&Cathodes_Wy,"Cathodes_Wy/F");
+  outputTree->Branch("Cathodes_Ex",Cathodes_Ex,"Cathodes_Ex[16]/F");
+  outputTree->Branch("Cathodes_Ey",Cathodes_Ey,"Cathodes_Ey[16]/F");
+  outputTree->Branch("Cathodes_Wx",Cathodes_Wx,"Cathodes_Wx[16]/F");
+  outputTree->Branch("Cathodes_Wy",Cathodes_Wy,"Cathodes_Wy[16]/F");
   outputTree->Branch("ScintE", &ScintE, "q1/F:q2:q3:q4:e1:de1:e2:de2:e3:de3:e4:de4:energy:denergy:nPE1:nPE2:nPE3:nPE4");
   outputTree->Branch("ScintW", &ScintW, "q1/F:q2:q3:q4:e1:de1:e2:de2:e3:de3:e4:de4:energy:denergy:nPE1:nPE2:nPE3:nPE4");
   outputTree->Branch("EvisE",&EvisE,"EvisE/F");
@@ -85,6 +87,11 @@ void DataTreeFLOAT::makeOutputTree(std::string outputFileName, std::string outpu
   outputTree->Branch("Type",&Type,"Type/I");
   outputTree->Branch("ProbIII",&ProbIII,"ProbIII/F");
   outputTree->Branch("Erecon",&Erecon,"Erecon/F");
+
+  outputTree->Branch("badTimeFlag",&badTimeFlag,"badTimeFlag/I");
+  outputTree->Branch("oldTimeE",&oldTimeE, "oldTimeE/F");
+  outputTree->Branch("oldTimeW",&oldTimeW, "oldTimeW/F");
+  outputTree->Branch("oldTime",&oldTime, "oldTime/F");
 
   std::cout << "Created output tree " << outputTreeName << " in " << outputFileName << "...\n";
 };
@@ -131,10 +138,10 @@ void DataTreeFLOAT::setupInputTree(std::string inputFileName, std::string inputT
   inputTree->SetBranchAddress("yE",&yE);
   inputTree->SetBranchAddress("xW",&xW);
   inputTree->SetBranchAddress("yW",&yW);
-  inputTree->SetBranchAddress("Cathodes_Ex",&Cathodes_Ex);
-  inputTree->SetBranchAddress("Cathodes_Ey",&Cathodes_Ey);
-  inputTree->SetBranchAddress("Cathodes_Wx",&Cathodes_Wx);
-  inputTree->SetBranchAddress("Cathodes_Wy",&Cathodes_Wy);
+  inputTree->SetBranchAddress("Cathodes_Ex",Cathodes_Ex);
+  inputTree->SetBranchAddress("Cathodes_Ey",Cathodes_Ey);
+  inputTree->SetBranchAddress("Cathodes_Wx",Cathodes_Wx);
+  inputTree->SetBranchAddress("Cathodes_Wy",Cathodes_Wy);
   inputTree->SetBranchAddress("ScintE", &ScintE);
   inputTree->SetBranchAddress("ScintW", &ScintW);
   inputTree->SetBranchAddress("EvisE",&EvisE);
@@ -178,6 +185,11 @@ void DataTreeFLOAT::setupInputTree(std::string inputFileName, std::string inputT
   inputTree->SetBranchAddress("Type",&Type);
   inputTree->SetBranchAddress("ProbIII",&ProbIII);
   inputTree->SetBranchAddress("Erecon",&Erecon);
+
+  inputTree->SetBranchAddress("badTimeFlag",&badTimeFlag);
+  inputTree->SetBranchAddress("oldTimeE",&oldTimeE);
+  inputTree->SetBranchAddress("oldTimeW",&oldTimeW);
+  inputTree->SetBranchAddress("oldTime",&oldTime);
 
   std::cout << "Prepared input tree " << inputTreeName << " in " << inputFileName << "...\n";
 };

@@ -81,28 +81,28 @@ void plot_source_peaks(TString runNumber)
     c1_1->SetLogy(0);
     his1_E0->SetXTitle("East PMT 1");
     his1_E0->GetXaxis()->CenterTitle();
-    his1_E0->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his1_E0->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his1_E0->Draw();
     
     c1_2->cd();
     c1_2->SetLogy(0);
     his1_E1->SetXTitle("East PMT 2");
     his1_E1->GetXaxis()->CenterTitle();
-    his1_E1->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his1_E1->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his1_E1->Draw();
     
     c1_3->cd();
     c1_3->SetLogy(0);
     his1_E2->SetXTitle("East PMT 3");
     his1_E2->GetXaxis()->CenterTitle();
-    his1_E2->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his1_E2->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his1_E2->Draw();
     
     c1_4->cd();
     c1_4->SetLogy(0);
     his1_E3->SetXTitle("East PMT 4");
     his1_E3->GetXaxis()->CenterTitle();
-    his1_E3->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his1_E3->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his1_E3->Draw();
     
     c1->Print(filenameOutFirst);
@@ -115,28 +115,28 @@ void plot_source_peaks(TString runNumber)
     c2_1->SetLogy(0);
     his1_W0->SetXTitle("West PMT 1");
     his1_W0->GetXaxis()->CenterTitle();
-    his1_W0->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his1_W0->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his1_W0->Draw();
     
     c2_2->cd();
     c2_2->SetLogy(0);
     his1_W1->SetXTitle("West PMT 2");
     his1_W1->GetXaxis()->CenterTitle();
-    his1_W1->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his1_W1->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his1_W1->Draw();
     
     c2_3->cd();
     c2_3->SetLogy(0);
     his1_W2->SetXTitle("West PMT 3");
     his1_W2->GetXaxis()->CenterTitle();
-    his1_W2->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his1_W2->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his1_W2->Draw();
 
     c2_4->cd();
     c2_4->SetLogy(0);
     his1_W3->SetXTitle("West PMT 4");
     his1_W3->GetXaxis()->CenterTitle();
-    his1_W3->GetXaxis()->SetRangeUser(0.0,upperRange+980.);
+    his1_W3->GetXaxis()->SetRangeUser(-50.0,upperRange+980.);
     his1_W3->Draw();
     
     if (nSources > 1 && (useSource[1] || useSource[2])) c2->Print(filenameOut);
@@ -154,28 +154,28 @@ void plot_source_peaks(TString runNumber)
     c3_1->SetLogy(0);
     his2_E0->SetXTitle("East PMT 1");
     his2_E0->GetXaxis()->CenterTitle();
-    his2_E0->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his2_E0->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his2_E0->Draw();
     
     c3_2->cd();
     c3_2->SetLogy(0);
     his2_E1->SetXTitle("East PMT 2");
     his2_E1->GetXaxis()->CenterTitle();
-    his2_E1->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his2_E1->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his2_E1->Draw();
     
     c3_3->cd();
     c3_3->SetLogy(0);
     his2_E2->SetXTitle("East PMT 3");
     his2_E2->GetXaxis()->CenterTitle();
-    his2_E2->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his2_E2->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his2_E2->Draw();
     
     c3_4->cd();
     c3_4->SetLogy(0);
     his2_E3->SetXTitle("East PMT 4");
     his2_E3->GetXaxis()->CenterTitle();
-    his2_E3->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his2_E3->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his2_E3->Draw();
     
     if (useSource[0]) c3->Print(filenameOut);
@@ -189,28 +189,28 @@ void plot_source_peaks(TString runNumber)
     c4_1->SetLogy(0);
     his2_W0->SetXTitle("West PMT 1");
     his2_W0->GetXaxis()->CenterTitle();
-    his2_W0->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his2_W0->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his2_W0->Draw();
     
     c4_2->cd();
     c4_2->SetLogy(0);
     his2_W1->SetXTitle("West PMT 2");
     his2_W1->GetXaxis()->CenterTitle();
-    his2_W1->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his2_W1->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his2_W1->Draw();
     
     c4_3->cd();
     c4_3->SetLogy(0);
     his2_W2->SetXTitle("West PMT 3");
     his2_W2->GetXaxis()->CenterTitle();
-    his2_W2->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his2_W2->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his2_W2->Draw();
     
     c4_4->cd();
     c4_4->SetLogy(0);
     his2_W3->SetXTitle("West PMT 4");
     his2_W3->GetXaxis()->CenterTitle();
-    his2_W3->GetXaxis()->SetRangeUser(0.0,upperRange+980.);
+    his2_W3->GetXaxis()->SetRangeUser(-50.0,upperRange+980.);
     his2_W3->Draw();
     
     if (nSources > 2 && useSource[2]) c4->Print(filenameOut);
@@ -230,28 +230,28 @@ void plot_source_peaks(TString runNumber)
     c5_1->SetLogy(0);
     his3_E0->SetXTitle("East PMT 1");
     his3_E0->GetXaxis()->CenterTitle();
-    his3_E0->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his3_E0->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his3_E0->Draw();
     
     c5_2->cd();
     c5_2->SetLogy(0);
     his3_E1->SetXTitle("East PMT 2");
     his3_E1->GetXaxis()->CenterTitle();
-    his3_E1->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his3_E1->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his3_E1->Draw();
     
     c5_3->cd();
     c5_3->SetLogy(0);
     his3_E2->SetXTitle("East PMT 3");
     his3_E2->GetXaxis()->CenterTitle();
-    his3_E2->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his3_E2->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his3_E2->Draw();
     
     c5_4->cd();
     c5_4->SetLogy(0);
     his3_E3->SetXTitle("East PMT 4");
     his3_E3->GetXaxis()->CenterTitle();
-    his3_E3->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his3_E3->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his3_E3->Draw();
     
     if (useSource[0] || useSource[1]) c5->Print(filenameOut);
@@ -265,28 +265,28 @@ void plot_source_peaks(TString runNumber)
     c6_1->SetLogy(0);
     his3_W0->SetXTitle("West PMT 1");
     his3_W0->GetXaxis()->CenterTitle();
-    his3_W0->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his3_W0->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his3_W0->Draw();
     
     c6_2->cd();
     c6_2->SetLogy(0);
     his3_W1->SetXTitle("West PMT 2");
     his3_W1->GetXaxis()->CenterTitle();
-    his3_W1->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his3_W1->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his3_W1->Draw();
     
     c6_3->cd();
     c6_3->SetLogy(0);
     his3_W2->SetXTitle("West PMT 3");
     his3_W2->GetXaxis()->CenterTitle();
-    his3_W2->GetXaxis()->SetRangeUser(0.0,upperRange);
+    his3_W2->GetXaxis()->SetRangeUser(-50.0,upperRange);
     his3_W2->Draw();
     
     c6_4->cd();
     c6_4->SetLogy(0);
     his3_W3->SetXTitle("West PMT 4");
     his3_W3->GetXaxis()->CenterTitle();
-    his3_W3->GetXaxis()->SetRangeUser(0.0,upperRange+980.);
+    his3_W3->GetXaxis()->SetRangeUser(-50.0,upperRange+980.);
     his3_W3->Draw();
     
     c6->Print(filenameOutLast);

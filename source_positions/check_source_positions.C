@@ -62,13 +62,13 @@ void check_source_positions(TString runNumber)
   TH2F *hiswxy = new TH2F("hiswxy", "", 100,-50.0,50.0, 100,-50.0,50.0);
 
   // Cuts
-  TCut *type = new TCut("(type_pass3 == 0)");
-  TCut *east = new TCut("(side_pass3 == 0)");
-  TCut *west = new TCut("(side_pass3 == 1)");
+  TCut *type = new TCut("(Type == 0)");
+  TCut *east = new TCut("(Side == 0)");
+  TCut *west = new TCut("(Side == 1)");
 
   // Project ntuple data into histograms
-  pass3->Draw("yE_pass3:xE_pass3 >> hisexy", *type && *east);
-  pass3->Draw("yW_pass3:xW_pass3 >> hiswxy", *type && *west);
+  pass3->Draw("yE.center:xE.center >> hisexy", *type && *east);
+  pass3->Draw("yW.center:xW.center >> hiswxy", *type && *west);
 
   // Find East peaks
   c1 = new TCanvas("c1","c1");

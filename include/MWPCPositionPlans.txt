@@ -1,0 +1,56 @@
+All of the combinations...
+
+  no clipping
+  no wires above threshold -> Position = 0.
+  1 wire above threshold -> position = wire position
+  2 consecutive wires above threshold -> Pick third wire on opposite side of max wire and set it equal to threshold.. fit with gaussian
+  3 consecutive wires above threshold -> Gaussian fit
+
+  Clipping...
+  1 clipped wire 
+     - no others above thresh -> Position = Clipped wire position
+     - 1 other neighbor above thresh -> Set wire on opposite side to threshold, fit with gaussian using clipped wire with signal 4096
+     - 2 neighbors -> Use clipped wire and fit with gaussian
+     - 3 neighbors -> fit these three wires with gaussian
+
+  2 clipped wires
+     - no others above thresh -> Position = average of two wires position
+     - 1 other neighbor above thresh -> add wire above thresh to neighbor, gaussian fit of all three
+     - 2 other neighbors above thresh -> 2 wires plus average of clipped wires with height 4096*1.25
+     - 3 neighbors above thresh -> Gaussian fit of three wires
+
+  More than 2 clipped wires
+     - average of clipped wires positions
+
+
+  Steps
+     - Calculate number of wires above threshold, and put them in trigger** vector
+     - If none are above threshold, set nClipped=0, move on
+     - If one is above threshold, set position to this point, check if it clipped
+     - If two are above threshold
+         - check for max and position of max
+	 - check for clipping, 
+	 - if both clipped, position is average of two wires
+	 - else pick one more wire on opposite side of lower wire, set it to 100. 
+	     - If max is edge wire, pick "ghost" wire outside outer wire, set it to 100.
+	 - and fit with gaussian
+     - If three or more are above threshold
+         - Check for max
+         - Check them for clipping
+	 - No Clipping -> Fit max and two neighbors with gaussian, if max is edge wire, use the two wires inside the plane
+	 - 1 Clipped -> use clipped wire and fit the three with gaussian, if edge is clipped, use the two wires in the plane
+	 - 2 Clipped 
+	     - 1 other above thresh -> add wire above thresh to it's clipped neighbor, gaussian fit of all three. 
+	     - 2 others above thresh -> 2 wires plus average of clipped wires with height 4096*1.25
+	     - 3 others above thresh -> use 3 wires in gaussian fit
+	 - 3 or more clipped
+	     - 3 others above thresh -> Fit with gaus
+	     - Else average clipped wires
+
+
+
+
+     Things to address
+     - multiple clusters of triggers for some backscattering events
+
+ 

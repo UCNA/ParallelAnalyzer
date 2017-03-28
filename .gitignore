@@ -4,6 +4,7 @@
 *#
 *cxx*
 *.pyc
+linearity_curves/*.pdf
 residuals/.*
 little_b/xuanSimData/*
 little_b/analyzed_files/*

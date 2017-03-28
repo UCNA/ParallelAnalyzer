@@ -22,6 +22,10 @@ pedestals.exe: pedestals.o
 	$(CXX) $(CXXFLAGS) -o pedestals.exe pedestals.o $(LIBS)
 	@echo "Done"
 
+pedestal_widths.exe: pedestal_widths.o
+	$(CXX) $(CXXFLAGS) -o pedestal_widths.exe pedestal_widths.o $(LIBS)
+	@echo "Done"
+
 # -------------------------------------------------------------------------------
 #  Generic compilation and linking step to make an executable from
 #  a single *.cc file

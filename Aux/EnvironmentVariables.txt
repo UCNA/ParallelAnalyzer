@@ -8,6 +8,9 @@ export UCNA_RAW_DATA=/path/to/rawDataDirectory
 # of readable data files as well as replayed data.
 export PARALLEL_DATA_PATH=/path/to/directory/containing/data/directories
 
+# This should be the path to the analysis code
+export ANALYSIS_CODE=/path/to/ParallelAnalyzer/
+
 
 # Set the ext below to whatever you want to be appended to your own personal directories
 # so that you do not overwrite others' directories. Mine is MB (my initials) so
@@ -26,10 +29,12 @@ export REPLAY_PASS3="${PARALLEL_DATA_PATH}/replay_pass3${ext}/"
 export REPLAY_PASS4="${PARALLEL_DATA_PATH}/replay_pass4${ext}/"
 export GAIN_BISMUTH="${PARALLEL_DATA_PATH}/gain_bismuth${ext}/"
 export NPE_WEIGHTS="${PARALLEL_DATA_PATH}/nPE_weights${ext}/"
+export LINEARITY_CURVES="${PARALLEL_DATA_PATH}/linearity_curves${ext}/"
+export POSITION_MAPS="${PARALLEL_DATA_PATH}/position_maps${ext}/"
 export OCTET_LIST="${PARALLEL_DATA_PATH}/octet_list${ext}/"
 export TRIGGER_FUNC="${PARALLEL_DATA_PATH}/trigger_functions${ext}/"
 export REVCALSIM="${PARALLEL_DATA_PATH}/reverse_cal_sim${ext}/"
-export CUTS="${PARALLEL_DATA_PATH}/CUTS${ext}/"	
+export CUTS="${PARALLEL_DATA_PATH}/cuts${ext}/"	
 export ANALYSIS_RESULTS="${PARALLEL_DATA_PATH}/analysis_results${ext}/"
 export MPM_ANALYSIS_RESULTS_MPM="${PARALLEL_DATA_PATH}/MPM_analysis_results${ext}/"
 export SIM_ANALYSIS_RESULTS="${PARALLEL_DATA_PATH}/sim_analysis_results${ext}/"	

@@ -3,15 +3,15 @@
 import os
 import shutil
 
-year = 2011
+year = 2012
 octet_file_base = None
 octet_range = []
 cuts_base = os.getenv("CUTS")
 if year==2011:
-    octet_file_base = "/extern/UCNA/octet_list_MB/2011-2012/"
+    octet_file_base = "%s/2011-2012/"%os.getenv("OCTET_LIST")
     octet_range = [0,59]
 elif year==2012:
-    octet_file_base = "/extern/UCNA/octet_list_MB/2012-2013/"
+    octet_file_base = "%s/2012-2013/"%os.getenv("OCTET_LIST")
     octet_range = [60,121]
 else:
     exit
@@ -24,7 +24,7 @@ for i in range(octet_range[0],octet_range[1]+1,1):
         for line in octFile:
             entries = line.split()
             octRuns.append(int(entries[1]))
-            #print int(entries[1])
+            print int(entries[1])
         refRun = None
         for run in octRuns:
             if os.path.isfile(cuts_base+"cuts_%i.dat"%run):

@@ -42,9 +42,9 @@ vector <vector <double> > returnSourcePosition (Int_t runNumber, string src) {
 void quick_plot_spectra(Int_t runNumber, string src) {
   Char_t temp[500];
   gStyle->SetOptStat(0);
-  sprintf(temp,"%s/replay_pass4_%i.root",getenv("REPLAY_PASS4"),runNumber);
+  sprintf(temp,"%s/replay_pass3_%i.root",getenv("REPLAY_PASS3"),runNumber);
   TFile *data = new TFile(temp,"READ");
-  TTree *TData = (TTree*)(data->Get("pass4"));
+  TTree *TData = (TTree*)(data->Get("pass3"));
   sprintf(temp,"%s/sources/revCalSim_%i_%s.root",getenv("REVCALSIM"),runNumber, src.c_str());
   TFile *sim = new TFile(temp,"READ");
   TTree *TSim = (TTree*)(sim->Get("revCalSim"));
@@ -72,24 +72,32 @@ void quick_plot_spectra(Int_t runNumber, string src) {
   sim_W_all->SetLineColor(kRed);
   Char_t cuts[1000];
   
-  //Type0
+  //All types
+
+  Double_t integralE, integralW, scaleValE, scaleValW;
+
+  Double_t normMin = 0., normMax = 1200.;
+
+  normMin = src=="Bi207" ? 900. : src=="Sn113" ? 300. : 80.;
+  normMax = src=="Bi207" ? 1100. : src=="Sn113" ? 450. : 170.;
 
   TCanvas *c1 = new TCanvas("c1","c1", 1200, 400);
   c1->Divide(2,1);
   c1->cd(1);
   sprintf(cuts,"PID==1 && Type<3 && Side==0 && EvisE>0. && xE.center>(%f-2.*%f) && xE.center<(%f+2.*%f) && yE.center>(%f-2.*%f) && yE.center<(%f+2.*%f)",srcPos[0][0],srcPos[0][2],srcPos[0][0],srcPos[0][2],srcPos[0][1],srcPos[0][2],srcPos[0][1],srcPos[0][2]);  
-  TData->Draw("EvisE>>data_E_all", cuts);
-  //data_E_all->GetXaxis()->SetRangeUser(0.,250.);
-  Double_t integralE = data_E_all->Integral();
+  TData->Draw("Erecon>>data_E_all", cuts);
+
+  data_E_all->GetXaxis()->SetRangeUser(normMin,normMax);
+  integralE = data_E_all->Integral();
   //Double_t
-  //data_E_all->GetXaxis()->SetRangeUser(0.,1200.);
+  data_E_all->GetXaxis()->SetRangeUser(0.,1200.);
 
   sprintf(cuts,"PID==1 && side==0 && type<3 && EvisE>0.");
-  TSim->Draw("EvisE>>sim_E_all",cuts,"SAME");
-  //sim_E_all->GetXaxis()->SetRangeUser(0.,250.);
-  //Double_t scaleValE = integralE/sim_E_all->Integral();
-  Double_t scaleValE = data_E_all->GetBinContent(data_E_all->GetMaximumBin())/sim_E_all->GetBinContent(sim_E_all->GetMaximumBin());
-  //sim_E_all->GetXaxis()->SetRangeUser(0.,1200.);
+  TSim->Draw("Erecon>>sim_E_all",cuts,"SAME");
+  sim_E_all->GetXaxis()->SetRangeUser(normMin,normMax);
+  scaleValE = integralE/sim_E_all->Integral();
+  //Double_t scaleValE = data_E_all->GetBinContent(data_E_all->GetMaximumBin())/sim_E_all->GetBinContent(sim_E_all->GetMaximumBin());
+  sim_E_all->GetXaxis()->SetRangeUser(0.,1200.);
   sim_E_all->Scale(scaleValE);
   sim_E_all->Draw("SAME");
 
@@ -97,18 +105,18 @@ void quick_plot_spectra(Int_t runNumber, string src) {
   c1->cd(2);
 
   sprintf(cuts,"PID==1 && Type<3 && Side==1 && EvisW>0. && xW.center>(%f-2.*%f) && xW.center<(%f+2.*%f) && yW.center>(%f-2.*%f) && yW.center<(%f+2.*%f)",srcPos[1][0],srcPos[1][2],srcPos[1][0],srcPos[1][2],srcPos[1][1],srcPos[1][2],srcPos[1][1],srcPos[1][2]);  
-  TData->Draw("EvisW>>data_W_all", cuts);
-  //data_W_all->GetXaxis()->SetRangeUser(0.,250.);
-  Double_t integralW = data_W_all->Integral();
-  //data_W_all->GetXaxis()->SetRangeUser(0.,1200.);
+  TData->Draw("Erecon>>data_W_all", cuts);
+  data_W_all->GetXaxis()->SetRangeUser(normMin,normMax);
+  integralW = data_W_all->Integral();
+  data_W_all->GetXaxis()->SetRangeUser(0.,1200.);
 
   sprintf(cuts,"PID==1 && side==1 && type<3 && EvisW>0.");
-  TSim->Draw("EvisW>>sim_W_all",cuts,"SAME");
-  //sim_W_all->GetXaxis()->SetRangeUser(0.,250.);
-  //Double_t scaleValW = integralW/sim_W_all->Integral();
-  Double_t scaleValW = data_W_all->GetBinContent(data_W_all->GetMaximumBin())/sim_W_all->GetBinContent(sim_W_all->GetMaximumBin());
+  TSim->Draw("Erecon>>sim_W_all",cuts,"SAME");
+  sim_W_all->GetXaxis()->SetRangeUser(normMin,normMax);
+  scaleValW = integralW/sim_W_all->Integral();
+  //Double_t scaleValW = data_W_all->GetBinContent(data_W_all->GetMaximumBin())/sim_W_all->GetBinContent(sim_W_all->GetMaximumBin());
 
-  //sim_W_all->GetXaxis()->SetRangeUser(0.,1200.);
+  sim_W_all->GetXaxis()->SetRangeUser(0.,1200.);
   sim_W_all->Scale(scaleValW);
   sim_W_all->Draw("SAME");
 

@@ -8,10 +8,10 @@ using namespace std;
 
 // Position bins
 const int nPMT = 8;
-const int nPosBinsX = 43;
-const int nPosBinsY = 43;  
-const double xBinWidth = 2.5;
-const double yBinWidth = 2.5;
+const int nPosBinsX = 23; //43;
+const int nPosBinsY = 23; //43;  
+const double xBinWidth = 5.;//2.5;
+const double yBinWidth = 5.;//2.5;
 double xBinLower[nPosBinsX];
 double xBinUpper[nPosBinsX];
 double xBinCenter[nPosBinsX];
@@ -42,7 +42,7 @@ void GetPositionMap(int XePeriod) {
   
   // Determine position map to use
   char tempFileXePositionMap[500];
-  sprintf(tempFileXePositionMap, "../position_map/position_map_%i_RC_123.dat",XePeriod);
+  sprintf(tempFileXePositionMap, "%s/position_map_%i_RC_123_%0.1fmm.dat",getenv("POSITION_MAPS"),XePeriod, xBinWidth);
   
   cout << "... Reading: " << tempFileXePositionMap << endl;
 

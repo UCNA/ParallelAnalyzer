@@ -16,6 +16,7 @@ using namespace std;
 
 // These are the weighted true peaks from the KLM CE sources
 const static double peakCe = 130.3;// 131.5956;//80.5;
+const static double peakIn = 174.35;
 const static double peakSn = 368.4938;//317.8;
 const static double peakBiLow = 498.;//501.420;//448.8;
 const static double peakBiHigh = 993.789;//926.;
@@ -79,7 +80,7 @@ string getIndiumSide(int runNumber) {
     //cout << "Connected to DB Server\n";
     TSQLResult *res = db->Query(cmd);
     int rows = res->GetRowCount();
-    cout << rows << endl;
+    //cout << rows << endl;
     TSQLRow *row = res->Next();
    
     if (!row) {

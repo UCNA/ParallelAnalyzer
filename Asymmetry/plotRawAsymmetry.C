@@ -1,6 +1,6 @@
 {
   //#include <vector>
-  gStyle->SetOptFit(1111);
+  //gStyle->SetOptFit(1111);
   gStyle->SetTitleStyle(0000);
   gStyle->SetTitleX(.25);
 

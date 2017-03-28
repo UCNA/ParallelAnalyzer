@@ -35,7 +35,7 @@ void fit_source_positions(TString runNumber)
 
   // Input ntuple
   TString filenameIn;
-  filenameIn  = TString(getenv("REPLAY_PASS3"))+TString("/replay_pass3_");
+  filenameIn  = TString(getenv("REPLAY_PASS2"))+TString("/replay_pass2_");
   filenameIn += runNumber;
   filenameIn += ".root";
   cout << "Processing ... " << filenameIn << endl;
@@ -68,8 +68,8 @@ void fit_source_positions(TString runNumber)
   TCut *west = new TCut("(Side == 1)");
 
   // Project ntuple data into histograms
-  pass3->Draw("yE.center:xE.center >> hisexy", *type && *east);
-  pass3->Draw("yW.center:xW.center >> hiswxy", *type && *west);
+  pass2->Draw("yE.center:xE.center >> hisexy", *type && *east);
+  pass2->Draw("yW.center:xW.center >> hiswxy", *type && *west);
 
   // Find East peaks
   c1 = new TCanvas("c1","c1");

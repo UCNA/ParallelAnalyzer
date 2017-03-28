@@ -1,16 +1,57 @@
 #include "DataTree.hh"
+#include <TSystem.h>
+#include <TKey.h>
 
 
-DataTree::DataTree() : inputFile(NULL), outputFile(NULL), inputTree(NULL), outputTree(NULL) {
+Int_t checkIfReplayFileIsGood(std::string fname) {
+
+  if ( gSystem->AccessPathName(fname.c_str()) ) {
+    std::cout << fname << " does not exist.\n";
+    return 0;
+  }
+  
+  // Open the file and give it a chance to recover broken keys
+  TFile *f = new TFile(fname.c_str(),"UPDATE");
+  
+  if ( f->IsZombie() ) {
+    std::cout << fname << " IS A ZOMBIE!!!\n";
+    delete f;
+    return -1;
+  }
+  
+  //If it's not a zombie, check that at least 5 keys exist...
+
+  TIter next(f->GetListOfKeys());
+  TKey *key;
+  Int_t nkeys = 0;
+  while ( (key=(TKey*)next()) ) nkeys++;
+
+  if ( nkeys < 5 ) {
+    std::cout << fname << " NOT FULLY RECOVERED!!!\n";
+    delete f;
+    return -1;
+  }
+
+  delete f;
+  return 1;
+
+};
+
+DataTree::DataTree() : inputFile(NULL), outputFile(NULL), inputTree(NULL), outputTree(NULL), bInputTreeIsGood(false) {
   
 };
 
 DataTree::~DataTree() {
-  delete UCN_Mon_1_Rate; delete UCN_Mon_2_Rate; delete UCN_Mon_3_Rate; delete UCN_Mon_4_Rate; 
+  //if (UCN_Mon_1_Rate) { std::cout << "trying to delete\n"; delete UCN_Mon_1_Rate; }
+  //if (UCN_Mon_2_Rate) delete UCN_Mon_2_Rate;
+  //if (UCN_Mon_3_Rate) delete UCN_Mon_3_Rate;
+  //if (UCN_Mon_4_Rate) delete UCN_Mon_4_Rate;
+  
   if (outputTree) delete outputTree;
-  if (outputFile) {outputFile->Close();  delete outputFile;}
-  if (inputTree) delete inputTree;
-  if (inputFile) { inputFile->Close(); delete inputFile;}
+  if (outputFile) delete outputFile;
+  if (inputFile) delete inputFile;
+  
+  
 };
 
 void DataTree::makeOutputTree(std::string outputFileName, std::string outputTreeName) {
@@ -39,10 +80,10 @@ void DataTree::makeOutputTree(std::string outputFileName, std::string outputTree
   outputTree->Branch("yE",&yE,"center/D:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/D:height");
   outputTree->Branch("xW",&xW,"center/D:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/D:height");
   outputTree->Branch("yW",&yW,"center/D:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/D:height");
-  outputTree->Branch("Cathodes_Ex",&Cathodes_Ex,"Cathodes_Ex/D");
-  outputTree->Branch("Cathodes_Ey",&Cathodes_Ey,"Cathodes_Ey/D");
-  outputTree->Branch("Cathodes_Wx",&Cathodes_Wx,"Cathodes_Wx/D");
-  outputTree->Branch("Cathodes_Wy",&Cathodes_Wy,"Cathodes_Wy/D");
+  outputTree->Branch("Cathodes_Ex",Cathodes_Ex,"Cathodes_Ex[16]/D");
+  outputTree->Branch("Cathodes_Ey",Cathodes_Ey,"Cathodes_Ey[16]/D");
+  outputTree->Branch("Cathodes_Wx",Cathodes_Wx,"Cathodes_Wx[16]/D");
+  outputTree->Branch("Cathodes_Wy",Cathodes_Wy,"Cathodes_Wy[16]/D");
   outputTree->Branch("ScintE", &ScintE, "q1/D:q2:q3:q4:e1:de1:e2:de2:e3:de3:e4:de4:energy:denergy:nPE1:nPE2:nPE3:nPE4");
   outputTree->Branch("ScintW", &ScintW, "q1/D:q2:q3:q4:e1:de1:e2:de2:e3:de3:e4:de4:energy:denergy:nPE1:nPE2:nPE3:nPE4");
   outputTree->Branch("EvisE",&EvisE,"EvisE/D");
@@ -86,7 +127,24 @@ void DataTree::makeOutputTree(std::string outputFileName, std::string outputTree
   outputTree->Branch("Type",&Type,"Type/I");
   outputTree->Branch("ProbIII",&ProbIII,"ProbIII/D");
   outputTree->Branch("Erecon",&Erecon,"Erecon/D");
+  outputTree->Branch("old_Erecon",&old_Erecon,"old_Erecon/D");
+  outputTree->Branch("gaus_Erecon",&gaus_Erecon,"gaus_Erecon/D");
 
+  outputTree->Branch("badTimeFlag",&badTimeFlag,"badTimeFlag/I");
+  outputTree->Branch("oldTimeE",&oldTimeE, "oldTimeE/D");
+  outputTree->Branch("oldTimeW",&oldTimeW, "oldTimeW/D");
+  outputTree->Branch("oldTime",&oldTime, "oldTime/D");
+
+  outputTree->Branch("old_xE",&old_xE,"center/D:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/D:height");
+  outputTree->Branch("old_yE",&old_yE,"center/D:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/D:height");
+  outputTree->Branch("old_xW",&old_xW,"center/D:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/D:height");
+  outputTree->Branch("old_yW",&old_yW,"center/D:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/D:height");
+
+  outputTree->Branch("gaus_xE",&gaus_xE,"center/D:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/D:height");
+  outputTree->Branch("gaus_yE",&gaus_yE,"center/D:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/D:height");
+  outputTree->Branch("gaus_xW",&gaus_xW,"center/D:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/D:height");
+  outputTree->Branch("gaus_yW",&gaus_yW,"center/D:width:cathSum:maxValue:maxWire/I:mult:nClipped:err:rawCenter/D:height");
+  
   std::cout << "Created output tree " << outputTreeName << " in " << outputFileName << "...\n";
 };
 
@@ -103,7 +161,14 @@ void DataTree::writeOutputFile() {
 };
 
 void DataTree::setupInputTree(std::string inputFileName, std::string inputTreeName) {
+  
+  // Check that the file is good...
+  if ( checkIfReplayFileIsGood(inputFileName.c_str()) != 1 ) return;
+
+  bInputTreeIsGood = true;
+
   inputFile = new TFile(inputFileName.c_str(),"READ");
+
   inputTree = (TTree*)(inputFile->Get(inputTreeName.c_str()));
   //inputTree = (TTree*)(gROOT->FindObject(inputTreeName.c_str()));
 
@@ -134,10 +199,10 @@ void DataTree::setupInputTree(std::string inputFileName, std::string inputTreeNa
   inputTree->SetBranchAddress("yE",&yE);
   inputTree->SetBranchAddress("xW",&xW);
   inputTree->SetBranchAddress("yW",&yW);
-  inputTree->SetBranchAddress("Cathodes_Ex",&Cathodes_Ex);
-  inputTree->SetBranchAddress("Cathodes_Ey",&Cathodes_Ey);
-  inputTree->SetBranchAddress("Cathodes_Wx",&Cathodes_Wx);
-  inputTree->SetBranchAddress("Cathodes_Wy",&Cathodes_Wy);
+  inputTree->SetBranchAddress("Cathodes_Ex",Cathodes_Ex);
+  inputTree->SetBranchAddress("Cathodes_Ey",Cathodes_Ey);
+  inputTree->SetBranchAddress("Cathodes_Wx",Cathodes_Wx);
+  inputTree->SetBranchAddress("Cathodes_Wy",Cathodes_Wy);
   inputTree->SetBranchAddress("ScintE", &ScintE);
   inputTree->SetBranchAddress("ScintW", &ScintW);
   inputTree->SetBranchAddress("EvisE",&EvisE);
@@ -181,6 +246,23 @@ void DataTree::setupInputTree(std::string inputFileName, std::string inputTreeNa
   inputTree->SetBranchAddress("Type",&Type);
   inputTree->SetBranchAddress("ProbIII",&ProbIII);
   inputTree->SetBranchAddress("Erecon",&Erecon);
+  inputTree->SetBranchAddress("old_Erecon",&old_Erecon);
+  inputTree->SetBranchAddress("gaus_Erecon",&gaus_Erecon);
+
+  inputTree->SetBranchAddress("badTimeFlag",&badTimeFlag);
+  inputTree->SetBranchAddress("oldTimeE",&oldTimeE);
+  inputTree->SetBranchAddress("oldTimeW",&oldTimeW);
+  inputTree->SetBranchAddress("oldTime",&oldTime);
+
+  inputTree->SetBranchAddress("old_xE",&old_xE);
+  inputTree->SetBranchAddress("old_yE",&old_yE);
+  inputTree->SetBranchAddress("old_xW",&old_xW);
+  inputTree->SetBranchAddress("old_yW",&old_yW);
+
+  inputTree->SetBranchAddress("gaus_xE",&gaus_xE);
+  inputTree->SetBranchAddress("gaus_yE",&gaus_yE);
+  inputTree->SetBranchAddress("gaus_xW",&gaus_xW);
+  inputTree->SetBranchAddress("gaus_yW",&gaus_yW);
 
   std::cout << "Prepared input tree " << inputTreeName << " in " << inputFileName << "...\n";
 };

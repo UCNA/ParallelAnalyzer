@@ -84,6 +84,12 @@ public:
   Float_t ProbIII; //Probability of type 3 event
   Float_t Erecon; //Final reconstructed energy of an event
 
+  // New variabled for beam cuts
+  Int_t badTimeFlag; //This is 0 for good events, 1 for bad events
+  Float_t oldTimeE;   // blinded time East
+  Float_t oldTimeW;   // blinded time West
+  Float_t oldTime;    // UNBLINDED time
+
   TH1F *UCN_Mon_1_Rate, *UCN_Mon_2_Rate, *UCN_Mon_3_Rate, *UCN_Mon_4_Rate;
 
   //std::string inputTreeName, outputTreeName; 

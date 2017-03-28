@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
   cout.precision(12);
 
   cout << "Run " << argv[1] << " ..." << endl;
-  cout << "... Creating spec_" << argv[1] << ".root from replay_pass4 data ..." << endl;
+  cout << "... Creating spec_" << argv[1] << ".root from replay_pass3 data ..." << endl;
 
   // Open output ntuple
   char tempOut[500];
@@ -43,11 +43,11 @@ int main(int argc, char *argv[])
 
   // Input ntuple
   char tempIn[500];
-  sprintf(tempIn, "%s/replay_pass4_%s.root", getenv("REPLAY_PASS4"),argv[1]);
+  sprintf(tempIn, "%s/replay_pass3_%s.root", getenv("REPLAY_PASS3"),argv[1]);
   //sprintf(tempIn, "../replay_pass2/replay_pass2_%s.root",argv[1]);
 
   DataTree *UK = new DataTree();
-  UK->setupInputTree(std::string(tempIn),"pass4");
+  UK->setupInputTree(std::string(tempIn),"pass3");
 
   int nEvents = UK->getEntries();
   cout << "... Processing nEvents = " << nEvents << endl;
@@ -111,6 +111,11 @@ int main(int argc, char *argv[])
     spec->Side = UK->Side;
     spec->ProbIII = (float)UK->ProbIII;
     spec->Erecon = (float)UK->Erecon;
+
+    spec->badTimeFlag = UK->badTimeFlag; 
+    spec->oldTimeE = (float)UK->oldTimeE;
+    spec->oldTimeW = (float)UK->oldTimeW;
+    spec->oldTime = (float)UK->oldTime;
 
     copy(UK->Cathodes_Ex,UK->Cathodes_Ex+16,spec->Cathodes_Ex);
     copy(UK->Cathodes_Ey,UK->Cathodes_Ey+16,spec->Cathodes_Ey);
@@ -201,6 +206,12 @@ int main(int argc, char *argv[])
 
     spec->fillOutputTree();
   }
+
+  spec->UCN_Mon_1_Rate = UK->UCN_Mon_1_Rate;
+  spec->UCN_Mon_2_Rate = UK->UCN_Mon_2_Rate;
+  spec->UCN_Mon_3_Rate = UK->UCN_Mon_3_Rate;
+  spec->UCN_Mon_4_Rate = UK->UCN_Mon_4_Rate;
+
 
   // Write output ntuple
   spec->writeOutputFile();

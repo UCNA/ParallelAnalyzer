@@ -26,9 +26,9 @@
 
   // East residuals
   double EQ[3];
-  EQ[0] = peakCe_EQ;//98.2;
-  EQ[1] = peakSn_EQ;//331.2;
-  EQ[2] = peakBiHigh_EQ;//928.0;
+  EQ[0] = 131.6;//98.2;
+  EQ[1] = 368.5;//331.2;
+  EQ[2] = 993.789;//928.0;
   double dEQ[3] = {};
 
   double resEast[3];

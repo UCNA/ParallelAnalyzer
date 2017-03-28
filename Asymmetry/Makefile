@@ -6,22 +6,24 @@ ROOTLIBS	= $(shell root-config --libs)
 ROOTGLIBS	= $(shell root-config --glibs)
 ROOTCFLAGS	= $(shell root-config --cflags)
 
+VPATH = ./:../include
 
 CXX		= g++
-CXXFLAGS	= -O2 -Wall -fPIC -std=c++11 -g
+CXXFLAGS	= -O2 -Wall -fPIC -std=c++11
 LD		= g++
 SOFLAGS		= -shared
 LIBS		= $(ROOTLIBS) $(ROOTGLIBS)
-CXXFLAGS       += $(ROOTCFLAGS) -Iinclude
+CXXFLAGS       += $(ROOTCFLAGS) -I../include
 LIBS	       += -lSpectrum -lMinuit
 
-objects = MBUtils.o Asymmetries.o SQLinterface.o SystematicCorrections.o EvtRateHandler.o 
+objects = Asymmetries.o SQLinterface.o SystematicCorrections.o MBUtils.o EvtRateHandler.o calibrationTools.o
+
 
 .PHONY: all
 all: MBAnalyzer.exe UK2SIMcomparison.exe
 
-MBAnalyzer.exe: MBAnalyzer.o $(objects) 
-	$(CXX) $(CXXFLAGS) -o MBAnalyzer.exe MBAnalyzer.o $(objects) $(LIBS) 
+MBAnalyzer.exe: MBAnalyzer.o $(objects) BetaSpectrum.o
+	$(CXX) $(CXXFLAGS) -o MBAnalyzer.exe MBAnalyzer.o $(objects) BetaSpectrum.o $(LIBS) 
 	@echo "Done"
 
 UK2MPMcomparison.exe: UK2MPMcomparison.o $(objects) 
@@ -36,9 +38,13 @@ SuperSumComparison.exe: SuperSumComparison.o $(objects)
 	$(CXX) $(CXXFLAGS) -o SuperSumComparison.exe SuperSumComparison.o $(objects) $(LIBS) 
 	@echo "Done"
 
-Asymmetries.o: Asymmetries.hh
+calibrationTools.o: calibrationTools.hh
 
-EvtRateHandler.o: EvtRateHandler.hh SQLinterface.hh
+Asymmetries.o: Asymmetries.hh MBUtils.o
+
+BetaSpectrum.o: BetaSpectrum.hh
+
+EvtRateHandler.o: EvtRateHandler.hh SQLinterface.hh MBUtils.o
 
 SQLinterface.o: SQLinterface.hh
 

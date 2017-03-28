@@ -155,56 +155,6 @@ int WireChamberResponse::ResponseType(Float_t cath[]){
 
 
 
-//testing grounds
-/*int main()
-{
-	
-  	WireChamberResponse *WCR =new WireChamberResponse();
-
-	//Set response thresholds, TODO: make these fuzzy to get chi^2. note: this is nearly impossible.
-	//optional definitions; default values are shown here. 	
-	WCR->threshold=120;  //adc threshold (is it really an event?)	
-	WCR->threshold2=82;  //triangle daughter threshold. 		
-	WCR->platfrac=0.90;  //what is the platue threshold.?? 
-	WCR->trifrac=1.5;	  //what is the leaning threshold.?? 		 
-	
-	//set run number
-	WCR->SetPhysTree(22000); //run number that you want to get the responses for. 
-
-  	
-	//lets apply the response to a few events and see how it did!
-	for(int i =10; i<20; i++){	
-	
-	//get the damn entry
-	WCR->phys->GetEntry(i);
-		
-	cout<<WCR->ResponseType(WCR->cathwx)<<"\n";  //this is how to use the function to get response. 
-	cout<<WCR->quadmax[0]<<" "<<WCR->quadmax[1]<<" "<<WCR->quadmax[2]<<" "<<WCR->quadmax[3]<<"\n";	
-	cout<<WCR->quadind[0]<<" "<<WCR->quadind[1]<<" "<<WCR->quadind[2]<<" "<<WCR->quadind[3]<<"\n";	
-
-	}
-	
-
-	
-  return 0;
-  }*/
-
-
-
-/*  //Make Histograms! if 2D use TH2F.. etc.
-TH1F * gainhist = new TH1F("gain","gain hist",30,-1,4);//,30,0,10);
- 
-for (int i = 0; i< linum; ++i){
- //pmtTree->GetEntry(i);
-    if(xpos[i]*xpos[i]+ypos[i]*ypos[i] < 25 && gain0[i]<2 && gain0[i]>0){ //&& LG02error[i]>0.0001){
-      
-  gainhist->Fill(gain0[i]);
-  
-      }
-     }
-
-gainhist->Draw("colz");
-*/
 
 
 
