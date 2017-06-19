@@ -29,6 +29,7 @@
 #include <TString.h>
 #include <TStyle.h>
 
+const bool useEvis = true;           // Uses Evis rather than Erecon
 
 using namespace std;
 
@@ -162,7 +163,7 @@ void doForegroundSpectra (int octetMin, int octetMax)
   char temp[200];
 
   //Root file to output to
-  TFile *outfile = new TFile(TString::Format("SIM_ForegroundSpectra_%i-%i.root",octetMin,octetMax),"RECREATE");
+  TFile *outfile = new TFile(TString::Format("SIM_ForegroundSpectra_%i-%i%s.root",octetMin,octetMax,(useEvis?"_Evis":"")),"RECREATE");
 
   //Make all the pertinent histograms
 
@@ -228,12 +229,16 @@ void doForegroundSpectra (int octetMin, int octetMax)
     int nClipped_EX, nClipped_EY, nClipped_WX, nClipped_WY;
     int xE_mult=0, yE_mult=0, xW_mult=0, yW_mult=0;
 
+    double EdepQE=0., EdepQW=0.;
     
     Tin->SetBranchAddress("PID", &PID);
     Tin->SetBranchAddress("type", &type);
     Tin->SetBranchAddress("side", &side); 
     Tin->SetBranchAddress("Erecon",&Erecon);
     
+    Tin->GetBranch("EdepQ")->GetLeaf("EdepQE")->SetAddress(&EdepQE);
+    Tin->GetBranch("EdepQ")->GetLeaf("EdepQW")->SetAddress(&EdepQW);
+
     Tin->GetBranch("xE")->GetLeaf("center")->SetAddress(&EmwpcX);
     Tin->GetBranch("yE")->GetLeaf("center")->SetAddress(&EmwpcY);
     Tin->GetBranch("xW")->GetLeaf("center")->SetAddress(&WmwpcX);
@@ -294,7 +299,7 @@ void doForegroundSpectra (int octetMin, int octetMax)
 	if ( r2E<(fiducialCut*fiducialCut) && r2W<(fiducialCut*fiducialCut) )	  {
 		
 	  //Type 0
-	  if (type==0) histOFF[0][side]->Fill(Erecon);
+	  if (type==0) histOFF[0][side]->Fill( !useEvis ? Erecon : (side==0 ? EdepQE : EdepQW) );
 	
 	  //Type 1
 	  if (type==1) histOFF[1][side]->Fill(Erecon);
@@ -348,11 +353,15 @@ void doForegroundSpectra (int octetMin, int octetMax)
     int nClipped_EX, nClipped_EY, nClipped_WX, nClipped_WY;
     int xE_mult=0, yE_mult=0, xW_mult=0, yW_mult=0;
 
+    double EdepQE=0., EdepQW=0.;
     
     Tin->SetBranchAddress("PID", &PID);
     Tin->SetBranchAddress("type", &type);
     Tin->SetBranchAddress("side", &side); 
     Tin->SetBranchAddress("Erecon",&Erecon);
+    
+    Tin->GetBranch("EdepQ")->GetLeaf("EdepQE")->SetAddress(&EdepQE);
+    Tin->GetBranch("EdepQ")->GetLeaf("EdepQW")->SetAddress(&EdepQW);
     
     Tin->GetBranch("xE")->GetLeaf("center")->SetAddress(&EmwpcX);
     Tin->GetBranch("yE")->GetLeaf("center")->SetAddress(&EmwpcY);
@@ -415,7 +424,7 @@ void doForegroundSpectra (int octetMin, int octetMax)
 	if ( r2E<(fiducialCut*fiducialCut) && r2W<(fiducialCut*fiducialCut) )	  {
 		
 	  //Type 0
-	  if (type==0) histON[0][side]->Fill(Erecon);
+	  if (type==0) histON[0][side]->Fill( !useEvis ? Erecon : (side==0 ? EdepQE : EdepQW) );
 	
 	  //Type 1
 	  if (type==1) histON[1][side]->Fill(Erecon);

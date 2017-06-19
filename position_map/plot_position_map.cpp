@@ -16,20 +16,37 @@
 
 using namespace std;
 
-void plot_position_map(int iRunPeriod, double binWidth);
+void plot_position_map(int iRunPeriod, double binWidth, TString fitType);
 
 
 int main(int argc, char* argv[]) {
+
+    if ( argc!=4 ) {
+    std::cout << "USAGE: ./plot_position_map.exe [XePeriod] [binWidth] [fitType]\n"
+	      << "fitType = {ave, peak, endpoint}\n";
+    exit(0);
+  }
+
+
   int runPeriod = atoi(argv[1]);
   double binWidth = atof(argv[2]);
+  TString fitType = TString(argv[3]);
 
-  plot_position_map(runPeriod, binWidth);
+
+  plot_position_map(runPeriod, binWidth, fitType);
   
 
 }
 
-void plot_position_map(int XePeriod, double binWidth)
+void plot_position_map(int XePeriod, double binWidth, TString fitType)
 {
+
+  if ( fitType!=TString("ave") && fitType!=TString("peak") && fitType!=TString("endpoint") ) { 
+    std::cout << "bad fit choice\n"; 
+    exit(0); 
+  }
+			 
+
   cout.setf(ios::fixed, ios::floatfield);
   cout.precision(12);
 
@@ -78,7 +95,7 @@ void plot_position_map(int XePeriod, double binWidth)
   
   PositionMap posmap(binWidth, 50.);
   posmap.setRCflag(false); // plotting non RC maps
-  posmap.readPositionMap(XePeriod);
+  posmap.readPositionMap(XePeriod,fitType);
 
   
   PositionMap plotMap(0.5,50.);
@@ -128,7 +145,7 @@ void plot_position_map(int XePeriod, double binWidth)
   TString filenameOut;
   Char_t runPeriodString[10];
   sprintf(runPeriodString,"%i",XePeriod);
-  filenameOut = TString(getenv("POSITION_MAPS")) + "position_map_"+TString(runPeriodString)+TString::Format("_%0.1fmm.pdf",binWidth);
+  filenameOut = TString(getenv("POSITION_MAPS")) + "position_map_"+TString(runPeriodString)+TString::Format("_%0.1fmm_%s.pdf",binWidth,fitType.Data());
   
   /*if (iRunPeriod == 1) filenameOut  = "position_map_1_RC_123.pdf";
   if (iRunPeriod == 2) filenameOut  = "position_map_2_RC_123.pdf";

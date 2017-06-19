@@ -20,10 +20,14 @@ objects = MBUtils.o
 
 
 .PHONY: all
-all: EastWestComparisons.exe
+all: EastWestComparisons.exe PositionComparisons.exe
 
 EastWestComparisons.exe: EastWestComparisons.o $(objects) 
 	$(CXX) $(CXXFLAGS) -o EastWestComparisons.exe EastWestComparisons.o $(objects) $(LIBS) 
+	@echo "Done"
+
+PositionComparisons.exe: PositionComparisons.o $(objects) 
+	$(CXX) $(CXXFLAGS) -o PositionComparisons.exe PositionComparisons.o $(objects) $(LIBS) 
 	@echo "Done"
 
 MBUtils.o: MBUtils.hh

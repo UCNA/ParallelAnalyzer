@@ -21,6 +21,7 @@
 #include "basic_reconstruction.h"
 #include "runInfo.h"
 #include "DataTree.hh"
+#include "peaks.hh"
 
 using namespace std;
 
@@ -89,15 +90,15 @@ int main(int argc, char *argv[])
 
   // Output histograms
   int nBin = 200;
-  TH1F *his[8];
-  his[0] = new TH1F("hisE0", "", nBin,0.0,4000.0);
-  his[1] = new TH1F("hisE1", "", nBin,0.0,4000.0);
-  his[2] = new TH1F("hisE2", "", nBin,0.0,4000.0);
-  his[3] = new TH1F("hisE3", "", nBin,0.0,4000.0);
-  his[4] = new TH1F("hisW0", "", nBin,0.0,4000.0);
-  his[5] = new TH1F("hisW1", "", nBin,0.0,4000.0);
-  his[6] = new TH1F("hisW2", "", nBin,0.0,4000.0);
-  his[7] = new TH1F("hisW3", "", nBin,0.0,4000.0);
+  TH1D *his[8];
+  his[0] = new TH1D("hisE0", "", nBin,0.0,4000.0);
+  his[1] = new TH1D("hisE1", "", nBin,0.0,4000.0);
+  his[2] = new TH1D("hisE2", "", nBin,0.0,4000.0);
+  his[3] = new TH1D("hisE3", "", nBin,0.0,4000.0);
+  his[4] = new TH1D("hisW0", "", nBin,0.0,4000.0);
+  his[5] = new TH1D("hisW1", "", nBin,0.0,4000.0);
+  his[6] = new TH1D("hisW2", "", nBin,0.0,4000.0);
+  his[7] = new TH1D("hisW3", "", nBin,0.0,4000.0);
 
   // Open input ntuple
   
@@ -263,8 +264,67 @@ int main(int argc, char *argv[])
     fitMean[m] = -1.0;
   }
 
+
+  SinglePeakHist *fitter;
+
   // Fit for East PMT #0
-  TF1 *gaussian_fit_E0 = new TF1("gaussian_fit_E0",
+  fitter = new SinglePeakHist(his[0],xLow[0],xHigh[0]);
+  fitMean[0] = fitter->ReturnMean();
+  delete fitter;
+
+  cout << "fitMean[0] = " << fitMean[0] << endl;
+
+  // Fit for East PMT #1
+  fitter = new SinglePeakHist(his[1],xLow[1],xHigh[1]);
+  fitMean[1] = fitter->ReturnMean();
+  delete fitter;
+
+  cout << "fitMean[1] = " << fitMean[1] << endl;
+
+  // Fit for East PMT #2
+  fitter = new SinglePeakHist(his[2],xLow[2],xHigh[2]);
+  fitMean[2] = fitter->ReturnMean();
+  delete fitter;
+
+  cout << "fitMean[2] = " << fitMean[2] << endl;
+
+  // Fit for East PMT #3
+  fitter = new SinglePeakHist(his[3],xLow[3],xHigh[3]);
+  fitMean[3] = fitter->ReturnMean();
+  delete fitter;
+
+  cout << "fitMean[3] = " << fitMean[3] << endl;
+
+
+  // Fit for West PMT #0
+  fitter = new SinglePeakHist(his[4],xLow[4],xHigh[4]);
+  fitMean[4] = fitter->ReturnMean();
+  delete fitter;
+
+  cout << "fitMean[4] = " << fitMean[4] << endl;
+
+  // Fit for West PMT #1
+  fitter = new SinglePeakHist(his[5],xLow[5],xHigh[5]);
+  fitMean[5] = fitter->ReturnMean();
+  delete fitter;
+
+  cout << "fitMean[5] = " << fitMean[5] << endl;
+
+  // Fit for West PMT #2
+  fitter = new SinglePeakHist(his[6],xLow[6],xHigh[6]);
+  fitMean[6] = fitter->ReturnMean();
+  delete fitter;
+
+  cout << "fitMean[6] = " << fitMean[6] << endl;
+
+  // Fit for West PMT #3
+  fitter = new SinglePeakHist(his[7],xLow[7],xHigh[7]);
+  fitMean[7] = fitter->ReturnMean();
+  delete fitter;
+
+  cout << "fitMean[7] = " << fitMean[7] << endl;
+
+  /* TF1 *gaussian_fit_E0 = new TF1("gaussian_fit_E0",
                                  "[0]*exp(-(x-[1])*(x-[1])/(2.*[2]*[2]))",
                                  xLow[0], xHigh[0]);
   gaussian_fit_E0->SetParameter(0, maxCounts[0]);
@@ -357,7 +417,7 @@ int main(int argc, char *argv[])
   gaussian_fit_W3->SetLineColor(2);
   his[7]->Fit("gaussian_fit_W3", "LR");
   fitMean[7] = gaussian_fit_W3->GetParameter(1);
-  cout << "fitMean[7] = " << fitMean[7] << endl;
+  cout << "fitMean[7] = " << fitMean[7] << endl;*/
 
   //Get PMT quality status
   std::vector<Int_t> pmtquality = getPMTQuality(runNumber);
@@ -375,7 +435,7 @@ int main(int argc, char *argv[])
     refGainFile.close();
       
     for (int n=0; n<8; n++) {
-      gainCorrection[n] = pmtquality[n] ? (referenceMean[n] / fitMean[n]) : 1.;
+      gainCorrection[n] = fitMean[n]>0. ? (referenceMean[n] / fitMean[n]) : 1.;
     }    
   }
   else {

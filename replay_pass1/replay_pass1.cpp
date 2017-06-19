@@ -664,6 +664,22 @@ int main(int argc, char *argv[])
     t->ScintW.e1=t->ScintW.de1=t->ScintW.e2=t->ScintW.de2=t->ScintW.e3=t->ScintW.de3=t->ScintW.e4=t->ScintW.de4=0.;
     t->ScintW.energy=t->ScintW.denergy=0.;
     t->ScintW.nPE1=t->ScintW.nPE2=t->ScintW.nPE3=t->ScintW.nPE4=0.;
+
+    t->ScintE_bare.q1 = pmt[0];
+    t->ScintE_bare.q2 = pmt[1];
+    t->ScintE_bare.q3 = pmt[2];
+    t->ScintE_bare.q4 = pmt[3]; 
+    t->ScintE_bare.e1=t->ScintE_bare.de1=t->ScintE_bare.e2=t->ScintE_bare.de2=t->ScintE_bare.e3=t->ScintE_bare.de3=t->ScintE_bare.e4=t->ScintE_bare.de4=0.;
+    t->ScintE_bare.energy=t->ScintE_bare.denergy=0.;
+    t->ScintE_bare.nPE1=t->ScintE_bare.nPE2=t->ScintE_bare.nPE3=t->ScintE_bare.nPE4=0.;
+    
+    t->ScintW_bare.q1 = pmt[4];
+    t->ScintW_bare.q2 = pmt[5];
+    t->ScintW_bare.q3 = pmt[6];
+    t->ScintW_bare.q4 = pmt[7]; 
+    t->ScintW_bare.e1=t->ScintW_bare.de1=t->ScintW_bare.e2=t->ScintW_bare.de2=t->ScintW_bare.e3=t->ScintW_bare.de3=t->ScintW_bare.e4=t->ScintW_bare.de4=0.;
+    t->ScintW_bare.energy=t->ScintW_bare.denergy=0.;
+    t->ScintW_bare.nPE1=t->ScintW_bare.nPE2=t->ScintW_bare.nPE3=t->ScintW_bare.nPE4=0.;
     
     t->EvisE = t->EvisW = 0.;
     

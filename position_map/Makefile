@@ -19,7 +19,7 @@ LIBS          = $(ROOTLIBS) $(ROOTGLIBS)
 CXXFLAGS     += $(ROOTCFLAGS) -I../include
 LIBS         += -lSpectrum -lMinuit
 
-objects = DataTree.o MBUtils.o positionMapHandler.o ../source_peaks/peaks.o
+objects = DataTree.o MBUtils.o positionMapHandler.o peaks.o BetaDecayTools.o
 
 position_map.exe: position_map.o $(objects)
 	$(CXX) $(CXXFLAGS) -o position_map.exe position_map.o $(objects) $(LIBS)
@@ -29,6 +29,10 @@ plot_position_map.exe: plot_position_map.o $(objects)
 	$(CXX) $(CXXFLAGS) -o plot_position_map.exe plot_position_map.o $(objects) $(LIBS)
 	@echo "Done"
 
+compare_position_maps.exe: compare_position_maps.o $(objects)
+	$(CXX) $(CXXFLAGS) -o compare_position_maps.exe compare_position_maps.o $(objects) $(LIBS)
+	@echo "Done"
+
 plot_swank_map.exe: plot_swank_map.o $(objects)
 	$(CXX) $(CXXFLAGS) -o plot_swank_map.exe plot_swank_map.o $(objects) $(LIBS)
 	@echo "Done"
@@ -36,6 +40,8 @@ plot_swank_map.exe: plot_swank_map.o $(objects)
 compare_swank_maps.exe: compare_swank_maps.o $(objects)
 	$(CXX) $(CXXFLAGS) -o compare_swank_maps.exe compare_swank_maps.o $(objects) $(LIBS)
 	@echo "Done"
+
+BetaDecayTools.o: BetaDecayTools.hh
 
 DataTree.o: DataTree.hh
 

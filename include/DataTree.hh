@@ -70,6 +70,7 @@ public:
   Double_t Cathodes_Ex[16], Cathodes_Ey[16]; //array of cathode values
   Double_t Cathodes_Wx[16], Cathodes_Wy[16]; //array of cathode values
   Scint ScintE, ScintW; //Scintillator variable information
+  Scint ScintE_bare, ScintW_bare; //Scintillator variable information w/o ep gain correction
   Double_t EvisE, EvisW; // Visible (quenched) energy on each side
   Double_t CathSumE, CathSumW; //sum of both x-y cathode planes
   Double_t CathMaxE, CathMaxW; //smaller max-value of each plane

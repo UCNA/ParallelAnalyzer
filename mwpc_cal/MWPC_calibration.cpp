@@ -345,12 +345,14 @@ int main(int argc, char *argv[])
   gEast->GetYaxis()->SetTitle("MWPC Energy Deposition (keV)");
   gEast->GetYaxis()->CenterTitle();
   gEast->Draw("AP");
-  gEast->GetXaxis()->SetLimits(0.,EdataMPV[0]+30.);
+  Double_t max = TMath::MaxElement(nEnergyBins,EdataMPV);
+  max = max>4000. ? 4000. : max;
+  gEast->GetXaxis()->SetLimits(0., max<4000. ? max+30. : max);
   gEast->SetMinimum(0.);
   gEast->Draw("AP");
   c1->Update();
 
-  gEast->Fit(f1,"","",EdataMPV[nEnergyBins-1]-50. ,EdataMPV[0]+30.);
+  gEast->Fit(f1,"","",EdataMPV[nEnergyBins-1]-50., max<4000. ? max+30. : max);
 
   eastOffset = f1->GetParameter(0);
   eastFactor = f1->GetParameter(1);
@@ -371,12 +373,14 @@ int main(int argc, char *argv[])
   gWest->GetYaxis()->CenterTitle();
   gWest->SetMinimum(0.);
   gWest->Draw("AP");
-  gWest->GetXaxis()->SetLimits(0.,WdataMPV[0]+30.);
+  max = TMath::MaxElement(nEnergyBins,WdataMPV);
+  max = max>4000. ? 4000. : max;
+  gWest->GetXaxis()->SetLimits(0.,max<4000. ? max+30. : max);
   gWest->SetMinimum(0.);
   gWest->Draw("AP");
   c1->Update();
 
-  gWest->Fit(f2,"","",WdataMPV[nEnergyBins-1]-50.,WdataMPV[0]+30.);
+  gWest->Fit(f2,"","",WdataMPV[nEnergyBins-1]-50., max<4000. ? max+30. : max);
 
   westOffset = f2->GetParameter(0);
   westFactor = f2->GetParameter(1);

@@ -33,6 +33,21 @@
 
 bool OnlyReplayBadFiles = false;
 
+std::vector <Double_t> loadEndpointGain(Int_t runNumber) {
+
+  std::vector <Double_t> gain(8,1.);
+  std::ifstream infile(TString::Format("%s/EndpointGain/run-%i_epGain.dat",getenv("ENDPOINT_ANALYSIS"),runNumber));
+
+  if ( infile.is_open() ) {
+    for ( auto &g : gain ) infile >> g;
+  }
+
+  for ( auto g : gain ) std::cout << g << std::endl;
+  
+  return gain;
+
+}; // TODO: copy all endpoint gain factors to individual runs in BetaManager.py
+
 std::vector < std::vector <Double_t> > loadPMTpedestals(Int_t runNumber) {
 
   Char_t temp[500];
@@ -63,12 +78,12 @@ vector < Double_t > GetAlphaValues(Int_t runPeriod)
   return alphas;
 };
 
-vector <Int_t> getPMTQuality(Int_t runNumber) {
+vector <Int_t> getEreconPMTQuality(Int_t runNumber) {
   //Read in PMT quality file
   cout << "Reading in PMT Quality file ...\n";
   vector <Int_t>  pmtQuality (8,0);
   Char_t temp[200];
-  sprintf(temp,"%s/residuals/PMT_runQuality_master.dat",getenv("ANALYSIS_CODE")); 
+  sprintf(temp,"%s/residuals/PMT_EreconQuality_master.dat",getenv("ANALYSIS_CODE")); 
   ifstream pmt;
   std::cout << temp << std::endl;
   pmt.open(temp);
@@ -92,10 +107,20 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+
+  if ( argc<2 || argc>3 ) {
+    std::cout << "USAGE: ./replay_pass3.exe [run] [applyEndpointGain = false]\n\n";
+    exit(0);
+  }
+  
   cout.setf(ios::fixed, ios::floatfield);
   cout.precision(12);
   
   int runNumber = atoi(argv[1]);
+  bool applyEndpointGain = false;
+  if ( argc==3 && ( TString(argv[2])==TString("true") || atoi(argv[2])==1 ) ) applyEndpointGain = true; 
+
+  
   int nPMT = 8;
   int nParams = 3; //takes a quadratic 
 
@@ -152,13 +177,14 @@ int main(int argc, char *argv[])
   EreconParameterization eRecon(runNumber); //Load the simulated relationship between EQ and Etrue
   WirechamberCal mwpcCal(runNumber);        //Load the Wirechamber Calibration
 
-  std::cout << "made it here\n";
+  std::vector <Double_t> epGain(8,1.); // Loading the endpoint gain factors if they are to be used
+  if ( applyEndpointGain ) epGain = loadEndpointGain(runNumber);
   
-  std::vector <Int_t> pmtQuality = getPMTQuality(runNumber); //Read in PMT quality file
+  std::vector <Int_t> pmtQuality = getEreconPMTQuality(runNumber); //Read in PMT quality file
   std::vector <Double_t> alpha = GetAlphaValues(calibrationPeriod); //Get values for nPE/keV...
     
   PositionMap posmap(5.0,50.); //Reading Scintillator position maps
-  posmap.readPositionMap( getXeRunPeriod(runNumber) );
+  posmap.readPositionMap( getXeRunPeriod(runNumber), "endpoint" );
 
   MWPCPositionMap anodeMap(5., 50.);    // Reading Anode position maps
   anodeMap.readMWPCPositionMap( getXeRunPeriodForMWPCmap(runNumber) ,250.,300.); // Using 250-300 keV because that's the most probable range
@@ -383,10 +409,10 @@ int main(int argc, char *argv[])
       gaus_eta = posmap.getInterpolatedEta(t->gaus_xE.center, t->gaus_yE.center, t->gaus_xW.center, t->gaus_yW.center);
       
       //First calculate old position reconstruction old_Erecon
-      t->ScintE.e1 = linearityCurve.applyLinCurve(0,t->ScintE.q1);
-      t->ScintE.e2 = linearityCurve.applyLinCurve(1,t->ScintE.q2);
-      t->ScintE.e3 = linearityCurve.applyLinCurve(2,t->ScintE.q3);
-      t->ScintE.e4 = linearityCurve.applyLinCurve(3,t->ScintE.q4);
+      t->ScintE.e1 = linearityCurve.applyLinCurve(0,t->ScintE.q1) * epGain[0];
+      t->ScintE.e2 = linearityCurve.applyLinCurve(1,t->ScintE.q2) * epGain[1];
+      t->ScintE.e3 = linearityCurve.applyLinCurve(2,t->ScintE.q3) * epGain[2];
+      t->ScintE.e4 = linearityCurve.applyLinCurve(3,t->ScintE.q4) * epGain[3];
       
       t->ScintE.e1 = ( old_eta[0]>0. && t->ScintE.e1>0. ) ? t->ScintE.e1 / old_eta[0] : 0.;
       t->ScintE.e2 = ( old_eta[1]>0. && t->ScintE.e2>0. ) ? t->ScintE.e2 / old_eta[1] : 0.;
@@ -404,10 +430,10 @@ int main(int argc, char *argv[])
       t->ScintE.de4 = t->ScintE.nPE4 > 0. ? t->ScintE.e4/sqrt(t->ScintE.nPE4) : 0.;
       
       
-      t->ScintW.e1 = linearityCurve.applyLinCurve(4,t->ScintW.q1);
-      t->ScintW.e2 = linearityCurve.applyLinCurve(5,t->ScintW.q2);
-      t->ScintW.e3 = linearityCurve.applyLinCurve(6,t->ScintW.q3);
-      t->ScintW.e4 = linearityCurve.applyLinCurve(7,t->ScintW.q4);
+      t->ScintW.e1 = linearityCurve.applyLinCurve(4,t->ScintW.q1) * epGain[4];
+      t->ScintW.e2 = linearityCurve.applyLinCurve(5,t->ScintW.q2) * epGain[5];
+      t->ScintW.e3 = linearityCurve.applyLinCurve(6,t->ScintW.q3) * epGain[6];
+      t->ScintW.e4 = linearityCurve.applyLinCurve(7,t->ScintW.q4) * epGain[7];
       
       t->ScintW.e1 = ( old_eta[4]>0. && t->ScintW.e1>0. ) ? t->ScintW.e1 / old_eta[4] : 0.;
       t->ScintW.e2 = ( old_eta[5]>0. && t->ScintW.e2>0. ) ? t->ScintW.e2 / old_eta[5] : 0.;
@@ -486,10 +512,10 @@ int main(int argc, char *argv[])
       ////////////////////////////////////////////////////////////////////
       
       //First calculate old position reconstruction gaus_Erecon
-      t->ScintE.e1 = linearityCurve.applyLinCurve(0,t->ScintE.q1);
-      t->ScintE.e2 = linearityCurve.applyLinCurve(1,t->ScintE.q2);
-      t->ScintE.e3 = linearityCurve.applyLinCurve(2,t->ScintE.q3);
-      t->ScintE.e4 = linearityCurve.applyLinCurve(3,t->ScintE.q4);
+      t->ScintE.e1 = linearityCurve.applyLinCurve(0,t->ScintE.q1) * epGain[0];
+      t->ScintE.e2 = linearityCurve.applyLinCurve(1,t->ScintE.q2) * epGain[1];
+      t->ScintE.e3 = linearityCurve.applyLinCurve(2,t->ScintE.q3) * epGain[2];
+      t->ScintE.e4 = linearityCurve.applyLinCurve(3,t->ScintE.q4) * epGain[3];
       
       t->ScintE.e1 = ( gaus_eta[0]>0. && t->ScintE.e1>0. ) ? t->ScintE.e1 / gaus_eta[0] : 0.;
       t->ScintE.e2 = ( gaus_eta[1]>0. && t->ScintE.e2>0. ) ? t->ScintE.e2 / gaus_eta[1] : 0.;
@@ -507,10 +533,10 @@ int main(int argc, char *argv[])
       t->ScintE.de4 = t->ScintE.nPE4 > 0. ? t->ScintE.e4/sqrt(t->ScintE.nPE4) : 0.;
       
       
-      t->ScintW.e1 = linearityCurve.applyLinCurve(4,t->ScintW.q1);
-      t->ScintW.e2 = linearityCurve.applyLinCurve(5,t->ScintW.q2);
-      t->ScintW.e3 = linearityCurve.applyLinCurve(6,t->ScintW.q3);
-      t->ScintW.e4 = linearityCurve.applyLinCurve(7,t->ScintW.q4);
+      t->ScintW.e1 = linearityCurve.applyLinCurve(4,t->ScintW.q1) * epGain[4];
+      t->ScintW.e2 = linearityCurve.applyLinCurve(5,t->ScintW.q2) * epGain[5];
+      t->ScintW.e3 = linearityCurve.applyLinCurve(6,t->ScintW.q3) * epGain[6];
+      t->ScintW.e4 = linearityCurve.applyLinCurve(7,t->ScintW.q4) * epGain[7];
       
       t->ScintW.e1 = ( gaus_eta[4]>0. && t->ScintW.e1>0. ) ? t->ScintW.e1 / gaus_eta[4] : 0.;
       t->ScintW.e2 = ( gaus_eta[5]>0. && t->ScintW.e2>0. ) ? t->ScintW.e2 / gaus_eta[5] : 0.;
@@ -535,9 +561,9 @@ int main(int argc, char *argv[])
       //EAST
       numer = 0.;
       numer = ( (pmtQuality[0] && t->ScintE.nPE1>0. ? t->ScintE.nPE1 : 0.) +
-		(pmtQuality[1] && t->ScintE.nPE1>0. ? t->ScintE.nPE2 : 0.) + 
-		(pmtQuality[2] && t->ScintE.nPE1>0. ? t->ScintE.nPE3 : 0.) + 
-		(pmtQuality[3] && t->ScintE.nPE1>0. ? t->ScintE.nPE4 : 0.) );
+		(pmtQuality[1] && t->ScintE.nPE2>0. ? t->ScintE.nPE2 : 0.) + 
+		(pmtQuality[2] && t->ScintE.nPE3>0. ? t->ScintE.nPE3 : 0.) + 
+		(pmtQuality[3] && t->ScintE.nPE4>0. ? t->ScintE.nPE4 : 0.) );
       
       denom = 0.;
       denom  = ( (pmtQuality[0] && t->ScintE.nPE1>0. ? alpha[0] * gaus_eta[0] : 0.) +
@@ -552,9 +578,9 @@ int main(int argc, char *argv[])
       numer = denom = 0.;
       
       numer = ( (pmtQuality[4] && t->ScintW.nPE1>0. ? t->ScintW.nPE1 : 0.) +
-		(pmtQuality[5] && t->ScintW.nPE1>0. ? t->ScintW.nPE2 : 0.) + 
-		(pmtQuality[6] && t->ScintW.nPE1>0. ? t->ScintW.nPE3 : 0.) + 
-		(pmtQuality[7] && t->ScintW.nPE1>0. ? t->ScintW.nPE4 : 0.) );
+		(pmtQuality[5] && t->ScintW.nPE2>0. ? t->ScintW.nPE2 : 0.) + 
+		(pmtQuality[6] && t->ScintW.nPE3>0. ? t->ScintW.nPE3 : 0.) + 
+		(pmtQuality[7] && t->ScintW.nPE4>0. ? t->ScintW.nPE4 : 0.) );
       
       denom  = ( (pmtQuality[4] && t->ScintW.nPE1>0. ? alpha[4] * gaus_eta[4] : 0.) +
 		 (pmtQuality[5] && t->ScintW.nPE2>0. ? alpha[5] * gaus_eta[5] : 0.) +
@@ -591,15 +617,16 @@ int main(int argc, char *argv[])
       
       /////////////////////////////////////////////////////////////
       // Now for the real Erecon and all of the variables that will be saved to file
-      t->ScintE.e1 = linearityCurve.applyLinCurve(0,t->ScintE.q1);
-      t->ScintE.e2 = linearityCurve.applyLinCurve(1,t->ScintE.q2);
-      t->ScintE.e3 = linearityCurve.applyLinCurve(2,t->ScintE.q3);
-      t->ScintE.e4 = linearityCurve.applyLinCurve(3,t->ScintE.q4);
       
-      t->ScintE.e1 = ( eta[0]>0. && t->ScintE.e1>0. ) ? t->ScintE.e1 / eta[0] : 0.;
-      t->ScintE.e2 = ( eta[1]>0. && t->ScintE.e2>0. ) ? t->ScintE.e2 / eta[1] : 0.;
-      t->ScintE.e3 = ( eta[2]>0. && t->ScintE.e3>0. ) ? t->ScintE.e3 / eta[2] : 0.;
-      t->ScintE.e4 = ( eta[3]>0. && t->ScintE.e4>0. ) ? t->ScintE.e4 / eta[3] : 0.;
+      t->ScintE.e1 = linearityCurve.applyLinCurve(0,t->ScintE.q1) * epGain[0];
+      t->ScintE.e2 = linearityCurve.applyLinCurve(1,t->ScintE.q2) * epGain[1];
+      t->ScintE.e3 = linearityCurve.applyLinCurve(2,t->ScintE.q3) * epGain[2];
+      t->ScintE.e4 = linearityCurve.applyLinCurve(3,t->ScintE.q4) * epGain[3];
+      
+      t->ScintE.e1 = ( eta[0]>0. ) ? t->ScintE.e1 / eta[0] : 0.;
+      t->ScintE.e2 = ( eta[1]>0. ) ? t->ScintE.e2 / eta[1] : 0.;
+      t->ScintE.e3 = ( eta[2]>0. ) ? t->ScintE.e3 / eta[2] : 0.;
+      t->ScintE.e4 = ( eta[3]>0. ) ? t->ScintE.e4 / eta[3] : 0.;
       
       t->ScintE.nPE1 = eta[0] > 0. ? t->ScintE.e1 * eta[0] * alpha[0] : 0.;
       t->ScintE.nPE2 = eta[1] > 0. ? t->ScintE.e2 * eta[1] * alpha[1] : 0.;
@@ -612,15 +639,15 @@ int main(int argc, char *argv[])
       t->ScintE.de4 = t->ScintE.nPE4 > 0. ? t->ScintE.e4/sqrt(t->ScintE.nPE4) : 0.;
       
       
-      t->ScintW.e1 = linearityCurve.applyLinCurve(4,t->ScintW.q1);
-      t->ScintW.e2 = linearityCurve.applyLinCurve(5,t->ScintW.q2);
-      t->ScintW.e3 = linearityCurve.applyLinCurve(6,t->ScintW.q3);
-      t->ScintW.e4 = linearityCurve.applyLinCurve(7,t->ScintW.q4);
+      t->ScintW.e1 = linearityCurve.applyLinCurve(4,t->ScintW.q1) * epGain[4];
+      t->ScintW.e2 = linearityCurve.applyLinCurve(5,t->ScintW.q2) * epGain[5];
+      t->ScintW.e3 = linearityCurve.applyLinCurve(6,t->ScintW.q3) * epGain[6];
+      t->ScintW.e4 = linearityCurve.applyLinCurve(7,t->ScintW.q4) * epGain[7];
       
-      t->ScintW.e1 = ( eta[4]>0. && t->ScintW.e1>0. ) ? t->ScintW.e1 / eta[4] : 0.;
-      t->ScintW.e2 = ( eta[5]>0. && t->ScintW.e2>0. ) ? t->ScintW.e2 / eta[5] : 0.;
-      t->ScintW.e3 = ( eta[6]>0. && t->ScintW.e3>0. ) ? t->ScintW.e3 / eta[6] : 0.;
-      t->ScintW.e4 = ( eta[7]>0. && t->ScintW.e4>0. ) ? t->ScintW.e4 / eta[7] : 0.;
+      t->ScintW.e1 = ( eta[4]>0. ) ? t->ScintW.e1 / eta[4] : 0.;
+      t->ScintW.e2 = ( eta[5]>0. ) ? t->ScintW.e2 / eta[5] : 0.;
+      t->ScintW.e3 = ( eta[6]>0. ) ? t->ScintW.e3 / eta[6] : 0.;
+      t->ScintW.e4 = ( eta[7]>0. ) ? t->ScintW.e4 / eta[7] : 0.;
       
       t->ScintW.nPE1 = eta[4] > 0. ? t->ScintW.e1 * eta[4] * alpha[4] : 0.;
       t->ScintW.nPE2 = eta[5] > 0. ? t->ScintW.e2 * eta[5] * alpha[5] : 0.;
@@ -632,6 +659,59 @@ int main(int argc, char *argv[])
       t->ScintW.de3 = t->ScintW.nPE3 > 0. ? t->ScintW.e3/sqrt(t->ScintW.nPE3) : 0.;
       t->ScintW.de4 = t->ScintW.nPE4 > 0. ? t->ScintW.e4/sqrt(t->ScintW.nPE4) : 0.;
       
+
+      // Fill bare scintillator branch with no endpoint gain
+      t->ScintE_bare.q1 = t->ScintE.q1;
+      t->ScintE_bare.q2 = t->ScintE.q2;
+      t->ScintE_bare.q3 = t->ScintE.q3;
+      t->ScintE_bare.q4 = t->ScintE.q4;
+
+      t->ScintW_bare.q1 = t->ScintW.q1;
+      t->ScintW_bare.q2 = t->ScintW.q2;
+      t->ScintW_bare.q3 = t->ScintW.q3;
+      t->ScintW_bare.q4 = t->ScintW.q4;
+
+      t->ScintE_bare.e1 = linearityCurve.applyLinCurve(0,t->ScintE_bare.q1);
+      t->ScintE_bare.e2 = linearityCurve.applyLinCurve(1,t->ScintE_bare.q2);
+      t->ScintE_bare.e3 = linearityCurve.applyLinCurve(2,t->ScintE_bare.q3);
+      t->ScintE_bare.e4 = linearityCurve.applyLinCurve(3,t->ScintE_bare.q4);
+      
+      t->ScintE_bare.e1 = ( eta[0]>0. ) ? t->ScintE_bare.e1 / eta[0] : 0.;
+      t->ScintE_bare.e2 = ( eta[1]>0. ) ? t->ScintE_bare.e2 / eta[1] : 0.;
+      t->ScintE_bare.e3 = ( eta[2]>0. ) ? t->ScintE_bare.e3 / eta[2] : 0.;
+      t->ScintE_bare.e4 = ( eta[3]>0. ) ? t->ScintE_bare.e4 / eta[3] : 0.;
+      
+      t->ScintE_bare.nPE1 = eta[0] > 0. ? t->ScintE_bare.e1 * eta[0] * alpha[0] : 0.;
+      t->ScintE_bare.nPE2 = eta[1] > 0. ? t->ScintE_bare.e2 * eta[1] * alpha[1] : 0.;
+      t->ScintE_bare.nPE3 = eta[2] > 0. ? t->ScintE_bare.e3 * eta[2] * alpha[2] : 0.;
+      t->ScintE_bare.nPE4 = eta[3] > 0. ? t->ScintE_bare.e4 * eta[3] * alpha[3] : 0.;
+      
+      t->ScintE_bare.de1 = t->ScintE_bare.nPE1 > 0. ? t->ScintE_bare.e1/sqrt(t->ScintE_bare.nPE1) : 0.;
+      t->ScintE_bare.de2 = t->ScintE_bare.nPE2 > 0. ? t->ScintE_bare.e2/sqrt(t->ScintE_bare.nPE2) : 0.;
+      t->ScintE_bare.de3 = t->ScintE_bare.nPE3 > 0. ? t->ScintE_bare.e3/sqrt(t->ScintE_bare.nPE3) : 0.;
+      t->ScintE_bare.de4 = t->ScintE_bare.nPE4 > 0. ? t->ScintE_bare.e4/sqrt(t->ScintE_bare.nPE4) : 0.;
+      
+      
+      t->ScintW_bare.e1 = linearityCurve.applyLinCurve(4,t->ScintW_bare.q1);
+      t->ScintW_bare.e2 = linearityCurve.applyLinCurve(5,t->ScintW_bare.q2);
+      t->ScintW_bare.e3 = linearityCurve.applyLinCurve(6,t->ScintW_bare.q3);
+      t->ScintW_bare.e4 = linearityCurve.applyLinCurve(7,t->ScintW_bare.q4);
+      
+      t->ScintW_bare.e1 = ( eta[4]>0. ) ? t->ScintW_bare.e1 / eta[4] : 0.;
+      t->ScintW_bare.e2 = ( eta[5]>0. ) ? t->ScintW_bare.e2 / eta[5] : 0.;
+      t->ScintW_bare.e3 = ( eta[6]>0. ) ? t->ScintW_bare.e3 / eta[6] : 0.;
+      t->ScintW_bare.e4 = ( eta[7]>0. ) ? t->ScintW_bare.e4 / eta[7] : 0.;
+      
+      t->ScintW_bare.nPE1 = eta[4] > 0. ? t->ScintW_bare.e1 * eta[4] * alpha[4] : 0.;
+      t->ScintW_bare.nPE2 = eta[5] > 0. ? t->ScintW_bare.e2 * eta[5] * alpha[5] : 0.;
+      t->ScintW_bare.nPE3 = eta[6] > 0. ? t->ScintW_bare.e3 * eta[6] * alpha[6] : 0.;
+      t->ScintW_bare.nPE4 = eta[7] > 0. ? t->ScintW_bare.e4 * eta[7] * alpha[7] : 0.;
+      
+      t->ScintW_bare.de1 = t->ScintW_bare.nPE1 > 0. ? t->ScintW_bare.e1/sqrt(t->ScintW_bare.nPE1) : 0.;
+      t->ScintW_bare.de2 = t->ScintW_bare.nPE2 > 0. ? t->ScintW_bare.e2/sqrt(t->ScintW_bare.nPE2) : 0.;
+      t->ScintW_bare.de3 = t->ScintW_bare.nPE3 > 0. ? t->ScintW_bare.e3/sqrt(t->ScintW_bare.nPE3) : 0.;
+      t->ScintW_bare.de4 = t->ScintW_bare.nPE4 > 0. ? t->ScintW_bare.e4/sqrt(t->ScintW_bare.nPE4) : 0.;
+
       //std::cout << "Made it here" << std::endl;
       
       
@@ -639,16 +719,16 @@ int main(int argc, char *argv[])
       
       //EAST
       numer = 0.;
-      numer = ( (pmtQuality[0] && t->ScintE.nPE1>0. ? t->ScintE.nPE1 : 0.) +
-		(pmtQuality[1] && t->ScintE.nPE1>0. ? t->ScintE.nPE2 : 0.) + 
-		(pmtQuality[2] && t->ScintE.nPE1>0. ? t->ScintE.nPE3 : 0.) + 
-		(pmtQuality[3] && t->ScintE.nPE1>0. ? t->ScintE.nPE4 : 0.) );
+      numer = ( (pmtQuality[0] ? t->ScintE.nPE1 : 0.) +
+		(pmtQuality[1] ? t->ScintE.nPE2 : 0.) + 
+		(pmtQuality[2] ? t->ScintE.nPE3 : 0.) + 
+		(pmtQuality[3] ? t->ScintE.nPE4 : 0.) );
       
       denom = 0.;
-      denom  = ( (pmtQuality[0] && t->ScintE.nPE1>0. ? alpha[0] * eta[0] : 0.) +
-		 (pmtQuality[1] && t->ScintE.nPE2>0. ? alpha[1] * eta[1] : 0.) +
-		 (pmtQuality[2] && t->ScintE.nPE3>0. ? alpha[2] * eta[2] : 0.) + 
-		 (pmtQuality[3] && t->ScintE.nPE4>0. ? alpha[3] * eta[3] : 0.) ); 
+      denom  = ( (pmtQuality[0] ? alpha[0] * eta[0] : 0.) +
+		 (pmtQuality[1] ? alpha[1] * eta[1] : 0.) +
+		 (pmtQuality[2] ? alpha[2] * eta[2] : 0.) + 
+		 (pmtQuality[3] ? alpha[3] * eta[3] : 0.) ); 
       
       t->ScintE.energy = t->EvisE = (denom!=0. ? numer/denom : 0.);
       t->ScintE.denergy = (denom!=0. ? sqrt(t->ScintE.energy/denom) : 0.);
@@ -656,15 +736,15 @@ int main(int argc, char *argv[])
       //WEST
       numer = denom = 0.;
       
-      numer = ( (pmtQuality[4] && t->ScintW.nPE1>0. ? t->ScintW.nPE1 : 0.) +
-		(pmtQuality[5] && t->ScintW.nPE1>0. ? t->ScintW.nPE2 : 0.) + 
-		(pmtQuality[6] && t->ScintW.nPE1>0. ? t->ScintW.nPE3 : 0.) + 
-		(pmtQuality[7] && t->ScintW.nPE1>0. ? t->ScintW.nPE4 : 0.) );
+      numer = ( (pmtQuality[4] ? t->ScintW.nPE1 : 0.) +
+		(pmtQuality[5] ? t->ScintW.nPE2 : 0.) + 
+		(pmtQuality[6] ? t->ScintW.nPE3 : 0.) + 
+		(pmtQuality[7] ? t->ScintW.nPE4 : 0.) );
       
-      denom  = ( (pmtQuality[4] && t->ScintW.nPE1>0. ? alpha[4] * eta[4] : 0.) +
-		 (pmtQuality[5] && t->ScintW.nPE2>0. ? alpha[5] * eta[5] : 0.) +
-		 (pmtQuality[6] && t->ScintW.nPE3>0. ? alpha[6] * eta[6] : 0.) + 
-		 (pmtQuality[7] && t->ScintW.nPE4>0. ? alpha[7] * eta[7] : 0.) ); 
+      denom  = ( (pmtQuality[4] ? alpha[4] * eta[4] : 0.) +
+		 (pmtQuality[5] ? alpha[5] * eta[5] : 0.) +
+		 (pmtQuality[6] ? alpha[6] * eta[6] : 0.) + 
+		 (pmtQuality[7] ? alpha[7] * eta[7] : 0.) ); 
       
       
       t->ScintW.energy = t->EvisW = (denom!=0. ? numer/denom : 0.);

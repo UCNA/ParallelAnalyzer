@@ -1,3 +1,6 @@
+#include "../include/DataTree.hh"
+
+MWPC xE, xW, yE, yW;
 
 int PID, type, side; // basic analysis tags
 
@@ -7,7 +10,7 @@ double Erecon; // smeared, weighted, and trigger func corrected energy summed ov
 
 int nClipped_EX, nClipped_EY, nClipped_WX, nClipped_WY; // Clipping numbers
 
-double Cath_EX[16], Cath_EY[16], Cath_WX[16], Cath_WY[16];
+float Cath_EX[16], Cath_EY[16], Cath_WX[16], Cath_WY[16];
 
 struct Evis {
   double EvisE;

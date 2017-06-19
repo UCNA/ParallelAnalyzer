@@ -230,7 +230,7 @@ int main(int argc, char *argv[])
 
   // Load calibration info
   PositionMap posmap(5.0,50.);
-  posmap.readPositionMap(getXeRunPeriod(runNumber));
+  posmap.readPositionMap(getXeRunPeriod(runNumber),"endpoint");
   
   vector < Double_t > eta;
   std::vector < std::vector <Int_t> > numDataPoints(3, std::vector <Int_t>(2,0)); //Holds the number of data points for each side for each source
@@ -395,7 +395,9 @@ int main(int argc, char *argv[])
   double lowBiFitMean[8]={0.};
   double lowBiFitMeanError[8]={0.};
   double fitSigma[3][8]={0.};
+  double fitSigmaError[3][8]={0.};
   double lowBiFitSigma[8]={0.};
+  double lowBiFitSigmaError[8]={0.};
 
   for (int n=0; n<nSources; n++) {
 
@@ -413,6 +415,7 @@ int main(int argc, char *argv[])
 	    fitMean[n][j] = sing.ReturnMean();
 	    fitMeanError[n][j] = sing.ReturnMeanError();
 	    fitSigma[n][j] = sing.ReturnSigma();
+	    fitSigmaError[n][j] = sing.ReturnSigmaError();
 	  }
 
 	  else  {
@@ -425,6 +428,7 @@ int main(int argc, char *argv[])
 	      fitMean[n][j] = sing.ReturnMean();
 	      fitMeanError[n][j] = sing.ReturnMeanError();
 	      fitSigma[n][j] = sing.ReturnSigma();
+	      fitSigmaError[n][j] = sing.ReturnSigmaError();
 	    }
 
 	    else cout << "RUN " << runNumber << " CAN'T CONVERGE ON " << sourceName[n] << " PEAK IN PMT " << j  << endl;
@@ -443,7 +447,9 @@ int main(int argc, char *argv[])
 	    lowBiFitMean[j] = doub.ReturnMean2();
 	    lowBiFitMeanError[j] = doub.ReturnMean2Error();
 	    fitSigma[n][j] = doub.ReturnSigma1();
+	    fitSigmaError[n][j] = doub.ReturnSigma1Error();
 	    lowBiFitSigma[j] = doub.ReturnSigma2();
+	    lowBiFitSigmaError[j] = doub.ReturnSigma2Error();
 	  }
 
 	  else  {
@@ -458,7 +464,9 @@ int main(int argc, char *argv[])
 	      lowBiFitMean[j] = doub.ReturnMean2();
 	      lowBiFitMeanError[j] = doub.ReturnMean2Error();
 	      fitSigma[n][j] = doub.ReturnSigma1();
+	      fitSigmaError[n][j] = doub.ReturnSigma1Error();
 	      lowBiFitSigma[j] = doub.ReturnSigma2();
+	      lowBiFitSigmaError[j] = doub.ReturnSigma2Error();
 	    }
 
 	    else cout << "RUN " << runNumber << " CAN'T CONVERGE ON " << sourceName[n] << " PEAK IN PMT " << j  << endl;
@@ -478,6 +486,8 @@ int main(int argc, char *argv[])
   ofstream outResultsMeanError(tempResults);
   sprintf(tempResults, "%s/source_peaks/source_widths_%s_Evis.dat",getenv("REVCALSIM"), argv[1]);
   ofstream outResultsSigma(tempResults);
+  sprintf(tempResults, "%s/source_peaks/source_widths_errors_%s_Evis.dat",getenv("REVCALSIM"), argv[1]);
+  ofstream outResultsSigmaError(tempResults);
 
   for (int n=0; n<nSources; n++) {
     if (useSource[n]) {
@@ -514,6 +524,16 @@ int main(int argc, char *argv[])
 		     << fitSigma[n][5] << " "
 		     << fitSigma[n][6] << " "
 		     << fitSigma[n][7] << endl;
+      outResultsSigmaError << runNumber << " "
+		     << srcName << " "
+		     << fitSigmaError[n][0] << " "
+		     << fitSigmaError[n][1] << " "
+		     << fitSigmaError[n][2] << " "
+		     << fitSigmaError[n][3] << " "
+		     << fitSigmaError[n][4] << " "
+		     << fitSigmaError[n][5] << " "
+		     << fitSigmaError[n][6] << " "
+		     << fitSigmaError[n][7] << endl;
     }
   }
 
@@ -548,10 +568,22 @@ int main(int argc, char *argv[])
 		   << lowBiFitSigma[5] << " "
 		   << lowBiFitSigma[6] << " "
 		   << lowBiFitSigma[7] << endl;
+
+     outResultsSigmaError << runNumber << " "
+		   << "Bi2" << " "
+		   << lowBiFitSigmaError[0] << " "
+		   << lowBiFitSigmaError[1] << " "
+		   << lowBiFitSigmaError[2] << " "
+		   << lowBiFitSigmaError[3] << " "
+		   << lowBiFitSigmaError[4] << " "
+		   << lowBiFitSigmaError[5] << " "
+		   << lowBiFitSigmaError[6] << " "
+		   << lowBiFitSigmaError[7] << endl;
   }
   outResultsMean.close();
   outResultsMeanError.close();
   outResultsSigma.close();
+  outResultsSigmaError.close();
 
 
   //Now for the total Evis peaks and widths

@@ -1,7 +1,6 @@
 #include <vector>
 #include <TF1.h>
 
-static const bool useRC = false;
 
 class PositionMap {
 
@@ -10,7 +9,7 @@ public:
   PositionMap(Double_t bin_width, Double_t r_max); //Constructor
   ~PositionMap();
 
-  void readPositionMap(Int_t XeRunPeriod); //Read in a trigger map
+  void readPositionMap(Int_t XeRunPeriod, TString type="ave"); //Read in a trigger map
   //void writePositionMap(Int_t XeRunPeriod); //Write trigger map
   void setPositionMapPoint(Int_t xBin, Int_t yBin, std::vector <Double_t> vals); //Set a trigger map val
 
@@ -34,7 +33,8 @@ private:
 
   Double_t binWidth; //x and y width of position bins
   Double_t rmax; //Maximum r where an interpolation can faithfully be constructed
-  bool bUseRC; // Flag which defaults to const value at top of file, but can be set to whatever
+  bool bUseRC; // Flag which defaults to false, but can be set to whatever
+               // This is outdated and shouldn't be turned on...
   
   Int_t nBinsXY, nBinsTotal;
   Int_t XePeriod;

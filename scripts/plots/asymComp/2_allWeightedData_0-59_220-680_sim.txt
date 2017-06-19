@@ -1,3 +1,0 @@
-RawA_oct_by_oct	0.0505553	0.000196592
-BetaCorrA_oct_by_oct	-0.124677	0.000483413
-BetaCorrA_binSummed	-0.124677	0.000483413

@@ -4,12 +4,12 @@
 // runs they apply to, and then put vertical lines at each of these
 #include <vector>
 
-std::vector <Int_t> getPMTQuality(Int_t runNumber) {
+std::vector <Int_t> getPMTEreconQuality(Int_t runNumber) {
   //Read in PMT quality file
   //cout << "Reading in PMT Quality file ...\n";
   vector <Int_t>  pmtQuality (8,0);
   Char_t temp[200];
-  sprintf(temp,"%s/residuals/PMT_runQuality_master.dat",getenv("ANALYSIS_CODE")); 
+  sprintf(temp,"%s/residuals/PMT_EreconQuality_master.dat",getenv("ANALYSIS_CODE")); 
   ifstream pmt;
   //std::cout << temp << std::endl;
   pmt.open(temp);
@@ -108,7 +108,7 @@ void plotGainTimeDependence(TString year) {
       // 17588 is empty, the ranges are unused Xe runs which weren't processed, 
       // (rn>20515 && rn<21087) is all the garbage which isn't really usable from the beginning of 2012-2013
 
-      std::vector <Int_t> pmtQuality = getPMTQuality(rn);
+      std::vector <Int_t> pmtQuality = getPMTEreconQuality(rn);
       
       //std::cout << "Opened " << filename << std::endl;
       gainFile >> e1 >> e1_norm

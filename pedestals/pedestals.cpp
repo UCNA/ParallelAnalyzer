@@ -273,10 +273,10 @@ int main(int argc, char *argv[])
     if ( triggerBiPulser ) { // Choosing Bi Pulser events
 
       //East
-      if (TdcE1<0.0001 && TdcE2<0.0001 && TdcE3<0.0001 && TdcE4<0.0001) {
+      //if (TdcE1<0.0001 && TdcE2<0.0001 && TdcE3<0.0001 && TdcE4<0.0001) {
 
 	// East PMTs
-	//his11->Fill(Qadc[0]);
+	//	his11->Fill(Qadc[0]);
 	//his12->Fill(Qadc[1]);
 	//his13->Fill(Qadc[2]);
 	//his14->Fill(Qadc[3]);
@@ -319,13 +319,13 @@ int main(int argc, char *argv[])
 
 
 
-      }
+	//}
 
       //West 
-      if (TdcW1<0.0001 && TdcW2<0.0001 && TdcW3<0.0001 && TdcW4<0.0001) {
+      //if (TdcW1<0.0001 && TdcW2<0.0001 && TdcW3<0.0001 && TdcW4<0.0001) {
 
 	//West PMTs
-	//his15->Fill(Qadc[4]);
+	//	his15->Fill(Qadc[4]);
 	//his16->Fill(Qadc[5]);
 	//his17->Fill(Qadc[6]);
 	//his18->Fill(Qadc[7]);
@@ -365,7 +365,7 @@ int main(int argc, char *argv[])
 	his232->Fill(Padc[31]);
 
 	his301->Fill(Pdc34);
-      }
+	//}
       
     }
 
@@ -381,20 +381,20 @@ int main(int argc, char *argv[])
       if ( TdcW2<0.000001 ) his16->Fill(Qadc[5]);
       if ( TdcW3<0.000001 ) his17->Fill(Qadc[6]);
       if ( TdcW4<0.000001 ) his18->Fill(Qadc[7]);	
-
+    
     }
 
   }
 
 
-  pedQadc[0] = his11->GetXaxis()->GetBinCenter(his11->GetMaximumBin()); his11->GetXaxis()->SetRangeUser(pedQadc[0]-15., pedQadc[0]+15.);
-  pedQadc[1] = his12->GetXaxis()->GetBinCenter(his12->GetMaximumBin()); his12->GetXaxis()->SetRangeUser(pedQadc[1]-15., pedQadc[1]+15.);
-  pedQadc[2] = his13->GetXaxis()->GetBinCenter(his13->GetMaximumBin()); his13->GetXaxis()->SetRangeUser(pedQadc[2]-15., pedQadc[2]+15.);
-  pedQadc[3] = his14->GetXaxis()->GetBinCenter(his14->GetMaximumBin()); his14->GetXaxis()->SetRangeUser(pedQadc[3]-15., pedQadc[3]+15.);
-  pedQadc[4] = his15->GetXaxis()->GetBinCenter(his15->GetMaximumBin()); his15->GetXaxis()->SetRangeUser(pedQadc[4]-15., pedQadc[4]+15.);
-  pedQadc[5] = his16->GetXaxis()->GetBinCenter(his16->GetMaximumBin()); his16->GetXaxis()->SetRangeUser(pedQadc[5]-15., pedQadc[5]+15.);
-  pedQadc[6] = his17->GetXaxis()->GetBinCenter(his17->GetMaximumBin()); his17->GetXaxis()->SetRangeUser(pedQadc[6]-15., pedQadc[6]+15.);
-  pedQadc[7] = his18->GetXaxis()->GetBinCenter(his18->GetMaximumBin()); his18->GetXaxis()->SetRangeUser(pedQadc[7]-15., pedQadc[7]+15.);
+  pedQadc[0] = his11->GetXaxis()->GetBinCenter(his11->GetMaximumBin()); his11->GetXaxis()->SetRangeUser(pedQadc[0]-30., pedQadc[0]+30.);
+  pedQadc[1] = his12->GetXaxis()->GetBinCenter(his12->GetMaximumBin()); his12->GetXaxis()->SetRangeUser(pedQadc[1]-30., pedQadc[1]+30.);
+  pedQadc[2] = his13->GetXaxis()->GetBinCenter(his13->GetMaximumBin()); his13->GetXaxis()->SetRangeUser(pedQadc[2]-30., pedQadc[2]+30.);
+  pedQadc[3] = his14->GetXaxis()->GetBinCenter(his14->GetMaximumBin()); his14->GetXaxis()->SetRangeUser(pedQadc[3]-30., pedQadc[3]+30.);
+  pedQadc[4] = his15->GetXaxis()->GetBinCenter(his15->GetMaximumBin()); his15->GetXaxis()->SetRangeUser(pedQadc[4]-30., pedQadc[4]+30.);
+  pedQadc[5] = his16->GetXaxis()->GetBinCenter(his16->GetMaximumBin()); his16->GetXaxis()->SetRangeUser(pedQadc[5]-30., pedQadc[5]+30.);
+  pedQadc[6] = his17->GetXaxis()->GetBinCenter(his17->GetMaximumBin()); his17->GetXaxis()->SetRangeUser(pedQadc[6]-30., pedQadc[6]+30.);
+  pedQadc[7] = his18->GetXaxis()->GetBinCenter(his18->GetMaximumBin()); his18->GetXaxis()->SetRangeUser(pedQadc[7]-30., pedQadc[7]+30.);
 
   pedPdc2[0]  = his101->GetXaxis()->GetBinCenter(his101->GetMaximumBin()); his101->GetXaxis()->SetRangeUser(pedPdc2[0]-50., pedPdc2[0]+50.);
   pedPdc2[1]  = his102->GetXaxis()->GetBinCenter(his102->GetMaximumBin()); his102->GetXaxis()->SetRangeUser(pedPdc2[1]-50., pedPdc2[1]+50.);

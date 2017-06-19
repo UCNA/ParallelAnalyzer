@@ -1,0 +1,2646 @@
+****************************
+Asymm= -0.123109
+100-510 keV_total_Error= 0.014886
+
+Weighted_Energy_Error: 0.012804
+Total_Statistical_Error: 0.006233
+Total_Systematic_Error: 0.004336
+****************************
+Asymm= -0.123069
+100-520 keV_total_Error= 0.014743
+
+Weighted_Energy_Error: 0.012687
+Total_Statistical_Error: 0.006175
+Total_Systematic_Error: 0.004274
+****************************
+Asymm= -0.123170
+100-530 keV_total_Error= 0.014605
+
+Weighted_Energy_Error: 0.012572
+Total_Statistical_Error: 0.006114
+Total_Systematic_Error: 0.004227
+****************************
+Asymm= -0.123006
+100-540 keV_total_Error= 0.014470
+
+Weighted_Energy_Error: 0.012451
+Total_Statistical_Error: 0.006070
+Total_Systematic_Error: 0.004185
+****************************
+Asymm= -0.122975
+100-550 keV_total_Error= 0.014363
+
+Weighted_Energy_Error: 0.012362
+Total_Statistical_Error: 0.006025
+Total_Systematic_Error: 0.004142
+****************************
+Asymm= -0.123099
+100-560 keV_total_Error= 0.014255
+
+Weighted_Energy_Error: 0.012270
+Total_Statistical_Error: 0.005976
+Total_Systematic_Error: 0.004116
+****************************
+Asymm= -0.123120
+100-570 keV_total_Error= 0.014139
+
+Weighted_Energy_Error: 0.012168
+Total_Statistical_Error: 0.005935
+Total_Systematic_Error: 0.004078
+****************************
+Asymm= -0.123296
+100-580 keV_total_Error= 0.014040
+
+Weighted_Energy_Error: 0.012082
+Total_Statistical_Error: 0.005890
+Total_Systematic_Error: 0.004056
+****************************
+Asymm= -0.123150
+100-590 keV_total_Error= 0.013944
+
+Weighted_Energy_Error: 0.011986
+Total_Statistical_Error: 0.005865
+Total_Systematic_Error: 0.004045
+****************************
+Asymm= -0.123164
+100-600 keV_total_Error= 0.013874
+
+Weighted_Energy_Error: 0.011932
+Total_Statistical_Error: 0.005836
+Total_Systematic_Error: 0.004007
+****************************
+Asymm= -0.123172
+100-610 keV_total_Error= 0.013803
+
+Weighted_Energy_Error: 0.011868
+Total_Statistical_Error: 0.005809
+Total_Systematic_Error: 0.003992
+****************************
+Asymm= -0.123140
+100-620 keV_total_Error= 0.013739
+
+Weighted_Energy_Error: 0.011809
+Total_Statistical_Error: 0.005787
+Total_Systematic_Error: 0.003976
+****************************
+Asymm= -0.123189
+100-630 keV_total_Error= 0.013682
+
+Weighted_Energy_Error: 0.011762
+Total_Statistical_Error: 0.005764
+Total_Systematic_Error: 0.003955
+****************************
+Asymm= -0.123196
+100-640 keV_total_Error= 0.013625
+
+Weighted_Energy_Error: 0.011711
+Total_Statistical_Error: 0.005745
+Total_Systematic_Error: 0.003933
+****************************
+Asymm= -0.123264
+100-650 keV_total_Error= 0.013575
+
+Weighted_Energy_Error: 0.011669
+Total_Statistical_Error: 0.005726
+Total_Systematic_Error: 0.003916
+****************************
+Asymm= -0.123264
+100-660 keV_total_Error= 0.013529
+
+Weighted_Energy_Error: 0.011626
+Total_Statistical_Error: 0.005713
+Total_Systematic_Error: 0.003905
+****************************
+Asymm= -0.123267
+100-670 keV_total_Error= 0.013495
+
+Weighted_Energy_Error: 0.011595
+Total_Statistical_Error: 0.005701
+Total_Systematic_Error: 0.003897
+****************************
+Asymm= -0.123240
+100-680 keV_total_Error= 0.013464
+
+Weighted_Energy_Error: 0.011567
+Total_Statistical_Error: 0.005692
+Total_Systematic_Error: 0.003884
+****************************
+Asymm= -0.123260
+100-690 keV_total_Error= 0.013440
+
+Weighted_Energy_Error: 0.011546
+Total_Statistical_Error: 0.005683
+Total_Systematic_Error: 0.003875
+****************************
+Asymm= -0.123270
+100-700 keV_total_Error= 0.013417
+
+Weighted_Energy_Error: 0.011524
+Total_Statistical_Error: 0.005676
+Total_Systematic_Error: 0.003871
+****************************
+Asymm= -0.123330
+100-710 keV_total_Error= 0.013399
+
+Weighted_Energy_Error: 0.011508
+Total_Statistical_Error: 0.005668
+Total_Systematic_Error: 0.003870
+****************************
+Asymm= -0.123282
+100-720 keV_total_Error= 0.013382
+
+Weighted_Energy_Error: 0.011489
+Total_Statistical_Error: 0.005666
+Total_Systematic_Error: 0.003869
+****************************
+Asymm= -0.123298
+100-730 keV_total_Error= 0.013375
+
+Weighted_Energy_Error: 0.011483
+Total_Statistical_Error: 0.005662
+Total_Systematic_Error: 0.003868
+****************************
+Asymm= -0.123295
+100-740 keV_total_Error= 0.013366
+
+Weighted_Energy_Error: 0.011474
+Total_Statistical_Error: 0.005660
+Total_Systematic_Error: 0.003868
+****************************
+Asymm= -0.123260
+100-750 keV_total_Error= 0.013362
+
+Weighted_Energy_Error: 0.011468
+Total_Statistical_Error: 0.005660
+Total_Systematic_Error: 0.003870
+****************************
+Asymm= -0.123231
+100-760 keV_total_Error= 0.013362
+
+Weighted_Energy_Error: 0.011467
+Total_Statistical_Error: 0.005660
+Total_Systematic_Error: 0.003875
+****************************
+Asymm= -0.123221
+100-770 keV_total_Error= 0.013365
+
+Weighted_Energy_Error: 0.011467
+Total_Statistical_Error: 0.005660
+Total_Systematic_Error: 0.003885
+****************************
+Asymm= -0.123107
+110-520 keV_total_Error= 0.014797
+
+Weighted_Energy_Error: 0.012724
+Total_Statistical_Error: 0.006204
+Total_Systematic_Error: 0.004309
+****************************
+Asymm= -0.123208
+110-530 keV_total_Error= 0.014657
+
+Weighted_Energy_Error: 0.012607
+Total_Statistical_Error: 0.006142
+Total_Systematic_Error: 0.004261
+****************************
+Asymm= -0.123042
+110-540 keV_total_Error= 0.014520
+
+Weighted_Energy_Error: 0.012484
+Total_Statistical_Error: 0.006098
+Total_Systematic_Error: 0.004218
+****************************
+Asymm= -0.123011
+110-550 keV_total_Error= 0.014410
+
+Weighted_Energy_Error: 0.012394
+Total_Statistical_Error: 0.006052
+Total_Systematic_Error: 0.004174
+****************************
+Asymm= -0.123136
+110-560 keV_total_Error= 0.014301
+
+Weighted_Energy_Error: 0.012301
+Total_Statistical_Error: 0.006002
+Total_Systematic_Error: 0.004146
+****************************
+Asymm= -0.123156
+110-570 keV_total_Error= 0.014183
+
+Weighted_Energy_Error: 0.012197
+Total_Statistical_Error: 0.005961
+Total_Systematic_Error: 0.004108
+****************************
+Asymm= -0.123333
+110-580 keV_total_Error= 0.014083
+
+Weighted_Energy_Error: 0.012110
+Total_Statistical_Error: 0.005916
+Total_Systematic_Error: 0.004085
+****************************
+Asymm= -0.123185
+110-590 keV_total_Error= 0.013986
+
+Weighted_Energy_Error: 0.012013
+Total_Statistical_Error: 0.005890
+Total_Systematic_Error: 0.004074
+****************************
+Asymm= -0.123199
+110-600 keV_total_Error= 0.013915
+
+Weighted_Energy_Error: 0.011958
+Total_Statistical_Error: 0.005860
+Total_Systematic_Error: 0.004035
+****************************
+Asymm= -0.123207
+110-610 keV_total_Error= 0.013843
+
+Weighted_Energy_Error: 0.011893
+Total_Statistical_Error: 0.005833
+Total_Systematic_Error: 0.004020
+****************************
+Asymm= -0.123174
+110-620 keV_total_Error= 0.013778
+
+Weighted_Energy_Error: 0.011834
+Total_Statistical_Error: 0.005811
+Total_Systematic_Error: 0.004003
+****************************
+Asymm= -0.123223
+110-630 keV_total_Error= 0.013721
+
+Weighted_Energy_Error: 0.011785
+Total_Statistical_Error: 0.005788
+Total_Systematic_Error: 0.003982
+****************************
+Asymm= -0.123230
+110-640 keV_total_Error= 0.013662
+
+Weighted_Energy_Error: 0.011734
+Total_Statistical_Error: 0.005769
+Total_Systematic_Error: 0.003960
+****************************
+Asymm= -0.123298
+110-650 keV_total_Error= 0.013612
+
+Weighted_Energy_Error: 0.011692
+Total_Statistical_Error: 0.005750
+Total_Systematic_Error: 0.003942
+****************************
+Asymm= -0.123298
+110-660 keV_total_Error= 0.013565
+
+Weighted_Energy_Error: 0.011648
+Total_Statistical_Error: 0.005736
+Total_Systematic_Error: 0.003930
+****************************
+Asymm= -0.123301
+110-670 keV_total_Error= 0.013531
+
+Weighted_Energy_Error: 0.011617
+Total_Statistical_Error: 0.005724
+Total_Systematic_Error: 0.003923
+****************************
+Asymm= -0.123274
+110-680 keV_total_Error= 0.013500
+
+Weighted_Energy_Error: 0.011589
+Total_Statistical_Error: 0.005715
+Total_Systematic_Error: 0.003910
+****************************
+Asymm= -0.123294
+110-690 keV_total_Error= 0.013475
+
+Weighted_Energy_Error: 0.011568
+Total_Statistical_Error: 0.005706
+Total_Systematic_Error: 0.003901
+****************************
+Asymm= -0.123304
+110-700 keV_total_Error= 0.013452
+
+Weighted_Energy_Error: 0.011545
+Total_Statistical_Error: 0.005699
+Total_Systematic_Error: 0.003896
+****************************
+Asymm= -0.123364
+110-710 keV_total_Error= 0.013434
+
+Weighted_Energy_Error: 0.011529
+Total_Statistical_Error: 0.005691
+Total_Systematic_Error: 0.003895
+****************************
+Asymm= -0.123316
+110-720 keV_total_Error= 0.013416
+
+Weighted_Energy_Error: 0.011509
+Total_Statistical_Error: 0.005689
+Total_Systematic_Error: 0.003894
+****************************
+Asymm= -0.123333
+110-730 keV_total_Error= 0.013409
+
+Weighted_Energy_Error: 0.011504
+Total_Statistical_Error: 0.005685
+Total_Systematic_Error: 0.003893
+****************************
+Asymm= -0.123329
+110-740 keV_total_Error= 0.013400
+
+Weighted_Energy_Error: 0.011494
+Total_Statistical_Error: 0.005683
+Total_Systematic_Error: 0.003893
+****************************
+Asymm= -0.123294
+110-750 keV_total_Error= 0.013396
+
+Weighted_Energy_Error: 0.011489
+Total_Statistical_Error: 0.005683
+Total_Systematic_Error: 0.003895
+****************************
+Asymm= -0.123264
+110-760 keV_total_Error= 0.013397
+
+Weighted_Energy_Error: 0.011487
+Total_Statistical_Error: 0.005683
+Total_Systematic_Error: 0.003900
+****************************
+Asymm= -0.123254
+110-770 keV_total_Error= 0.013399
+
+Weighted_Energy_Error: 0.011487
+Total_Statistical_Error: 0.005683
+Total_Systematic_Error: 0.003910
+****************************
+Asymm= -0.123233
+120-530 keV_total_Error= 0.014659
+
+Weighted_Energy_Error: 0.012579
+Total_Statistical_Error: 0.006178
+Total_Systematic_Error: 0.004299
+****************************
+Asymm= -0.123064
+120-540 keV_total_Error= 0.014521
+
+Weighted_Energy_Error: 0.012455
+Total_Statistical_Error: 0.006133
+Total_Systematic_Error: 0.004256
+****************************
+Asymm= -0.123032
+120-550 keV_total_Error= 0.014410
+
+Weighted_Energy_Error: 0.012365
+Total_Statistical_Error: 0.006086
+Total_Systematic_Error: 0.004210
+****************************
+Asymm= -0.123158
+120-560 keV_total_Error= 0.014300
+
+Weighted_Energy_Error: 0.012271
+Total_Statistical_Error: 0.006036
+Total_Systematic_Error: 0.004182
+****************************
+Asymm= -0.123178
+120-570 keV_total_Error= 0.014181
+
+Weighted_Energy_Error: 0.012166
+Total_Statistical_Error: 0.005993
+Total_Systematic_Error: 0.004144
+****************************
+Asymm= -0.123357
+120-580 keV_total_Error= 0.014080
+
+Weighted_Energy_Error: 0.012079
+Total_Statistical_Error: 0.005947
+Total_Systematic_Error: 0.004121
+****************************
+Asymm= -0.123207
+120-590 keV_total_Error= 0.013983
+
+Weighted_Energy_Error: 0.011981
+Total_Statistical_Error: 0.005921
+Total_Systematic_Error: 0.004112
+****************************
+Asymm= -0.123221
+120-600 keV_total_Error= 0.013911
+
+Weighted_Energy_Error: 0.011926
+Total_Statistical_Error: 0.005891
+Total_Systematic_Error: 0.004071
+****************************
+Asymm= -0.123229
+120-610 keV_total_Error= 0.013839
+
+Weighted_Energy_Error: 0.011861
+Total_Statistical_Error: 0.005863
+Total_Systematic_Error: 0.004056
+****************************
+Asymm= -0.123195
+120-620 keV_total_Error= 0.013773
+
+Weighted_Energy_Error: 0.011801
+Total_Statistical_Error: 0.005841
+Total_Systematic_Error: 0.004039
+****************************
+Asymm= -0.123245
+120-630 keV_total_Error= 0.013715
+
+Weighted_Energy_Error: 0.011752
+Total_Statistical_Error: 0.005818
+Total_Systematic_Error: 0.004018
+****************************
+Asymm= -0.123252
+120-640 keV_total_Error= 0.013656
+
+Weighted_Energy_Error: 0.011701
+Total_Statistical_Error: 0.005798
+Total_Systematic_Error: 0.003994
+****************************
+Asymm= -0.123321
+120-650 keV_total_Error= 0.013606
+
+Weighted_Energy_Error: 0.011658
+Total_Statistical_Error: 0.005779
+Total_Systematic_Error: 0.003976
+****************************
+Asymm= -0.123321
+120-660 keV_total_Error= 0.013559
+
+Weighted_Energy_Error: 0.011614
+Total_Statistical_Error: 0.005765
+Total_Systematic_Error: 0.003964
+****************************
+Asymm= -0.123323
+120-670 keV_total_Error= 0.013524
+
+Weighted_Energy_Error: 0.011583
+Total_Statistical_Error: 0.005753
+Total_Systematic_Error: 0.003957
+****************************
+Asymm= -0.123296
+120-680 keV_total_Error= 0.013492
+
+Weighted_Energy_Error: 0.011555
+Total_Statistical_Error: 0.005744
+Total_Systematic_Error: 0.003943
+****************************
+Asymm= -0.123316
+120-690 keV_total_Error= 0.013468
+
+Weighted_Energy_Error: 0.011534
+Total_Statistical_Error: 0.005734
+Total_Systematic_Error: 0.003934
+****************************
+Asymm= -0.123326
+120-700 keV_total_Error= 0.013444
+
+Weighted_Energy_Error: 0.011511
+Total_Statistical_Error: 0.005727
+Total_Systematic_Error: 0.003929
+****************************
+Asymm= -0.123387
+120-710 keV_total_Error= 0.013426
+
+Weighted_Energy_Error: 0.011495
+Total_Statistical_Error: 0.005719
+Total_Systematic_Error: 0.003928
+****************************
+Asymm= -0.123338
+120-720 keV_total_Error= 0.013408
+
+Weighted_Energy_Error: 0.011475
+Total_Statistical_Error: 0.005717
+Total_Systematic_Error: 0.003928
+****************************
+Asymm= -0.123355
+120-730 keV_total_Error= 0.013402
+
+Weighted_Energy_Error: 0.011469
+Total_Statistical_Error: 0.005713
+Total_Systematic_Error: 0.003927
+****************************
+Asymm= -0.123352
+120-740 keV_total_Error= 0.013392
+
+Weighted_Energy_Error: 0.011460
+Total_Statistical_Error: 0.005711
+Total_Systematic_Error: 0.003926
+****************************
+Asymm= -0.123316
+120-750 keV_total_Error= 0.013388
+
+Weighted_Energy_Error: 0.011454
+Total_Statistical_Error: 0.005711
+Total_Systematic_Error: 0.003928
+****************************
+Asymm= -0.123286
+120-760 keV_total_Error= 0.013389
+
+Weighted_Energy_Error: 0.011453
+Total_Statistical_Error: 0.005711
+Total_Systematic_Error: 0.003933
+****************************
+Asymm= -0.123275
+120-770 keV_total_Error= 0.013391
+
+Weighted_Energy_Error: 0.011453
+Total_Statistical_Error: 0.005711
+Total_Systematic_Error: 0.003943
+****************************
+Asymm= -0.123036
+130-540 keV_total_Error= 0.014461
+
+Weighted_Energy_Error: 0.012363
+Total_Statistical_Error: 0.006176
+Total_Systematic_Error: 0.004260
+****************************
+Asymm= -0.123004
+130-550 keV_total_Error= 0.014350
+
+Weighted_Energy_Error: 0.012272
+Total_Statistical_Error: 0.006129
+Total_Systematic_Error: 0.004213
+****************************
+Asymm= -0.123132
+130-560 keV_total_Error= 0.014239
+
+Weighted_Energy_Error: 0.012179
+Total_Statistical_Error: 0.006077
+Total_Systematic_Error: 0.004185
+****************************
+Asymm= -0.123153
+130-570 keV_total_Error= 0.014121
+
+Weighted_Energy_Error: 0.012074
+Total_Statistical_Error: 0.006034
+Total_Systematic_Error: 0.004147
+****************************
+Asymm= -0.123334
+130-580 keV_total_Error= 0.014019
+
+Weighted_Energy_Error: 0.011987
+Total_Statistical_Error: 0.005987
+Total_Systematic_Error: 0.004123
+****************************
+Asymm= -0.123182
+130-590 keV_total_Error= 0.013922
+
+Weighted_Energy_Error: 0.011890
+Total_Statistical_Error: 0.005960
+Total_Systematic_Error: 0.004114
+****************************
+Asymm= -0.123197
+130-600 keV_total_Error= 0.013849
+
+Weighted_Energy_Error: 0.011834
+Total_Statistical_Error: 0.005929
+Total_Systematic_Error: 0.004073
+****************************
+Asymm= -0.123205
+130-610 keV_total_Error= 0.013777
+
+Weighted_Energy_Error: 0.011769
+Total_Statistical_Error: 0.005901
+Total_Systematic_Error: 0.004058
+****************************
+Asymm= -0.123171
+130-620 keV_total_Error= 0.013711
+
+Weighted_Energy_Error: 0.011710
+Total_Statistical_Error: 0.005878
+Total_Systematic_Error: 0.004040
+****************************
+Asymm= -0.123222
+130-630 keV_total_Error= 0.013653
+
+Weighted_Energy_Error: 0.011661
+Total_Statistical_Error: 0.005855
+Total_Systematic_Error: 0.004019
+****************************
+Asymm= -0.123229
+130-640 keV_total_Error= 0.013594
+
+Weighted_Energy_Error: 0.011610
+Total_Statistical_Error: 0.005835
+Total_Systematic_Error: 0.003994
+****************************
+Asymm= -0.123299
+130-650 keV_total_Error= 0.013543
+
+Weighted_Energy_Error: 0.011567
+Total_Statistical_Error: 0.005815
+Total_Systematic_Error: 0.003976
+****************************
+Asymm= -0.123299
+130-660 keV_total_Error= 0.013496
+
+Weighted_Energy_Error: 0.011523
+Total_Statistical_Error: 0.005801
+Total_Systematic_Error: 0.003964
+****************************
+Asymm= -0.123301
+130-670 keV_total_Error= 0.013462
+
+Weighted_Energy_Error: 0.011492
+Total_Statistical_Error: 0.005788
+Total_Systematic_Error: 0.003956
+****************************
+Asymm= -0.123274
+130-680 keV_total_Error= 0.013430
+
+Weighted_Energy_Error: 0.011464
+Total_Statistical_Error: 0.005779
+Total_Systematic_Error: 0.003942
+****************************
+Asymm= -0.123294
+130-690 keV_total_Error= 0.013405
+
+Weighted_Energy_Error: 0.011443
+Total_Statistical_Error: 0.005769
+Total_Systematic_Error: 0.003933
+****************************
+Asymm= -0.123304
+130-700 keV_total_Error= 0.013381
+
+Weighted_Energy_Error: 0.011420
+Total_Statistical_Error: 0.005762
+Total_Systematic_Error: 0.003928
+****************************
+Asymm= -0.123366
+130-710 keV_total_Error= 0.013363
+
+Weighted_Energy_Error: 0.011404
+Total_Statistical_Error: 0.005754
+Total_Systematic_Error: 0.003927
+****************************
+Asymm= -0.123317
+130-720 keV_total_Error= 0.013346
+
+Weighted_Energy_Error: 0.011384
+Total_Statistical_Error: 0.005752
+Total_Systematic_Error: 0.003927
+****************************
+Asymm= -0.123334
+130-730 keV_total_Error= 0.013339
+
+Weighted_Energy_Error: 0.011379
+Total_Statistical_Error: 0.005748
+Total_Systematic_Error: 0.003925
+****************************
+Asymm= -0.123330
+130-740 keV_total_Error= 0.013329
+
+Weighted_Energy_Error: 0.011369
+Total_Statistical_Error: 0.005746
+Total_Systematic_Error: 0.003925
+****************************
+Asymm= -0.123294
+130-750 keV_total_Error= 0.013325
+
+Weighted_Energy_Error: 0.011363
+Total_Statistical_Error: 0.005746
+Total_Systematic_Error: 0.003926
+****************************
+Asymm= -0.123264
+130-760 keV_total_Error= 0.013326
+
+Weighted_Energy_Error: 0.011362
+Total_Statistical_Error: 0.005746
+Total_Systematic_Error: 0.003932
+****************************
+Asymm= -0.123253
+130-770 keV_total_Error= 0.013328
+
+Weighted_Energy_Error: 0.011362
+Total_Statistical_Error: 0.005746
+Total_Systematic_Error: 0.003941
+****************************
+Asymm= -0.122944
+140-550 keV_total_Error= 0.014243
+
+Weighted_Energy_Error: 0.012128
+Total_Statistical_Error: 0.006178
+Total_Systematic_Error: 0.004199
+****************************
+Asymm= -0.123075
+140-560 keV_total_Error= 0.014132
+
+Weighted_Energy_Error: 0.012034
+Total_Statistical_Error: 0.006125
+Total_Systematic_Error: 0.004169
+****************************
+Asymm= -0.123097
+140-570 keV_total_Error= 0.014014
+
+Weighted_Energy_Error: 0.011931
+Total_Statistical_Error: 0.006080
+Total_Systematic_Error: 0.004131
+****************************
+Asymm= -0.123282
+140-580 keV_total_Error= 0.013912
+
+Weighted_Energy_Error: 0.011845
+Total_Statistical_Error: 0.006032
+Total_Systematic_Error: 0.004107
+****************************
+Asymm= -0.123128
+140-590 keV_total_Error= 0.013815
+
+Weighted_Energy_Error: 0.011748
+Total_Statistical_Error: 0.006005
+Total_Systematic_Error: 0.004098
+****************************
+Asymm= -0.123144
+140-600 keV_total_Error= 0.013743
+
+Weighted_Energy_Error: 0.011693
+Total_Statistical_Error: 0.005974
+Total_Systematic_Error: 0.004056
+****************************
+Asymm= -0.123152
+140-610 keV_total_Error= 0.013671
+
+Weighted_Energy_Error: 0.011628
+Total_Statistical_Error: 0.005945
+Total_Systematic_Error: 0.004041
+****************************
+Asymm= -0.123119
+140-620 keV_total_Error= 0.013605
+
+Weighted_Energy_Error: 0.011569
+Total_Statistical_Error: 0.005922
+Total_Systematic_Error: 0.004023
+****************************
+Asymm= -0.123170
+140-630 keV_total_Error= 0.013547
+
+Weighted_Energy_Error: 0.011521
+Total_Statistical_Error: 0.005897
+Total_Systematic_Error: 0.004002
+****************************
+Asymm= -0.123177
+140-640 keV_total_Error= 0.013488
+
+Weighted_Energy_Error: 0.011470
+Total_Statistical_Error: 0.005877
+Total_Systematic_Error: 0.003977
+****************************
+Asymm= -0.123249
+140-650 keV_total_Error= 0.013437
+
+Weighted_Energy_Error: 0.011428
+Total_Statistical_Error: 0.005857
+Total_Systematic_Error: 0.003959
+****************************
+Asymm= -0.123249
+140-660 keV_total_Error= 0.013390
+
+Weighted_Energy_Error: 0.011384
+Total_Statistical_Error: 0.005842
+Total_Systematic_Error: 0.003946
+****************************
+Asymm= -0.123252
+140-670 keV_total_Error= 0.013356
+
+Weighted_Energy_Error: 0.011353
+Total_Statistical_Error: 0.005830
+Total_Systematic_Error: 0.003938
+****************************
+Asymm= -0.123224
+140-680 keV_total_Error= 0.013324
+
+Weighted_Energy_Error: 0.011325
+Total_Statistical_Error: 0.005820
+Total_Systematic_Error: 0.003924
+****************************
+Asymm= -0.123245
+140-690 keV_total_Error= 0.013299
+
+Weighted_Energy_Error: 0.011304
+Total_Statistical_Error: 0.005810
+Total_Systematic_Error: 0.003915
+****************************
+Asymm= -0.123255
+140-700 keV_total_Error= 0.013276
+
+Weighted_Energy_Error: 0.011282
+Total_Statistical_Error: 0.005803
+Total_Systematic_Error: 0.003909
+****************************
+Asymm= -0.123318
+140-710 keV_total_Error= 0.013258
+
+Weighted_Energy_Error: 0.011266
+Total_Statistical_Error: 0.005795
+Total_Systematic_Error: 0.003909
+****************************
+Asymm= -0.123268
+140-720 keV_total_Error= 0.013240
+
+Weighted_Energy_Error: 0.011246
+Total_Statistical_Error: 0.005793
+Total_Systematic_Error: 0.003909
+****************************
+Asymm= -0.123285
+140-730 keV_total_Error= 0.013233
+
+Weighted_Energy_Error: 0.011241
+Total_Statistical_Error: 0.005788
+Total_Systematic_Error: 0.003907
+****************************
+Asymm= -0.123282
+140-740 keV_total_Error= 0.013224
+
+Weighted_Energy_Error: 0.011231
+Total_Statistical_Error: 0.005786
+Total_Systematic_Error: 0.003906
+****************************
+Asymm= -0.123245
+140-750 keV_total_Error= 0.013220
+
+Weighted_Energy_Error: 0.011225
+Total_Statistical_Error: 0.005786
+Total_Systematic_Error: 0.003908
+****************************
+Asymm= -0.123214
+140-760 keV_total_Error= 0.013220
+
+Weighted_Energy_Error: 0.011224
+Total_Statistical_Error: 0.005786
+Total_Systematic_Error: 0.003913
+****************************
+Asymm= -0.123204
+140-770 keV_total_Error= 0.013222
+
+Weighted_Energy_Error: 0.011224
+Total_Statistical_Error: 0.005786
+Total_Systematic_Error: 0.003921
+****************************
+Asymm= -0.122976
+150-560 keV_total_Error= 0.013981
+
+Weighted_Energy_Error: 0.011847
+Total_Statistical_Error: 0.006180
+Total_Systematic_Error: 0.004115
+****************************
+Asymm= -0.123000
+150-570 keV_total_Error= 0.013863
+
+Weighted_Energy_Error: 0.011745
+Total_Statistical_Error: 0.006134
+Total_Systematic_Error: 0.004077
+****************************
+Asymm= -0.123190
+150-580 keV_total_Error= 0.013762
+
+Weighted_Energy_Error: 0.011659
+Total_Statistical_Error: 0.006085
+Total_Systematic_Error: 0.004053
+****************************
+Asymm= -0.123035
+150-590 keV_total_Error= 0.013666
+
+Weighted_Energy_Error: 0.011564
+Total_Statistical_Error: 0.006057
+Total_Systematic_Error: 0.004043
+****************************
+Asymm= -0.123051
+150-600 keV_total_Error= 0.013594
+
+Weighted_Energy_Error: 0.011510
+Total_Statistical_Error: 0.006025
+Total_Systematic_Error: 0.004002
+****************************
+Asymm= -0.123061
+150-610 keV_total_Error= 0.013522
+
+Weighted_Energy_Error: 0.011446
+Total_Statistical_Error: 0.005995
+Total_Systematic_Error: 0.003987
+****************************
+Asymm= -0.123027
+150-620 keV_total_Error= 0.013457
+
+Weighted_Energy_Error: 0.011388
+Total_Statistical_Error: 0.005971
+Total_Systematic_Error: 0.003968
+****************************
+Asymm= -0.123080
+150-630 keV_total_Error= 0.013399
+
+Weighted_Energy_Error: 0.011340
+Total_Statistical_Error: 0.005946
+Total_Systematic_Error: 0.003947
+****************************
+Asymm= -0.123088
+150-640 keV_total_Error= 0.013340
+
+Weighted_Energy_Error: 0.011290
+Total_Statistical_Error: 0.005926
+Total_Systematic_Error: 0.003922
+****************************
+Asymm= -0.123161
+150-650 keV_total_Error= 0.013290
+
+Weighted_Energy_Error: 0.011248
+Total_Statistical_Error: 0.005905
+Total_Systematic_Error: 0.003904
+****************************
+Asymm= -0.123162
+150-660 keV_total_Error= 0.013243
+
+Weighted_Energy_Error: 0.011205
+Total_Statistical_Error: 0.005890
+Total_Systematic_Error: 0.003892
+****************************
+Asymm= -0.123165
+150-670 keV_total_Error= 0.013209
+
+Weighted_Energy_Error: 0.011174
+Total_Statistical_Error: 0.005877
+Total_Systematic_Error: 0.003884
+****************************
+Asymm= -0.123138
+150-680 keV_total_Error= 0.013178
+
+Weighted_Energy_Error: 0.011147
+Total_Statistical_Error: 0.005867
+Total_Systematic_Error: 0.003870
+****************************
+Asymm= -0.123159
+150-690 keV_total_Error= 0.013153
+
+Weighted_Energy_Error: 0.011126
+Total_Statistical_Error: 0.005857
+Total_Systematic_Error: 0.003860
+****************************
+Asymm= -0.123169
+150-700 keV_total_Error= 0.013130
+
+Weighted_Energy_Error: 0.011104
+Total_Statistical_Error: 0.005850
+Total_Systematic_Error: 0.003855
+****************************
+Asymm= -0.123233
+150-710 keV_total_Error= 0.013112
+
+Weighted_Energy_Error: 0.011088
+Total_Statistical_Error: 0.005841
+Total_Systematic_Error: 0.003855
+****************************
+Asymm= -0.123183
+150-720 keV_total_Error= 0.013094
+
+Weighted_Energy_Error: 0.011068
+Total_Statistical_Error: 0.005839
+Total_Systematic_Error: 0.003854
+****************************
+Asymm= -0.123200
+150-730 keV_total_Error= 0.013087
+
+Weighted_Energy_Error: 0.011063
+Total_Statistical_Error: 0.005835
+Total_Systematic_Error: 0.003853
+****************************
+Asymm= -0.123197
+150-740 keV_total_Error= 0.013078
+
+Weighted_Energy_Error: 0.011053
+Total_Statistical_Error: 0.005832
+Total_Systematic_Error: 0.003852
+****************************
+Asymm= -0.123160
+150-750 keV_total_Error= 0.013074
+
+Weighted_Energy_Error: 0.011048
+Total_Statistical_Error: 0.005832
+Total_Systematic_Error: 0.003853
+****************************
+Asymm= -0.123129
+150-760 keV_total_Error= 0.013074
+
+Weighted_Energy_Error: 0.011047
+Total_Statistical_Error: 0.005833
+Total_Systematic_Error: 0.003858
+****************************
+Asymm= -0.123118
+150-770 keV_total_Error= 0.013076
+
+Weighted_Energy_Error: 0.011047
+Total_Statistical_Error: 0.005832
+Total_Systematic_Error: 0.003866
+****************************
+Asymm= -0.122822
+160-570 keV_total_Error= 0.013681
+
+Weighted_Energy_Error: 0.011518
+Total_Statistical_Error: 0.006198
+Total_Systematic_Error: 0.004013
+****************************
+Asymm= -0.123016
+160-580 keV_total_Error= 0.013581
+
+Weighted_Energy_Error: 0.011435
+Total_Statistical_Error: 0.006147
+Total_Systematic_Error: 0.003989
+****************************
+Asymm= -0.122861
+160-590 keV_total_Error= 0.013487
+
+Weighted_Energy_Error: 0.011341
+Total_Statistical_Error: 0.006118
+Total_Systematic_Error: 0.003981
+****************************
+Asymm= -0.122880
+160-600 keV_total_Error= 0.013415
+
+Weighted_Energy_Error: 0.011288
+Total_Statistical_Error: 0.006085
+Total_Systematic_Error: 0.003939
+****************************
+Asymm= -0.122891
+160-610 keV_total_Error= 0.013344
+
+Weighted_Energy_Error: 0.011225
+Total_Statistical_Error: 0.006054
+Total_Systematic_Error: 0.003925
+****************************
+Asymm= -0.122859
+160-620 keV_total_Error= 0.013279
+
+Weighted_Energy_Error: 0.011168
+Total_Statistical_Error: 0.006029
+Total_Systematic_Error: 0.003906
+****************************
+Asymm= -0.122914
+160-630 keV_total_Error= 0.013222
+
+Weighted_Energy_Error: 0.011121
+Total_Statistical_Error: 0.006004
+Total_Systematic_Error: 0.003885
+****************************
+Asymm= -0.122923
+160-640 keV_total_Error= 0.013163
+
+Weighted_Energy_Error: 0.011072
+Total_Statistical_Error: 0.005983
+Total_Systematic_Error: 0.003860
+****************************
+Asymm= -0.122998
+160-650 keV_total_Error= 0.013114
+
+Weighted_Energy_Error: 0.011031
+Total_Statistical_Error: 0.005961
+Total_Systematic_Error: 0.003842
+****************************
+Asymm= -0.123000
+160-660 keV_total_Error= 0.013068
+
+Weighted_Energy_Error: 0.010988
+Total_Statistical_Error: 0.005946
+Total_Systematic_Error: 0.003830
+****************************
+Asymm= -0.123004
+160-670 keV_total_Error= 0.013034
+
+Weighted_Energy_Error: 0.010958
+Total_Statistical_Error: 0.005933
+Total_Systematic_Error: 0.003823
+****************************
+Asymm= -0.122976
+160-680 keV_total_Error= 0.013003
+
+Weighted_Energy_Error: 0.010931
+Total_Statistical_Error: 0.005923
+Total_Systematic_Error: 0.003808
+****************************
+Asymm= -0.122998
+160-690 keV_total_Error= 0.012978
+
+Weighted_Energy_Error: 0.010911
+Total_Statistical_Error: 0.005912
+Total_Systematic_Error: 0.003799
+****************************
+Asymm= -0.123009
+160-700 keV_total_Error= 0.012955
+
+Weighted_Energy_Error: 0.010889
+Total_Statistical_Error: 0.005904
+Total_Systematic_Error: 0.003794
+****************************
+Asymm= -0.123074
+160-710 keV_total_Error= 0.012937
+
+Weighted_Energy_Error: 0.010873
+Total_Statistical_Error: 0.005896
+Total_Systematic_Error: 0.003794
+****************************
+Asymm= -0.123024
+160-720 keV_total_Error= 0.012920
+
+Weighted_Energy_Error: 0.010854
+Total_Statistical_Error: 0.005893
+Total_Systematic_Error: 0.003794
+****************************
+Asymm= -0.123041
+160-730 keV_total_Error= 0.012914
+
+Weighted_Energy_Error: 0.010849
+Total_Statistical_Error: 0.005889
+Total_Systematic_Error: 0.003792
+****************************
+Asymm= -0.123038
+160-740 keV_total_Error= 0.012904
+
+Weighted_Energy_Error: 0.010839
+Total_Statistical_Error: 0.005887
+Total_Systematic_Error: 0.003791
+****************************
+Asymm= -0.123001
+160-750 keV_total_Error= 0.012900
+
+Weighted_Energy_Error: 0.010834
+Total_Statistical_Error: 0.005887
+Total_Systematic_Error: 0.003792
+****************************
+Asymm= -0.122969
+160-760 keV_total_Error= 0.012901
+
+Weighted_Energy_Error: 0.010833
+Total_Statistical_Error: 0.005887
+Total_Systematic_Error: 0.003796
+****************************
+Asymm= -0.122958
+160-770 keV_total_Error= 0.012902
+
+Weighted_Energy_Error: 0.010833
+Total_Statistical_Error: 0.005887
+Total_Systematic_Error: 0.003804
+****************************
+Asymm= -0.123003
+170-580 keV_total_Error= 0.013405
+
+Weighted_Energy_Error: 0.011221
+Total_Statistical_Error: 0.006206
+Total_Systematic_Error: 0.003908
+****************************
+Asymm= -0.122845
+170-590 keV_total_Error= 0.013312
+
+Weighted_Energy_Error: 0.011129
+Total_Statistical_Error: 0.006177
+Total_Systematic_Error: 0.003899
+****************************
+Asymm= -0.122864
+170-600 keV_total_Error= 0.013241
+
+Weighted_Energy_Error: 0.011077
+Total_Statistical_Error: 0.006142
+Total_Systematic_Error: 0.003858
+****************************
+Asymm= -0.122876
+170-610 keV_total_Error= 0.013171
+
+Weighted_Energy_Error: 0.011016
+Total_Statistical_Error: 0.006111
+Total_Systematic_Error: 0.003844
+****************************
+Asymm= -0.122843
+170-620 keV_total_Error= 0.013107
+
+Weighted_Energy_Error: 0.010960
+Total_Statistical_Error: 0.006086
+Total_Systematic_Error: 0.003826
+****************************
+Asymm= -0.122899
+170-630 keV_total_Error= 0.013050
+
+Weighted_Energy_Error: 0.010914
+Total_Statistical_Error: 0.006060
+Total_Systematic_Error: 0.003806
+****************************
+Asymm= -0.122909
+170-640 keV_total_Error= 0.012992
+
+Weighted_Energy_Error: 0.010865
+Total_Statistical_Error: 0.006038
+Total_Systematic_Error: 0.003781
+****************************
+Asymm= -0.122985
+170-650 keV_total_Error= 0.012943
+
+Weighted_Energy_Error: 0.010825
+Total_Statistical_Error: 0.006016
+Total_Systematic_Error: 0.003763
+****************************
+Asymm= -0.122987
+170-660 keV_total_Error= 0.012898
+
+Weighted_Energy_Error: 0.010783
+Total_Statistical_Error: 0.006000
+Total_Systematic_Error: 0.003751
+****************************
+Asymm= -0.122991
+170-670 keV_total_Error= 0.012864
+
+Weighted_Energy_Error: 0.010754
+Total_Statistical_Error: 0.005986
+Total_Systematic_Error: 0.003745
+****************************
+Asymm= -0.122963
+170-680 keV_total_Error= 0.012833
+
+Weighted_Energy_Error: 0.010727
+Total_Statistical_Error: 0.005976
+Total_Systematic_Error: 0.003731
+****************************
+Asymm= -0.122986
+170-690 keV_total_Error= 0.012809
+
+Weighted_Energy_Error: 0.010707
+Total_Statistical_Error: 0.005965
+Total_Systematic_Error: 0.003721
+****************************
+Asymm= -0.122997
+170-700 keV_total_Error= 0.012786
+
+Weighted_Energy_Error: 0.010686
+Total_Statistical_Error: 0.005957
+Total_Systematic_Error: 0.003716
+****************************
+Asymm= -0.123063
+170-710 keV_total_Error= 0.012769
+
+Weighted_Energy_Error: 0.010670
+Total_Statistical_Error: 0.005948
+Total_Systematic_Error: 0.003716
+****************************
+Asymm= -0.123012
+170-720 keV_total_Error= 0.012752
+
+Weighted_Energy_Error: 0.010651
+Total_Statistical_Error: 0.005946
+Total_Systematic_Error: 0.003716
+****************************
+Asymm= -0.123030
+170-730 keV_total_Error= 0.012745
+
+Weighted_Energy_Error: 0.010646
+Total_Statistical_Error: 0.005941
+Total_Systematic_Error: 0.003715
+****************************
+Asymm= -0.123027
+170-740 keV_total_Error= 0.012736
+
+Weighted_Energy_Error: 0.010637
+Total_Statistical_Error: 0.005939
+Total_Systematic_Error: 0.003714
+****************************
+Asymm= -0.122988
+170-750 keV_total_Error= 0.012732
+
+Weighted_Energy_Error: 0.010632
+Total_Statistical_Error: 0.005939
+Total_Systematic_Error: 0.003715
+****************************
+Asymm= -0.122956
+170-760 keV_total_Error= 0.012733
+
+Weighted_Energy_Error: 0.010630
+Total_Statistical_Error: 0.005939
+Total_Systematic_Error: 0.003720
+****************************
+Asymm= -0.122945
+170-770 keV_total_Error= 0.012735
+
+Weighted_Energy_Error: 0.010630
+Total_Statistical_Error: 0.005939
+Total_Systematic_Error: 0.003729
+****************************
+Asymm= -0.122972
+180-590 keV_total_Error= 0.013149
+
+Weighted_Energy_Error: 0.010934
+Total_Statistical_Error: 0.006234
+Total_Systematic_Error: 0.003806
+****************************
+Asymm= -0.122990
+180-600 keV_total_Error= 0.013078
+
+Weighted_Energy_Error: 0.010883
+Total_Statistical_Error: 0.006198
+Total_Systematic_Error: 0.003766
+****************************
+Asymm= -0.123001
+180-610 keV_total_Error= 0.013009
+
+Weighted_Energy_Error: 0.010823
+Total_Statistical_Error: 0.006166
+Total_Systematic_Error: 0.003752
+****************************
+Asymm= -0.122966
+180-620 keV_total_Error= 0.012945
+
+Weighted_Energy_Error: 0.010767
+Total_Statistical_Error: 0.006140
+Total_Systematic_Error: 0.003735
+****************************
+Asymm= -0.123022
+180-630 keV_total_Error= 0.012889
+
+Weighted_Energy_Error: 0.010722
+Total_Statistical_Error: 0.006113
+Total_Systematic_Error: 0.003715
+****************************
+Asymm= -0.123031
+180-640 keV_total_Error= 0.012832
+
+Weighted_Energy_Error: 0.010674
+Total_Statistical_Error: 0.006091
+Total_Systematic_Error: 0.003690
+****************************
+Asymm= -0.123108
+180-650 keV_total_Error= 0.012783
+
+Weighted_Energy_Error: 0.010635
+Total_Statistical_Error: 0.006068
+Total_Systematic_Error: 0.003673
+****************************
+Asymm= -0.123109
+180-660 keV_total_Error= 0.012738
+
+Weighted_Energy_Error: 0.010594
+Total_Statistical_Error: 0.006052
+Total_Systematic_Error: 0.003662
+****************************
+Asymm= -0.123113
+180-670 keV_total_Error= 0.012705
+
+Weighted_Energy_Error: 0.010564
+Total_Statistical_Error: 0.006038
+Total_Systematic_Error: 0.003655
+****************************
+Asymm= -0.123084
+180-680 keV_total_Error= 0.012675
+
+Weighted_Energy_Error: 0.010538
+Total_Statistical_Error: 0.006028
+Total_Systematic_Error: 0.003641
+****************************
+Asymm= -0.123106
+180-690 keV_total_Error= 0.012650
+
+Weighted_Energy_Error: 0.010519
+Total_Statistical_Error: 0.006017
+Total_Systematic_Error: 0.003632
+****************************
+Asymm= -0.123118
+180-700 keV_total_Error= 0.012628
+
+Weighted_Energy_Error: 0.010498
+Total_Statistical_Error: 0.006008
+Total_Systematic_Error: 0.003627
+****************************
+Asymm= -0.123185
+180-710 keV_total_Error= 0.012611
+
+Weighted_Energy_Error: 0.010482
+Total_Statistical_Error: 0.005999
+Total_Systematic_Error: 0.003628
+****************************
+Asymm= -0.123132
+180-720 keV_total_Error= 0.012594
+
+Weighted_Energy_Error: 0.010464
+Total_Statistical_Error: 0.005997
+Total_Systematic_Error: 0.003628
+****************************
+Asymm= -0.123151
+180-730 keV_total_Error= 0.012587
+
+Weighted_Energy_Error: 0.010459
+Total_Statistical_Error: 0.005992
+Total_Systematic_Error: 0.003626
+****************************
+Asymm= -0.123147
+180-740 keV_total_Error= 0.012578
+
+Weighted_Energy_Error: 0.010449
+Total_Statistical_Error: 0.005990
+Total_Systematic_Error: 0.003626
+****************************
+Asymm= -0.123108
+180-750 keV_total_Error= 0.012574
+
+Weighted_Energy_Error: 0.010444
+Total_Statistical_Error: 0.005990
+Total_Systematic_Error: 0.003627
+****************************
+Asymm= -0.123075
+180-760 keV_total_Error= 0.012575
+
+Weighted_Energy_Error: 0.010443
+Total_Statistical_Error: 0.005990
+Total_Systematic_Error: 0.003632
+****************************
+Asymm= -0.123064
+180-770 keV_total_Error= 0.012577
+
+Weighted_Energy_Error: 0.010443
+Total_Statistical_Error: 0.005990
+Total_Systematic_Error: 0.003641
+****************************
+Asymm= -0.122888
+190-600 keV_total_Error= 0.012896
+
+Weighted_Energy_Error: 0.010648
+Total_Statistical_Error: 0.006271
+Total_Systematic_Error: 0.003690
+****************************
+Asymm= -0.122900
+190-610 keV_total_Error= 0.012828
+
+Weighted_Energy_Error: 0.010589
+Total_Statistical_Error: 0.006237
+Total_Systematic_Error: 0.003678
+****************************
+Asymm= -0.122866
+190-620 keV_total_Error= 0.012765
+
+Weighted_Energy_Error: 0.010535
+Total_Statistical_Error: 0.006211
+Total_Systematic_Error: 0.003661
+****************************
+Asymm= -0.122924
+190-630 keV_total_Error= 0.012710
+
+Weighted_Energy_Error: 0.010490
+Total_Statistical_Error: 0.006183
+Total_Systematic_Error: 0.003642
+****************************
+Asymm= -0.122934
+190-640 keV_total_Error= 0.012653
+
+Weighted_Energy_Error: 0.010444
+Total_Statistical_Error: 0.006160
+Total_Systematic_Error: 0.003617
+****************************
+Asymm= -0.123013
+190-650 keV_total_Error= 0.012605
+
+Weighted_Energy_Error: 0.010405
+Total_Statistical_Error: 0.006136
+Total_Systematic_Error: 0.003600
+****************************
+Asymm= -0.123015
+190-660 keV_total_Error= 0.012560
+
+Weighted_Energy_Error: 0.010365
+Total_Statistical_Error: 0.006120
+Total_Systematic_Error: 0.003589
+****************************
+Asymm= -0.123019
+190-670 keV_total_Error= 0.012528
+
+Weighted_Energy_Error: 0.010336
+Total_Statistical_Error: 0.006105
+Total_Systematic_Error: 0.003583
+****************************
+Asymm= -0.122990
+190-680 keV_total_Error= 0.012497
+
+Weighted_Energy_Error: 0.010310
+Total_Statistical_Error: 0.006094
+Total_Systematic_Error: 0.003570
+****************************
+Asymm= -0.123013
+190-690 keV_total_Error= 0.012473
+
+Weighted_Energy_Error: 0.010291
+Total_Statistical_Error: 0.006083
+Total_Systematic_Error: 0.003560
+****************************
+Asymm= -0.123025
+190-700 keV_total_Error= 0.012451
+
+Weighted_Energy_Error: 0.010271
+Total_Statistical_Error: 0.006074
+Total_Systematic_Error: 0.003556
+****************************
+Asymm= -0.123094
+190-710 keV_total_Error= 0.012434
+
+Weighted_Energy_Error: 0.010255
+Total_Statistical_Error: 0.006065
+Total_Systematic_Error: 0.003557
+****************************
+Asymm= -0.123040
+190-720 keV_total_Error= 0.012418
+
+Weighted_Energy_Error: 0.010237
+Total_Statistical_Error: 0.006062
+Total_Systematic_Error: 0.003557
+****************************
+Asymm= -0.123059
+190-730 keV_total_Error= 0.012411
+
+Weighted_Energy_Error: 0.010232
+Total_Statistical_Error: 0.006057
+Total_Systematic_Error: 0.003556
+****************************
+Asymm= -0.123056
+190-740 keV_total_Error= 0.012402
+
+Weighted_Energy_Error: 0.010223
+Total_Statistical_Error: 0.006055
+Total_Systematic_Error: 0.003555
+****************************
+Asymm= -0.123016
+190-750 keV_total_Error= 0.012399
+
+Weighted_Energy_Error: 0.010218
+Total_Statistical_Error: 0.006055
+Total_Systematic_Error: 0.003557
+****************************
+Asymm= -0.122982
+190-760 keV_total_Error= 0.012400
+
+Weighted_Energy_Error: 0.010217
+Total_Statistical_Error: 0.006055
+Total_Systematic_Error: 0.003563
+****************************
+Asymm= -0.122971
+190-770 keV_total_Error= 0.012402
+
+Weighted_Energy_Error: 0.010217
+Total_Statistical_Error: 0.006055
+Total_Systematic_Error: 0.003573
+****************************
+Asymm= -0.122796
+200-610 keV_total_Error= 0.012662
+
+Weighted_Energy_Error: 0.010357
+Total_Statistical_Error: 0.006314
+Total_Systematic_Error: 0.003632
+****************************
+Asymm= -0.122762
+200-620 keV_total_Error= 0.012601
+
+Weighted_Energy_Error: 0.010304
+Total_Statistical_Error: 0.006286
+Total_Systematic_Error: 0.003617
+****************************
+Asymm= -0.122822
+200-630 keV_total_Error= 0.012546
+
+Weighted_Energy_Error: 0.010261
+Total_Statistical_Error: 0.006257
+Total_Systematic_Error: 0.003598
+****************************
+Asymm= -0.122833
+200-640 keV_total_Error= 0.012489
+
+Weighted_Energy_Error: 0.010215
+Total_Statistical_Error: 0.006233
+Total_Systematic_Error: 0.003573
+****************************
+Asymm= -0.122915
+200-650 keV_total_Error= 0.012441
+
+Weighted_Energy_Error: 0.010177
+Total_Statistical_Error: 0.006209
+Total_Systematic_Error: 0.003556
+****************************
+Asymm= -0.122917
+200-660 keV_total_Error= 0.012397
+
+Weighted_Energy_Error: 0.010138
+Total_Statistical_Error: 0.006192
+Total_Systematic_Error: 0.003544
+****************************
+Asymm= -0.122922
+200-670 keV_total_Error= 0.012365
+
+Weighted_Energy_Error: 0.010110
+Total_Statistical_Error: 0.006177
+Total_Systematic_Error: 0.003540
+****************************
+Asymm= -0.122893
+200-680 keV_total_Error= 0.012335
+
+Weighted_Energy_Error: 0.010085
+Total_Statistical_Error: 0.006165
+Total_Systematic_Error: 0.003526
+****************************
+Asymm= -0.122916
+200-690 keV_total_Error= 0.012311
+
+Weighted_Energy_Error: 0.010066
+Total_Statistical_Error: 0.006154
+Total_Systematic_Error: 0.003516
+****************************
+Asymm= -0.122929
+200-700 keV_total_Error= 0.012289
+
+Weighted_Energy_Error: 0.010046
+Total_Statistical_Error: 0.006145
+Total_Systematic_Error: 0.003513
+****************************
+Asymm= -0.122999
+200-710 keV_total_Error= 0.012272
+
+Weighted_Energy_Error: 0.010031
+Total_Statistical_Error: 0.006135
+Total_Systematic_Error: 0.003516
+****************************
+Asymm= -0.122944
+200-720 keV_total_Error= 0.012257
+
+Weighted_Energy_Error: 0.010013
+Total_Statistical_Error: 0.006133
+Total_Systematic_Error: 0.003517
+****************************
+Asymm= -0.122964
+200-730 keV_total_Error= 0.012250
+
+Weighted_Energy_Error: 0.010008
+Total_Statistical_Error: 0.006127
+Total_Systematic_Error: 0.003516
+****************************
+Asymm= -0.122961
+200-740 keV_total_Error= 0.012242
+
+Weighted_Energy_Error: 0.009999
+Total_Statistical_Error: 0.006125
+Total_Systematic_Error: 0.003517
+****************************
+Asymm= -0.122920
+200-750 keV_total_Error= 0.012239
+
+Weighted_Energy_Error: 0.009994
+Total_Statistical_Error: 0.006125
+Total_Systematic_Error: 0.003519
+****************************
+Asymm= -0.122886
+200-760 keV_total_Error= 0.012240
+
+Weighted_Energy_Error: 0.009993
+Total_Statistical_Error: 0.006125
+Total_Systematic_Error: 0.003525
+****************************
+Asymm= -0.122874
+200-770 keV_total_Error= 0.012242
+
+Weighted_Energy_Error: 0.009993
+Total_Statistical_Error: 0.006125
+Total_Systematic_Error: 0.003536
+****************************
+Asymm= -0.122619
+210-620 keV_total_Error= 0.012411
+
+Weighted_Energy_Error: 0.010067
+Total_Statistical_Error: 0.006371
+Total_Systematic_Error: 0.003479
+****************************
+Asymm= -0.122682
+210-630 keV_total_Error= 0.012357
+
+Weighted_Energy_Error: 0.010025
+Total_Statistical_Error: 0.006340
+Total_Systematic_Error: 0.003461
+****************************
+Asymm= -0.122694
+210-640 keV_total_Error= 0.012301
+
+Weighted_Energy_Error: 0.009981
+Total_Statistical_Error: 0.006315
+Total_Systematic_Error: 0.003436
+****************************
+Asymm= -0.122779
+210-650 keV_total_Error= 0.012253
+
+Weighted_Energy_Error: 0.009943
+Total_Statistical_Error: 0.006290
+Total_Systematic_Error: 0.003420
+****************************
+Asymm= -0.122782
+210-660 keV_total_Error= 0.012209
+
+Weighted_Energy_Error: 0.009905
+Total_Statistical_Error: 0.006272
+Total_Systematic_Error: 0.003409
+****************************
+Asymm= -0.122788
+210-670 keV_total_Error= 0.012178
+
+Weighted_Energy_Error: 0.009877
+Total_Statistical_Error: 0.006257
+Total_Systematic_Error: 0.003406
+****************************
+Asymm= -0.122758
+210-680 keV_total_Error= 0.012148
+
+Weighted_Energy_Error: 0.009853
+Total_Statistical_Error: 0.006245
+Total_Systematic_Error: 0.003392
+****************************
+Asymm= -0.122783
+210-690 keV_total_Error= 0.012125
+
+Weighted_Energy_Error: 0.009834
+Total_Statistical_Error: 0.006233
+Total_Systematic_Error: 0.003383
+****************************
+Asymm= -0.122796
+210-700 keV_total_Error= 0.012103
+
+Weighted_Energy_Error: 0.009815
+Total_Statistical_Error: 0.006224
+Total_Systematic_Error: 0.003380
+****************************
+Asymm= -0.122869
+210-710 keV_total_Error= 0.012087
+
+Weighted_Energy_Error: 0.009800
+Total_Statistical_Error: 0.006213
+Total_Systematic_Error: 0.003383
+****************************
+Asymm= -0.122813
+210-720 keV_total_Error= 0.012072
+
+Weighted_Energy_Error: 0.009782
+Total_Statistical_Error: 0.006211
+Total_Systematic_Error: 0.003384
+****************************
+Asymm= -0.122833
+210-730 keV_total_Error= 0.012065
+
+Weighted_Energy_Error: 0.009778
+Total_Statistical_Error: 0.006206
+Total_Systematic_Error: 0.003385
+****************************
+Asymm= -0.122830
+210-740 keV_total_Error= 0.012057
+
+Weighted_Energy_Error: 0.009769
+Total_Statistical_Error: 0.006203
+Total_Systematic_Error: 0.003385
+****************************
+Asymm= -0.122788
+210-750 keV_total_Error= 0.012053
+
+Weighted_Energy_Error: 0.009764
+Total_Statistical_Error: 0.006203
+Total_Systematic_Error: 0.003388
+****************************
+Asymm= -0.122753
+210-760 keV_total_Error= 0.012055
+
+Weighted_Energy_Error: 0.009763
+Total_Statistical_Error: 0.006203
+Total_Systematic_Error: 0.003394
+****************************
+Asymm= -0.122742
+210-770 keV_total_Error= 0.012057
+
+Weighted_Energy_Error: 0.009763
+Total_Statistical_Error: 0.006203
+Total_Systematic_Error: 0.003405
+****************************
+Asymm= -0.122895
+220-630 keV_total_Error= 0.012224
+
+Weighted_Energy_Error: 0.009842
+Total_Statistical_Error: 0.006411
+Total_Systematic_Error: 0.003386
+****************************
+Asymm= -0.122905
+220-640 keV_total_Error= 0.012168
+
+Weighted_Energy_Error: 0.009798
+Total_Statistical_Error: 0.006385
+Total_Systematic_Error: 0.003360
+****************************
+Asymm= -0.122991
+220-650 keV_total_Error= 0.012121
+
+Weighted_Energy_Error: 0.009761
+Total_Statistical_Error: 0.006359
+Total_Systematic_Error: 0.003344
+****************************
+Asymm= -0.122993
+220-660 keV_total_Error= 0.012077
+
+Weighted_Energy_Error: 0.009723
+Total_Statistical_Error: 0.006341
+Total_Systematic_Error: 0.003333
+****************************
+Asymm= -0.122998
+220-670 keV_total_Error= 0.012047
+
+Weighted_Energy_Error: 0.009697
+Total_Statistical_Error: 0.006325
+Total_Systematic_Error: 0.003332
+****************************
+Asymm= -0.122967
+220-680 keV_total_Error= 0.012017
+
+Weighted_Energy_Error: 0.009672
+Total_Statistical_Error: 0.006313
+Total_Systematic_Error: 0.003317
+****************************
+Asymm= -0.122991
+220-690 keV_total_Error= 0.011993
+
+Weighted_Energy_Error: 0.009654
+Total_Statistical_Error: 0.006300
+Total_Systematic_Error: 0.003308
+****************************
+Asymm= -0.123004
+220-700 keV_total_Error= 0.011972
+
+Weighted_Energy_Error: 0.009635
+Total_Statistical_Error: 0.006291
+Total_Systematic_Error: 0.003306
+****************************
+Asymm= -0.123078
+220-710 keV_total_Error= 0.011956
+
+Weighted_Energy_Error: 0.009620
+Total_Statistical_Error: 0.006280
+Total_Systematic_Error: 0.003311
+****************************
+Asymm= -0.123020
+220-720 keV_total_Error= 0.011942
+
+Weighted_Energy_Error: 0.009603
+Total_Statistical_Error: 0.006277
+Total_Systematic_Error: 0.003313
+****************************
+Asymm= -0.123041
+220-730 keV_total_Error= 0.011935
+
+Weighted_Energy_Error: 0.009598
+Total_Statistical_Error: 0.006272
+Total_Systematic_Error: 0.003314
+****************************
+Asymm= -0.123037
+220-740 keV_total_Error= 0.011927
+
+Weighted_Energy_Error: 0.009590
+Total_Statistical_Error: 0.006269
+Total_Systematic_Error: 0.003316
+****************************
+Asymm= -0.122994
+220-750 keV_total_Error= 0.011924
+
+Weighted_Energy_Error: 0.009585
+Total_Statistical_Error: 0.006269
+Total_Systematic_Error: 0.003319
+****************************
+Asymm= -0.122958
+220-760 keV_total_Error= 0.011926
+
+Weighted_Energy_Error: 0.009584
+Total_Statistical_Error: 0.006269
+Total_Systematic_Error: 0.003326
+****************************
+Asymm= -0.122946
+220-770 keV_total_Error= 0.011929
+
+Weighted_Energy_Error: 0.009584
+Total_Statistical_Error: 0.006269
+Total_Systematic_Error: 0.003339
+****************************
+Asymm= -0.122839
+230-640 keV_total_Error= 0.012003
+
+Weighted_Energy_Error: 0.009584
+Total_Statistical_Error: 0.006476
+Total_Systematic_Error: 0.003207
+****************************
+Asymm= -0.122927
+230-650 keV_total_Error= 0.011956
+
+Weighted_Energy_Error: 0.009548
+Total_Statistical_Error: 0.006449
+Total_Systematic_Error: 0.003191
+****************************
+Asymm= -0.122930
+230-660 keV_total_Error= 0.011913
+
+Weighted_Energy_Error: 0.009511
+Total_Statistical_Error: 0.006430
+Total_Systematic_Error: 0.003181
+****************************
+Asymm= -0.122935
+230-670 keV_total_Error= 0.011882
+
+Weighted_Energy_Error: 0.009484
+Total_Statistical_Error: 0.006413
+Total_Systematic_Error: 0.003181
+****************************
+Asymm= -0.122903
+230-680 keV_total_Error= 0.011853
+
+Weighted_Energy_Error: 0.009461
+Total_Statistical_Error: 0.006400
+Total_Systematic_Error: 0.003167
+****************************
+Asymm= -0.122929
+230-690 keV_total_Error= 0.011829
+
+Weighted_Energy_Error: 0.009443
+Total_Statistical_Error: 0.006387
+Total_Systematic_Error: 0.003159
+****************************
+Asymm= -0.122942
+230-700 keV_total_Error= 0.011808
+
+Weighted_Energy_Error: 0.009424
+Total_Statistical_Error: 0.006377
+Total_Systematic_Error: 0.003156
+****************************
+Asymm= -0.123018
+230-710 keV_total_Error= 0.011792
+
+Weighted_Energy_Error: 0.009409
+Total_Statistical_Error: 0.006366
+Total_Systematic_Error: 0.003161
+****************************
+Asymm= -0.122959
+230-720 keV_total_Error= 0.011778
+
+Weighted_Energy_Error: 0.009392
+Total_Statistical_Error: 0.006363
+Total_Systematic_Error: 0.003164
+****************************
+Asymm= -0.122980
+230-730 keV_total_Error= 0.011771
+
+Weighted_Energy_Error: 0.009388
+Total_Statistical_Error: 0.006358
+Total_Systematic_Error: 0.003165
+****************************
+Asymm= -0.122976
+230-740 keV_total_Error= 0.011763
+
+Weighted_Energy_Error: 0.009379
+Total_Statistical_Error: 0.006355
+Total_Systematic_Error: 0.003166
+****************************
+Asymm= -0.122933
+230-750 keV_total_Error= 0.011761
+
+Weighted_Energy_Error: 0.009375
+Total_Statistical_Error: 0.006355
+Total_Systematic_Error: 0.003170
+****************************
+Asymm= -0.122896
+230-760 keV_total_Error= 0.011762
+
+Weighted_Energy_Error: 0.009374
+Total_Statistical_Error: 0.006355
+Total_Systematic_Error: 0.003178
+****************************
+Asymm= -0.122883
+230-770 keV_total_Error= 0.011765
+
+Weighted_Energy_Error: 0.009373
+Total_Statistical_Error: 0.006355
+Total_Systematic_Error: 0.003191
+****************************
+Asymm= -0.122882
+240-650 keV_total_Error= 0.011819
+
+Weighted_Energy_Error: 0.009343
+Total_Statistical_Error: 0.006544
+Total_Systematic_Error: 0.003097
+****************************
+Asymm= -0.122885
+240-660 keV_total_Error= 0.011777
+
+Weighted_Energy_Error: 0.009306
+Total_Statistical_Error: 0.006524
+Total_Systematic_Error: 0.003087
+****************************
+Asymm= -0.122890
+240-670 keV_total_Error= 0.011747
+
+Weighted_Energy_Error: 0.009280
+Total_Statistical_Error: 0.006506
+Total_Systematic_Error: 0.003087
+****************************
+Asymm= -0.122858
+240-680 keV_total_Error= 0.011717
+
+Weighted_Energy_Error: 0.009257
+Total_Statistical_Error: 0.006493
+Total_Systematic_Error: 0.003074
+****************************
+Asymm= -0.122884
+240-690 keV_total_Error= 0.011694
+
+Weighted_Energy_Error: 0.009240
+Total_Statistical_Error: 0.006479
+Total_Systematic_Error: 0.003065
+****************************
+Asymm= -0.122898
+240-700 keV_total_Error= 0.011673
+
+Weighted_Energy_Error: 0.009221
+Total_Statistical_Error: 0.006469
+Total_Systematic_Error: 0.003064
+****************************
+Asymm= -0.122976
+240-710 keV_total_Error= 0.011657
+
+Weighted_Energy_Error: 0.009207
+Total_Statistical_Error: 0.006457
+Total_Systematic_Error: 0.003070
+****************************
+Asymm= -0.122916
+240-720 keV_total_Error= 0.011643
+
+Weighted_Energy_Error: 0.009190
+Total_Statistical_Error: 0.006454
+Total_Systematic_Error: 0.003072
+****************************
+Asymm= -0.122937
+240-730 keV_total_Error= 0.011636
+
+Weighted_Energy_Error: 0.009185
+Total_Statistical_Error: 0.006449
+Total_Systematic_Error: 0.003074
+****************************
+Asymm= -0.122934
+240-740 keV_total_Error= 0.011629
+
+Weighted_Energy_Error: 0.009177
+Total_Statistical_Error: 0.006445
+Total_Systematic_Error: 0.003076
+****************************
+Asymm= -0.122889
+240-750 keV_total_Error= 0.011626
+
+Weighted_Energy_Error: 0.009172
+Total_Statistical_Error: 0.006445
+Total_Systematic_Error: 0.003080
+****************************
+Asymm= -0.122851
+240-760 keV_total_Error= 0.011628
+
+Weighted_Energy_Error: 0.009172
+Total_Statistical_Error: 0.006446
+Total_Systematic_Error: 0.003088
+****************************
+Asymm= -0.122838
+240-770 keV_total_Error= 0.011631
+
+Weighted_Energy_Error: 0.009171
+Total_Statistical_Error: 0.006445
+Total_Systematic_Error: 0.003102
+****************************
+Asymm= -0.122832
+250-660 keV_total_Error= 0.011650
+
+Weighted_Energy_Error: 0.009109
+Total_Statistical_Error: 0.006624
+Total_Systematic_Error: 0.002978
+****************************
+Asymm= -0.122839
+250-670 keV_total_Error= 0.011619
+
+Weighted_Energy_Error: 0.009083
+Total_Statistical_Error: 0.006605
+Total_Systematic_Error: 0.002979
+****************************
+Asymm= -0.122805
+250-680 keV_total_Error= 0.011590
+
+Weighted_Energy_Error: 0.009060
+Total_Statistical_Error: 0.006592
+Total_Systematic_Error: 0.002966
+****************************
+Asymm= -0.122833
+250-690 keV_total_Error= 0.011566
+
+Weighted_Energy_Error: 0.009043
+Total_Statistical_Error: 0.006577
+Total_Systematic_Error: 0.002958
+****************************
+Asymm= -0.122847
+250-700 keV_total_Error= 0.011546
+
+Weighted_Energy_Error: 0.009025
+Total_Statistical_Error: 0.006567
+Total_Systematic_Error: 0.002956
+****************************
+Asymm= -0.122928
+250-710 keV_total_Error= 0.011530
+
+Weighted_Energy_Error: 0.009011
+Total_Statistical_Error: 0.006555
+Total_Systematic_Error: 0.002963
+****************************
+Asymm= -0.122866
+250-720 keV_total_Error= 0.011516
+
+Weighted_Energy_Error: 0.008994
+Total_Statistical_Error: 0.006551
+Total_Systematic_Error: 0.002966
+****************************
+Asymm= -0.122888
+250-730 keV_total_Error= 0.011509
+
+Weighted_Energy_Error: 0.008990
+Total_Statistical_Error: 0.006545
+Total_Systematic_Error: 0.002968
+****************************
+Asymm= -0.122884
+250-740 keV_total_Error= 0.011502
+
+Weighted_Energy_Error: 0.008981
+Total_Statistical_Error: 0.006542
+Total_Systematic_Error: 0.002970
+****************************
+Asymm= -0.122838
+250-750 keV_total_Error= 0.011499
+
+Weighted_Energy_Error: 0.008977
+Total_Statistical_Error: 0.006542
+Total_Systematic_Error: 0.002974
+****************************
+Asymm= -0.122799
+250-760 keV_total_Error= 0.011501
+
+Weighted_Energy_Error: 0.008976
+Total_Statistical_Error: 0.006543
+Total_Systematic_Error: 0.002983
+****************************
+Asymm= -0.122786
+250-770 keV_total_Error= 0.011504
+
+Weighted_Energy_Error: 0.008976
+Total_Statistical_Error: 0.006542
+Total_Systematic_Error: 0.002997
+****************************
+Asymm= -0.122914
+260-670 keV_total_Error= 0.011514
+
+Weighted_Energy_Error: 0.008904
+Total_Statistical_Error: 0.006705
+Total_Systematic_Error: 0.002887
+****************************
+Asymm= -0.122879
+260-680 keV_total_Error= 0.011485
+
+Weighted_Energy_Error: 0.008882
+Total_Statistical_Error: 0.006690
+Total_Systematic_Error: 0.002873
+****************************
+Asymm= -0.122907
+260-690 keV_total_Error= 0.011461
+
+Weighted_Energy_Error: 0.008865
+Total_Statistical_Error: 0.006675
+Total_Systematic_Error: 0.002865
+****************************
+Asymm= -0.122922
+260-700 keV_total_Error= 0.011440
+
+Weighted_Energy_Error: 0.008847
+Total_Statistical_Error: 0.006664
+Total_Systematic_Error: 0.002865
+****************************
+Asymm= -0.123005
+260-710 keV_total_Error= 0.011424
+
+Weighted_Energy_Error: 0.008833
+Total_Statistical_Error: 0.006652
+Total_Systematic_Error: 0.002873
+****************************
+Asymm= -0.122940
+260-720 keV_total_Error= 0.011411
+
+Weighted_Energy_Error: 0.008817
+Total_Statistical_Error: 0.006649
+Total_Systematic_Error: 0.002877
+****************************
+Asymm= -0.122963
+260-730 keV_total_Error= 0.011405
+
+Weighted_Energy_Error: 0.008812
+Total_Statistical_Error: 0.006642
+Total_Systematic_Error: 0.002879
+****************************
+Asymm= -0.122959
+260-740 keV_total_Error= 0.011397
+
+Weighted_Energy_Error: 0.008804
+Total_Statistical_Error: 0.006639
+Total_Systematic_Error: 0.002882
+****************************
+Asymm= -0.122911
+260-750 keV_total_Error= 0.011395
+
+Weighted_Energy_Error: 0.008800
+Total_Statistical_Error: 0.006639
+Total_Systematic_Error: 0.002887
+****************************
+Asymm= -0.122871
+260-760 keV_total_Error= 0.011397
+
+Weighted_Energy_Error: 0.008799
+Total_Statistical_Error: 0.006639
+Total_Systematic_Error: 0.002896
+****************************
+Asymm= -0.122858
+260-770 keV_total_Error= 0.011400
+
+Weighted_Energy_Error: 0.008798
+Total_Statistical_Error: 0.006639
+Total_Systematic_Error: 0.002912
+****************************
+Asymm= -0.122913
+270-680 keV_total_Error= 0.011388
+
+Weighted_Energy_Error: 0.008706
+Total_Statistical_Error: 0.006798
+Total_Systematic_Error: 0.002771
+****************************
+Asymm= -0.122942
+270-690 keV_total_Error= 0.011364
+
+Weighted_Energy_Error: 0.008689
+Total_Statistical_Error: 0.006782
+Total_Systematic_Error: 0.002764
+****************************
+Asymm= -0.122957
+270-700 keV_total_Error= 0.011343
+
+Weighted_Energy_Error: 0.008671
+Total_Statistical_Error: 0.006770
+Total_Systematic_Error: 0.002764
+****************************
+Asymm= -0.123043
+270-710 keV_total_Error= 0.011327
+
+Weighted_Energy_Error: 0.008658
+Total_Statistical_Error: 0.006757
+Total_Systematic_Error: 0.002772
+****************************
+Asymm= -0.122976
+270-720 keV_total_Error= 0.011314
+
+Weighted_Energy_Error: 0.008642
+Total_Statistical_Error: 0.006754
+Total_Systematic_Error: 0.002776
+****************************
+Asymm= -0.123000
+270-730 keV_total_Error= 0.011307
+
+Weighted_Energy_Error: 0.008637
+Total_Statistical_Error: 0.006747
+Total_Systematic_Error: 0.002779
+****************************
+Asymm= -0.122996
+270-740 keV_total_Error= 0.011300
+
+Weighted_Energy_Error: 0.008629
+Total_Statistical_Error: 0.006744
+Total_Systematic_Error: 0.002782
+****************************
+Asymm= -0.122946
+270-750 keV_total_Error= 0.011298
+
+Weighted_Energy_Error: 0.008625
+Total_Statistical_Error: 0.006744
+Total_Systematic_Error: 0.002788
+****************************
+Asymm= -0.122905
+270-760 keV_total_Error= 0.011300
+
+Weighted_Energy_Error: 0.008624
+Total_Statistical_Error: 0.006744
+Total_Systematic_Error: 0.002798
+****************************
+Asymm= -0.122891
+270-770 keV_total_Error= 0.011303
+
+Weighted_Energy_Error: 0.008624
+Total_Statistical_Error: 0.006744
+Total_Systematic_Error: 0.002814
+****************************
+Asymm= -0.122935
+280-690 keV_total_Error= 0.011275
+
+Weighted_Energy_Error: 0.008515
+Total_Statistical_Error: 0.006900
+Total_Systematic_Error: 0.002649
+****************************
+Asymm= -0.122951
+280-700 keV_total_Error= 0.011254
+
+Weighted_Energy_Error: 0.008497
+Total_Statistical_Error: 0.006887
+Total_Systematic_Error: 0.002649
+****************************
+Asymm= -0.123039
+280-710 keV_total_Error= 0.011237
+
+Weighted_Energy_Error: 0.008484
+Total_Statistical_Error: 0.006873
+Total_Systematic_Error: 0.002657
+****************************
+Asymm= -0.122970
+280-720 keV_total_Error= 0.011224
+
+Weighted_Energy_Error: 0.008468
+Total_Statistical_Error: 0.006870
+Total_Systematic_Error: 0.002662
+****************************
+Asymm= -0.122995
+280-730 keV_total_Error= 0.011217
+
+Weighted_Energy_Error: 0.008464
+Total_Statistical_Error: 0.006863
+Total_Systematic_Error: 0.002665
+****************************
+Asymm= -0.122991
+280-740 keV_total_Error= 0.011210
+
+Weighted_Energy_Error: 0.008456
+Total_Statistical_Error: 0.006859
+Total_Systematic_Error: 0.002669
+****************************
+Asymm= -0.122939
+280-750 keV_total_Error= 0.011208
+
+Weighted_Energy_Error: 0.008451
+Total_Statistical_Error: 0.006859
+Total_Systematic_Error: 0.002675
+****************************
+Asymm= -0.122896
+280-760 keV_total_Error= 0.011210
+
+Weighted_Energy_Error: 0.008450
+Total_Statistical_Error: 0.006859
+Total_Systematic_Error: 0.002685
+****************************
+Asymm= -0.122882
+280-770 keV_total_Error= 0.011214
+
+Weighted_Energy_Error: 0.008450
+Total_Statistical_Error: 0.006859
+Total_Systematic_Error: 0.002702
+****************************
+Asymm= -0.122779
+290-700 keV_total_Error= 0.011187
+
+Weighted_Energy_Error: 0.008319
+Total_Statistical_Error: 0.007019
+Total_Systematic_Error: 0.002584
+****************************
+Asymm= -0.122872
+290-710 keV_total_Error= 0.011170
+
+Weighted_Energy_Error: 0.008305
+Total_Statistical_Error: 0.007004
+Total_Systematic_Error: 0.002594
+****************************
+Asymm= -0.122800
+290-720 keV_total_Error= 0.011157
+
+Weighted_Energy_Error: 0.008290
+Total_Statistical_Error: 0.007001
+Total_Systematic_Error: 0.002599
+****************************
+Asymm= -0.122826
+290-730 keV_total_Error= 0.011150
+
+Weighted_Energy_Error: 0.008285
+Total_Statistical_Error: 0.006993
+Total_Systematic_Error: 0.002603
+****************************
+Asymm= -0.122822
+290-740 keV_total_Error= 0.011143
+
+Weighted_Energy_Error: 0.008277
+Total_Statistical_Error: 0.006989
+Total_Systematic_Error: 0.002607
+****************************
+Asymm= -0.122769
+290-750 keV_total_Error= 0.011141
+
+Weighted_Energy_Error: 0.008273
+Total_Statistical_Error: 0.006989
+Total_Systematic_Error: 0.002613
+****************************
+Asymm= -0.122725
+290-760 keV_total_Error= 0.011143
+
+Weighted_Energy_Error: 0.008272
+Total_Statistical_Error: 0.006989
+Total_Systematic_Error: 0.002624
+****************************
+Asymm= -0.122710
+290-770 keV_total_Error= 0.011147
+
+Weighted_Energy_Error: 0.008272
+Total_Statistical_Error: 0.006989
+Total_Systematic_Error: 0.002641
+****************************
+Asymm= -0.122891
+300-710 keV_total_Error= 0.011120
+
+Weighted_Energy_Error: 0.008147
+Total_Statistical_Error: 0.007133
+Total_Systematic_Error: 0.002532
+****************************
+Asymm= -0.122817
+300-720 keV_total_Error= 0.011108
+
+Weighted_Energy_Error: 0.008132
+Total_Statistical_Error: 0.007129
+Total_Systematic_Error: 0.002539
+****************************
+Asymm= -0.122844
+300-730 keV_total_Error= 0.011101
+
+Weighted_Energy_Error: 0.008127
+Total_Statistical_Error: 0.007121
+Total_Systematic_Error: 0.002543
+****************************
+Asymm= -0.122840
+300-740 keV_total_Error= 0.011094
+
+Weighted_Energy_Error: 0.008119
+Total_Statistical_Error: 0.007117
+Total_Systematic_Error: 0.002548
+****************************
+Asymm= -0.122785
+300-750 keV_total_Error= 0.011092
+
+Weighted_Energy_Error: 0.008115
+Total_Statistical_Error: 0.007117
+Total_Systematic_Error: 0.002555
+****************************
+Asymm= -0.122739
+300-760 keV_total_Error= 0.011094
+
+Weighted_Energy_Error: 0.008114
+Total_Statistical_Error: 0.007118
+Total_Systematic_Error: 0.002567
+****************************
+Asymm= -0.122724
+300-770 keV_total_Error= 0.011098
+
+Weighted_Energy_Error: 0.008114
+Total_Statistical_Error: 0.007117
+Total_Systematic_Error: 0.002586
+****************************
+Asymm= -0.122854
+310-720 keV_total_Error= 0.011068
+
+Weighted_Energy_Error: 0.007981
+Total_Statistical_Error: 0.007264
+Total_Systematic_Error: 0.002460
+****************************
+Asymm= -0.122881
+310-730 keV_total_Error= 0.011061
+
+Weighted_Energy_Error: 0.007977
+Total_Statistical_Error: 0.007255
+Total_Systematic_Error: 0.002465
+****************************
+Asymm= -0.122877
+310-740 keV_total_Error= 0.011054
+
+Weighted_Energy_Error: 0.007969
+Total_Statistical_Error: 0.007251
+Total_Systematic_Error: 0.002471
+****************************
+Asymm= -0.122820
+310-750 keV_total_Error= 0.011053
+
+Weighted_Energy_Error: 0.007965
+Total_Statistical_Error: 0.007251
+Total_Systematic_Error: 0.002479
+****************************
+Asymm= -0.122772
+310-760 keV_total_Error= 0.011055
+
+Weighted_Energy_Error: 0.007964
+Total_Statistical_Error: 0.007251
+Total_Systematic_Error: 0.002493
+****************************
+Asymm= -0.122756
+310-770 keV_total_Error= 0.011060
+
+Weighted_Energy_Error: 0.007964
+Total_Statistical_Error: 0.007251
+Total_Systematic_Error: 0.002515
+****************************
+Asymm= -0.122594
+320-730 keV_total_Error= 0.011067
+
+Weighted_Energy_Error: 0.007811
+Total_Statistical_Error: 0.007419
+Total_Systematic_Error: 0.002536
+****************************
+Asymm= -0.122590
+320-740 keV_total_Error= 0.011060
+
+Weighted_Energy_Error: 0.007803
+Total_Statistical_Error: 0.007414
+Total_Systematic_Error: 0.002542
+****************************
+Asymm= -0.122531
+320-750 keV_total_Error= 0.011058
+
+Weighted_Energy_Error: 0.007798
+Total_Statistical_Error: 0.007414
+Total_Systematic_Error: 0.002549
+****************************
+Asymm= -0.122481
+320-760 keV_total_Error= 0.011061
+
+Weighted_Energy_Error: 0.007798
+Total_Statistical_Error: 0.007415
+Total_Systematic_Error: 0.002563
+****************************
+Asymm= -0.122465
+320-770 keV_total_Error= 0.011066
+
+Weighted_Energy_Error: 0.007797
+Total_Statistical_Error: 0.007414
+Total_Systematic_Error: 0.002584
+****************************
+Asymm= -0.122429
+330-740 keV_total_Error= 0.011059
+
+Weighted_Energy_Error: 0.007650
+Total_Statistical_Error: 0.007579
+Total_Systematic_Error: 0.002516
+****************************
+Asymm= -0.122367
+330-750 keV_total_Error= 0.011058
+
+Weighted_Energy_Error: 0.007646
+Total_Statistical_Error: 0.007579
+Total_Systematic_Error: 0.002524
+****************************
+Asymm= -0.122316
+330-760 keV_total_Error= 0.011061
+
+Weighted_Energy_Error: 0.007645
+Total_Statistical_Error: 0.007580
+Total_Systematic_Error: 0.002538
+****************************
+Asymm= -0.122299
+330-770 keV_total_Error= 0.011066
+
+Weighted_Energy_Error: 0.007645
+Total_Statistical_Error: 0.007579
+Total_Systematic_Error: 0.002561
+****************************
+Asymm= -0.122023
+340-750 keV_total_Error= 0.011092
+
+Weighted_Energy_Error: 0.007487
+Total_Statistical_Error: 0.007768
+Total_Systematic_Error: 0.002577
+****************************
+Asymm= -0.121969
+340-760 keV_total_Error= 0.011096
+
+Weighted_Energy_Error: 0.007486
+Total_Statistical_Error: 0.007769
+Total_Systematic_Error: 0.002592
+****************************
+Asymm= -0.121951
+340-770 keV_total_Error= 0.011101
+
+Weighted_Energy_Error: 0.007486
+Total_Statistical_Error: 0.007768
+Total_Systematic_Error: 0.002618
+****************************
+Asymm= -0.122130
+350-760 keV_total_Error= 0.011154
+
+Weighted_Energy_Error: 0.007358
+Total_Statistical_Error: 0.007937
+Total_Systematic_Error: 0.002693
+****************************
+Asymm= -0.122112
+350-770 keV_total_Error= 0.011160
+
+Weighted_Energy_Error: 0.007358
+Total_Statistical_Error: 0.007937
+Total_Systematic_Error: 0.002723
+****************************
+Asymm= -0.122230
+360-770 keV_total_Error= 0.011206
+
+Weighted_Energy_Error: 0.007231
+Total_Statistical_Error: 0.008121
+Total_Systematic_Error: 0.002709

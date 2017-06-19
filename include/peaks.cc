@@ -7,7 +7,7 @@
 
 
 SinglePeakHist::SinglePeakHist(TH1D* h, Double_t rangeLow, Double_t rangeHigh, bool autoFit, Int_t iterations, Double_t minScaleFac, Double_t maxScaleFac, bool landau) :
-  hist(h), func(NULL), mean(0.), meanErr(0.), sigma(0.), scale(0.), min(rangeLow), max(rangeHigh), iters(iterations), goodFit_prev(false), goodFit_new(false), status("NO FITS") {
+  hist(h), func(NULL), mean(0.), meanErr(0.), sigma(0.), sigmaErr(0.), scale(0.), min(rangeLow), max(rangeHigh), iters(iterations), goodFit_prev(false), goodFit_new(false), status("NO FITS") {
 
   minScaleFactor = minScaleFac;
   maxScaleFactor = maxScaleFac;
@@ -15,20 +15,22 @@ SinglePeakHist::SinglePeakHist(TH1D* h, Double_t rangeLow, Double_t rangeHigh, b
   _bLandau = landau;
 
   if (autoFit) {
+    hist->GetXaxis()->SetRangeUser(min,max);
     mean = hist->GetXaxis()->GetBinCenter(hist->GetMaximumBin());
     scale = hist->GetBinContent(hist->GetMaximumBin());
+    hist->GetXaxis()->SetRange(0,hist->GetNbinsX());
     sigma = 50.;
     Int_t it = 0;
     while (it<iters) {
       FitHist(mean, sigma, scale);
-      if (goodFit_new && goodFit_prev) break;
+      if (goodFit_new && goodFit_prev && it>1) break;
       goodFit_prev = goodFit_new;
       it++;
     }
 
     if (!goodFit_new && meanErr==0.) meanErr = 100.;
     
-    std::cout << "Finished Fitting after " << it << " iterations with Status = " << status << "\n"; 
+    std::cout << "Finished Fitting after " << it+1 << " iterations with Status = " << status << "\n"; 
   }
 }
 
@@ -58,6 +60,7 @@ void SinglePeakHist::FitHist(Double_t meanGuess, Double_t sigGuess, Double_t hei
     mean = meanCheck;
     meanErr = func->GetParError(1);
     sigma = sigmaCheck;
+    sigmaErr = func->GetParError(2);
     min = mean-minScaleFactor*sigma;
     max = mean+maxScaleFactor*sigma;
   }
@@ -69,6 +72,7 @@ void SinglePeakHist::FitHist(Double_t meanGuess, Double_t sigGuess, Double_t hei
     mean = meanCheck;
     meanErr = func->GetParError(1);
     sigma = sigmaCheck;
+    sigmaErr = func->GetParError(2);
     min = mean-sigma;
     max = mean+sigma;
     
@@ -86,7 +90,7 @@ void SinglePeakHist::FitHist(Double_t meanGuess, Double_t sigGuess, Double_t hei
 
 
 DoublePeakHist::DoublePeakHist(TH1D* h, Double_t rangeLow, Double_t rangeHigh, bool autoFit, Int_t iterations) :
-  hist(h), func(NULL), mean1(0.), mean1Err(0.), sigma1(0.), scale1(0.), mean2(0.), mean2Err(0.), sigma2(0.), scale2(0.), min(rangeLow), max(rangeHigh), iters(iterations), goodFit_prev(false), goodFit_new(false), status("NO FITS") {
+  hist(h), func(NULL), mean1(0.), mean1Err(0.), sigma1(0.), sigma1Err(0.), scale1(0.), mean2(0.), mean2Err(0.), sigma2(0.), sigma2Err(0.), scale2(0.), min(rangeLow), max(rangeHigh), iters(iterations), goodFit_prev(false), goodFit_new(false), status("NO FITS") {
 
   if (autoFit) {
     mean1 = hist->GetXaxis()->GetBinCenter(hist->GetMaximumBin());
@@ -154,10 +158,12 @@ void DoublePeakHist::FitHist(Double_t meanGuess1, Double_t sigGuess1, Double_t h
     mean1 = mean1Check;
     mean1Err = highPeak==0 ? func->GetParError(1) : func->GetParError(4);
     sigma1 = sigma1Check;
+    sigma1Err = highPeak==0 ? func->GetParError(2) : func->GetParError(5);
     scale2 = scale2Check;
     mean2 = mean2Check;
     mean2Err = highPeak==0 ? func->GetParError(4) : func->GetParError(1);
     sigma2 = sigma2Check;
+    sigma2Err = highPeak==0 ? func->GetParError(5) : func->GetParError(2);
     min = mean2-2.25*sigma2;
     max = mean1+2.0*sigma1;    
 
@@ -171,10 +177,12 @@ void DoublePeakHist::FitHist(Double_t meanGuess1, Double_t sigGuess1, Double_t h
     mean1 = mean1Check;
     mean1Err = highPeak==0 ? func->GetParError(1) : func->GetParError(4);
     sigma1 = sigma1Check;
+    sigma1Err = highPeak==0 ? func->GetParError(2) : func->GetParError(5);
     scale2 = scale2Check;
     mean2 = mean2Check;
     mean2Err = highPeak==0 ? func->GetParError(4) : func->GetParError(1);
     sigma2 = sigma2Check;
+    sigma2Err = highPeak==0 ? func->GetParError(5) : func->GetParError(2);
     min = mean2-2.25*sigma2;
     max = mean1+2.0*sigma1;    
 

@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////
-// Takes replay_pass4_#.root files and creates a spec_#.root
+// Takes replay_pass3_#.root files and creates a spec_#.root
 // file to be used in other analyzers. The spec file doesn't
 // include all the values as of yet... 
 //////////////////////////////////////////////////////////
@@ -55,6 +55,8 @@ int main(int argc, char *argv[])
   // Loop over events
   for (int i=0; i<nEvents; i++) {
     UK->getEvent(i);
+
+    if (i%10000==0) std::cout << i << std::endl;
 
     spec->TriggerNum = UK->TriggerNum;
     spec->Sis00 = UK->Sis00;

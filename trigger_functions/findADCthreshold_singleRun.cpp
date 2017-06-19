@@ -162,9 +162,9 @@ void findDiscriminatorThresh(Int_t rn) {
   DataTree *t = new DataTree();
 
   char tempIn[500];
-  sprintf(tempIn, "%s/replay_pass1_%i.root", getenv("REPLAY_PASS1"),rn);
+  sprintf(tempIn, "%s/replay_pass2_%i.root", getenv("REPLAY_PASS2"),rn);
   //sprintf(tempIn, "../replay_pass1/replay_pass1_%s.root", argv[1]);
-  t->setupInputTree(std::string(tempIn),"pass1");
+  t->setupInputTree(std::string(tempIn),"pass2");
 
   
   
@@ -180,60 +180,58 @@ void findDiscriminatorThresh(Int_t rn) {
 
     if (evt%100000==0) std::cout << evt << " in run " << run << std::endl;
 
-      
-    //if ((int)Sis00>3) /* && !((int)Sis00>=32 && (int)Sis00<=35))*/ continue; //Not a beta trigger or Bi pulser event
-
-    //Int_t side = (int)Sis00 - 1;
-
-    //if ( ((int)Sis00==1 || (int)Sis00==3) && PdcEast<Cuts.cutEastAnode) continue; //not an electron event
-    //if ( ((int)Sis00==2  || (int)Sis00==3) && PdcWest<Cuts.cutWestAnode) continue; //not an electron event
-      
+     
 
     // East Side Triggers (including backscatters)
-    if ( iSis00==1 ) { //&& t->xeRC>0 && t->xeRC<4 && t->yeRC>0 && t->yeRC<4 ) {  //TdcEast2fold > 0.00001 ) {
+    if ( iSis00==1 ) { 
 
-      //Fill West side total histograms
-      //if (PdcWest>Cuts.cutWestAnode) {
-      //std::cout <<  (QadcW1-peds[4][0])*gain[4] << std::endl;
 
-      totalW1->Fill((t->ScintW.q1)*gain[4]);
-      totalW2->Fill((t->ScintW.q2)*gain[5]);
-      totalW3->Fill((t->ScintW.q3)*gain[6]);
-      totalW4->Fill((t->ScintW.q4)*gain[7]);
+      totalW1->Fill( t->ScintW.q1 );
+      totalW2->Fill( t->ScintW.q2 );
+      totalW3->Fill( t->ScintW.q3 );
+      totalW4->Fill( t->ScintW.q4 );
       
-      if ( t->TDCW1>0.00001 ) triggerW1->Fill((t->ScintW.q1)*gain[4]);//-pedW1)*gainW1);
-      else pedW1->Fill((t->ScintW.q1)*gain[4]);
-      if ( t->TDCW2>0.00001 ) triggerW2->Fill((t->ScintW.q2)*gain[5]);//-pedW2)*gainW2);
-      else pedW2->Fill((t->ScintW.q2)*gain[5]);
-      if ( t->TDCW3>0.00001 ) triggerW3->Fill((t->ScintW.q3)*gain[6]);//-pedW3)*gainW3);
-      else pedW3->Fill((t->ScintW.q3)*gain[6]);
-      if ( t->TDCW4>0.00001 ) triggerW4->Fill((t->ScintW.q4)*gain[7]);//-pedW4)*gainW4);
-      else pedW4->Fill((t->ScintW.q4)*gain[7]);
+      if ( t->TDCW1>0.00001 ) triggerW1->Fill( t->ScintW.q1 );
+      else pedW1->Fill( t->ScintW.q1 );
+      if ( t->TDCW2>0.00001 ) triggerW2->Fill( t->ScintW.q2 );
+      else pedW2->Fill( t->ScintW.q2 );
+      if ( t->TDCW3>0.00001 ) triggerW3->Fill( t->ScintW.q3 );
+      else pedW3->Fill( t->ScintW.q3 );
+      if ( t->TDCW4>0.00001 ) triggerW4->Fill( t->ScintW.q4 );
+      else pedW4->Fill( t->ScintW.q4 );
       //}
       
       
+      // Now check that at least 2 other PMTs triggered for each East PMT
       
-      
-      
-      //3 PMTs trigger
-      if ( (t->TDCE1>0.00001 && t->TDCE2>0.00001 && t->TDCE3>0.00001) || (t->TDCE2>0.00001 && t->TDCE3>0.00001 && t->TDCE4>0.00001) || (t->TDCE1>0.00001 && t->TDCE3>0.00001 && t->TDCE4>0.00001) || (t->TDCE1>0.00001 && t->TDCE2>0.00001 && t->TDCE4>0.00001) ) { 
-	
-	//East side 3-fold trigger events
-	totalE1->Fill((t->ScintE.q1)*gain[0]);
-	totalE2->Fill((t->ScintE.q2)*gain[1]);
-	totalE3->Fill((t->ScintE.q3)*gain[2]);
-	totalE4->Fill((t->ScintE.q4)*gain[3]);
-	
-	if ( t->TDCE1>0.00001 ) triggerE1->Fill((t->ScintE.q1)*gain[0]);//-pedE1)*gainE1);
-	else pedE1->Fill((t->ScintE.q1)*gain[0]);
-	if ( t->TDCE2>0.00001 ) triggerE2->Fill((t->ScintE.q2)*gain[1]);//-pedE2)*gainE2);
-	else pedE2->Fill((t->ScintE.q2)*gain[1]);
-	if ( t->TDCE3>0.00001 ) triggerE3->Fill((t->ScintE.q3)*gain[2]);//-pedE3)*gainE3);
-	else pedE3->Fill((t->ScintE.q3)*gain[2]);
-	if ( t->TDCE4>0.00001 ) triggerE4->Fill((t->ScintE.q4)*gain[3]);//-pedE4)*gainE4);
-	else pedE4->Fill((t->ScintE.q4)*gain[3]);
-
+      //EPMT1
+      if ( ( t->TDCE2>0.00001 && t->TDCE3>0.00001 ) || ( t->TDCE2>0.00001 && t->TDCE4>0.00001 ) || ( t->TDCE3>0.00001 && t->TDCE4>0.00001 )  ) {
+	totalE1->Fill( t->ScintE.q1 );
+	if ( t->TDCE1>0.00001 ) triggerE1->Fill( t->ScintE.q1 );
+	else pedE1->Fill( t->ScintE.q1 );
       }
+
+      //EPMT2
+      if ( ( t->TDCE1>0.00001 && t->TDCE3>0.00001 ) || ( t->TDCE1>0.00001 && t->TDCE4>0.00001 ) || ( t->TDCE3>0.00001 && t->TDCE4>0.00001 )  ) {
+	totalE2->Fill( t->ScintE.q2 );
+	if ( t->TDCE2>0.00001 ) triggerE2->Fill( t->ScintE.q2 );
+	else pedE2->Fill( t->ScintE.q2 );
+      }
+
+      //EPMT3
+      if ( ( t->TDCE1>0.00001 && t->TDCE2>0.00001 ) || ( t->TDCE1>0.00001 && t->TDCE4>0.00001 ) || ( t->TDCE2>0.00001 && t->TDCE4>0.00001 )  ) {
+	totalE3->Fill( t->ScintE.q3 );
+	if ( t->TDCE3>0.00001 ) triggerE3->Fill( t->ScintE.q3 );
+	else pedE3->Fill( t->ScintE.q3 );
+      }
+      
+      //EPMT4
+      if ( ( t->TDCE1>0.00001 && t->TDCE2>0.00001 ) || ( t->TDCE1>0.00001 && t->TDCE3>0.00001 ) || ( t->TDCE2>0.00001 && t->TDCE3>0.00001 )  ) {
+	totalE4->Fill( t->ScintE.q4 );
+	if ( t->TDCE4>0.00001 ) triggerE4->Fill( t->ScintE.q4 );
+	else pedE4->Fill( t->ScintE.q4 );
+      }
+      
       
     }
     
@@ -242,84 +240,91 @@ void findDiscriminatorThresh(Int_t rn) {
       
       //Fill East side total histograms
       //if (PdcEast>Cuts.cutEastAnode) {
-      totalE1->Fill((t->ScintE.q1)*gain[0]);
-      totalE2->Fill((t->ScintE.q2)*gain[1]);
-      totalE3->Fill((t->ScintE.q3)*gain[2]);
-      totalE4->Fill((t->ScintE.q4)*gain[3]);
+      totalE1->Fill( t->ScintE.q1 );
+      totalE2->Fill( t->ScintE.q2 );
+      totalE3->Fill( t->ScintE.q3 );
+      totalE4->Fill( t->ScintE.q4 );
       
-      if ( t->TDCE1>0.00001 ) triggerE1->Fill((t->ScintE.q1)*gain[0]);//-pedE1)*gainE1);
-      else pedE1->Fill((t->ScintE.q1)*gain[0]);
-      if ( t->TDCE2>0.00001 ) triggerE2->Fill((t->ScintE.q2)*gain[1]);//-pedE2)*gainE2);
-      else pedE2->Fill((t->ScintE.q2)*gain[1]);
-      if ( t->TDCE3>0.00001 ) triggerE3->Fill((t->ScintE.q3)*gain[2]);//-pedE3)*gainE3);
-      else pedE3->Fill((t->ScintE.q3)*gain[2]);
-      if ( t->TDCE4>0.00001 ) triggerE4->Fill((t->ScintE.q4)*gain[3]);//-pedE4)*gainE4);
-      else pedE4->Fill((t->ScintE.q4)*gain[3]);
+      if ( t->TDCE1>0.00001 ) triggerE1->Fill( t->ScintE.q1 );
+      else pedE1->Fill( t->ScintE.q1 );
+      if ( t->TDCE2>0.00001 ) triggerE2->Fill( t->ScintE.q2 );
+      else pedE2->Fill( t->ScintE.q2 );
+      if ( t->TDCE3>0.00001 ) triggerE3->Fill( t->ScintE.q3 );
+      else pedE3->Fill( t->ScintE.q3 );
+      if ( t->TDCE4>0.00001 ) triggerE4->Fill( t->ScintE.q4 );
+      else pedE4->Fill( t->ScintE.q4 );
       //}
       
+
+      // Now check that at least 2 other PMTs triggered for each west PMT
       
-      if ( (t->TDCW1>0.00001 && t->TDCW2>0.00001 && t->TDCW3>0.00001) || (t->TDCW2>0.00001 && t->TDCW3>0.00001 && t->TDCW4>0.00001) || (t->TDCW1>0.00001 && t->TDCW3>0.00001 && t->TDCW4>0.00001) || (t->TDCW1>0.00001 && t->TDCW2>0.00001 && t->TDCW4>0.00001) ) { 
-	
-	//West side events
-	totalW1->Fill((t->ScintW.q1)*gain[4]);
-	totalW2->Fill((t->ScintW.q2)*gain[5]);
-	totalW3->Fill((t->ScintW.q3)*gain[6]);
-	totalW4->Fill((t->ScintW.q4)*gain[7]);
-      
-	if ( t->TDCW1>0.00001 ) triggerW1->Fill((t->ScintW.q1)*gain[4]);//-pedW1)*gainW1);
-	else pedW1->Fill((t->ScintW.q1)*gain[4]);
-	if ( t->TDCW2>0.00001 ) triggerW2->Fill((t->ScintW.q2)*gain[5]);//-pedW2)*gainW2);
-	else pedW2->Fill((t->ScintW.q2)*gain[5]);
-	if ( t->TDCW3>0.00001 ) triggerW3->Fill((t->ScintW.q3)*gain[6]);//-pedW3)*gainW3);
-	else pedW3->Fill((t->ScintW.q3)*gain[6]);
-	if ( t->TDCW4>0.00001 ) triggerW4->Fill((t->ScintW.q4)*gain[7]);//-pedW4)*gainW4);
-	else pedW4->Fill((t->ScintW.q4)*gain[7]);
-	  
+      //WPMT1
+      if ( ( t->TDCW2>0.00001 && t->TDCW3>0.00001 ) || ( t->TDCW2>0.00001 && t->TDCW4>0.00001 ) || ( t->TDCW3>0.00001 && t->TDCW4>0.00001 )  ) {
+	totalW1->Fill( t->ScintW.q1 );
+	if ( t->TDCW1>0.00001 ) triggerW1->Fill( t->ScintW.q1 );
+	else pedW1->Fill( t->ScintW.q1 );
       }
+
+      //WPMT2
+      if ( ( t->TDCW1>0.00001 && t->TDCW3>0.00001 ) || ( t->TDCW1>0.00001 && t->TDCW4>0.00001 ) || ( t->TDCW3>0.00001 && t->TDCW4>0.00001 )  ) {
+	totalW2->Fill( t->ScintW.q2 );
+	if ( t->TDCW2>0.00001 ) triggerW2->Fill( t->ScintW.q2 );
+	else pedW2->Fill( t->ScintW.q2 );
+      }
+
+      //WPMT3
+      if ( ( t->TDCW1>0.00001 && t->TDCW2>0.00001 ) || ( t->TDCW1>0.00001 && t->TDCW4>0.00001 ) || ( t->TDCW2>0.00001 && t->TDCW4>0.00001 )  ) {
+	totalW3->Fill( t->ScintW.q3 );
+	if ( t->TDCW3>0.00001 ) triggerW3->Fill( t->ScintW.q3 );
+	else pedW3->Fill( t->ScintW.q3 );
+      }
+      
+      //WPMT4
+      if ( ( t->TDCW1>0.00001 && t->TDCW2>0.00001 ) || ( t->TDCW1>0.00001 && t->TDCW3>0.00001 ) || ( t->TDCW2>0.00001 && t->TDCW3>0.00001 )  ) {
+	totalW4->Fill( t->ScintW.q4 );
+	if ( t->TDCW4>0.00001 ) triggerW4->Fill( t->ScintW.q4 );
+	else pedW4->Fill( t->ScintW.q4 );
+      }
+      
     }
 
-    if (iSis00==3) { // && t->xeRC>0 && t->xeRC<4 && t->yeRC>0 && t->yeRC<4 && t->xwRC>0 && t->xwRC<4 && t->ywRC>0 && t->ywRC<4) {
-      
-      if ( (t->TDCE1>0.00001 && t->TDCE2>0.00001 && t->TDCE3>0.00001) || (t->TDCE2>0.00001 && t->TDCE3>0.00001 && t->TDCE4>0.00001) || (t->TDCE1>0.00001 && t->TDCE3>0.00001 && t->TDCE4>0.00001) || (t->TDCE1>0.00001 && t->TDCE2>0.00001 && t->TDCE4>0.00001) ) { 
-	
-	//East side 3-fold trigger events
-	totalE1->Fill((t->ScintE.q1)*gain[0]);
-	totalE2->Fill((t->ScintE.q2)*gain[1]);
-	totalE3->Fill((t->ScintE.q3)*gain[2]);
-	totalE4->Fill((t->ScintE.q4)*gain[3]);
-	
-	if ( t->TDCE1>0.00001 ) triggerE1->Fill((t->ScintE.q1)*gain[0]);//-pedE1)*gainE1);
-	else pedE1->Fill((t->ScintE.q1)*gain[0]);
-	if ( t->TDCE2>0.00001 ) triggerE2->Fill((t->ScintE.q2)*gain[1]);//-pedE2)*gainE2);
-	else pedE2->Fill((t->ScintE.q2)*gain[1]);
-	if ( t->TDCE3>0.00001 ) triggerE3->Fill((t->ScintE.q3)*gain[2]);//-pedE3)*gainE3);
-	else pedE3->Fill((t->ScintE.q3)*gain[2]);
-	if ( t->TDCE4>0.00001 ) triggerE4->Fill((t->ScintE.q4)*gain[3]);//-pedE4)*gainE4);
-	else pedE4->Fill((t->ScintE.q4)*gain[3]);
-	
-      }
+    //Now take care of type 1 events which would have triggered no matter what
 
+    if (iSis00==3) { // && t->xeRC>0 && t->xeRC<4 && t->yeRC>0 && t->yeRC<4 && t->xwRC>0 && t->xwRC<4 && t->ywRC>0 && t->ywRC<4) {
+      	
+      totalE1->Fill( t->ScintE.q1 );
+      totalE2->Fill( t->ScintE.q2 );
+      totalE3->Fill( t->ScintE.q3 );
+      totalE4->Fill( t->ScintE.q4 );
       
-      if ( (t->TDCW1>0.00001 && t->TDCW2>0.00001 && t->TDCW3>0.00001) || (t->TDCW2>0.00001 && t->TDCW3>0.00001 && t->TDCW4>0.00001) || (t->TDCW1>0.00001 && t->TDCW3>0.00001 && t->TDCW4>0.00001) || (t->TDCW1>0.00001 && t->TDCW2>0.00001 && t->TDCW4>0.00001) ) { 
-	
-	//West side events
-	totalW1->Fill((t->ScintW.q1)*gain[4]);
-	totalW2->Fill((t->ScintW.q2)*gain[5]);
-	totalW3->Fill((t->ScintW.q3)*gain[6]);
-	totalW4->Fill((t->ScintW.q4)*gain[7]);
-	
-	if ( t->TDCW1>0.00001 ) triggerW1->Fill((t->ScintW.q1)*gain[4]);//-pedW1)*gainW1);
-	else pedW1->Fill((t->ScintW.q1)*gain[4]);
-	if ( t->TDCW2>0.00001 ) triggerW2->Fill((t->ScintW.q2)*gain[5]);//-pedW2)*gainW2);
-	else pedW2->Fill((t->ScintW.q2)*gain[5]);
-	if ( t->TDCW3>0.00001 ) triggerW3->Fill((t->ScintW.q3)*gain[6]);//-pedW3)*gainW3);
-	else pedW3->Fill((t->ScintW.q3)*gain[6]);
-	if ( t->TDCW4>0.00001 ) triggerW4->Fill((t->ScintW.q4)*gain[7]);//-pedW4)*gainW4);
-	else pedW4->Fill((t->ScintW.q4)*gain[7]);
-      }
+      if ( t->TDCE1>0.00001 ) triggerE1->Fill( t->ScintE.q1 );
+      else pedE1->Fill( t->ScintE.q1 );
+      if ( t->TDCE2>0.00001 ) triggerE2->Fill( t->ScintE.q2 );
+      else pedE2->Fill( t->ScintE.q2 );
+      if ( t->TDCE3>0.00001 ) triggerE3->Fill( t->ScintE.q3 );
+      else pedE3->Fill( t->ScintE.q3 );
+      if ( t->TDCE4>0.00001 ) triggerE4->Fill( t->ScintE.q4 );
+      else pedE4->Fill( t->ScintE.q4 );
+      
+    	
+      //West side events
+      totalW1->Fill( t->ScintW.q1 );
+      totalW2->Fill( t->ScintW.q2 );
+      totalW3->Fill( t->ScintW.q3 );
+      totalW4->Fill( t->ScintW.q4 );
+      
+      if ( t->TDCW1>0.00001 ) triggerW1->Fill( t->ScintW.q1 );
+      else pedW1->Fill( t->ScintW.q1 );
+      if ( t->TDCW2>0.00001 ) triggerW2->Fill( t->ScintW.q2 );
+      else pedW2->Fill( t->ScintW.q2 );
+      if ( t->TDCW3>0.00001 ) triggerW3->Fill( t->ScintW.q3 );
+      else pedW3->Fill( t->ScintW.q3 );
+      if ( t->TDCW4>0.00001 ) triggerW4->Fill( t->ScintW.q4 );
+      else pedW4->Fill( t->ScintW.q4 );
     }
     
   }
+
   delete t;
 
 

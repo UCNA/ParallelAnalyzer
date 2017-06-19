@@ -37,7 +37,7 @@ void betaAsymmetryFitter(TString year="2011-2012") {
   Double_t aErr = 0.;
 
   // Load the beta/2 corrected data first
-  TString fname = TString::Format("%s/Asymmetries/UnCorr_OctetAsymmetries_AnaChA_Octets_%s_BinByBin.txt",getenv("SIM_ANALYSIS_RESULTS"),octets.Data());
+  TString fname = TString::Format("%s/Asymmetries/UnCorr_OctetAsymmetries_AnaChC_Octets_%s_BinByBin.txt",getenv("SIM_ANALYSIS_RESULTS"),octets.Data());
   //UNBLINDED_
 
   std::ifstream infile(fname.Data());
@@ -53,7 +53,7 @@ void betaAsymmetryFitter(TString year="2011-2012") {
 
   
   
-  fname = TString::Format("%s/Asymmetries/UnCorr_OctetAsymmetries_AnaChA_Octets_%s_BinByBin_withEnergyDependence.txt",getenv("SIM_ANALYSIS_RESULTS"),octets.Data());
+  fname = TString::Format("%s/Asymmetries/UnCorr_OctetAsymmetries_AnaChC_Octets_%s_BinByBin_withEnergyDependence.txt",getenv("SIM_ANALYSIS_RESULTS"),octets.Data());
 
   infile.open(fname.Data());
   

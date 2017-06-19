@@ -109,12 +109,12 @@ vector <vector <double> > returnSourcePosition (Int_t runNumber, string src) {
   return srcPos;
 }
 
-vector <Int_t> getPMTQuality(Int_t runNumber) {
+vector <Int_t> getEreconPMTQuality(Int_t runNumber) {
   //Read in PMT quality file
   cout << "Reading in PMT Quality file ...\n";
   vector <Int_t>  pmtQuality (8,0);
   Char_t temp[200];
-  sprintf(temp,"%s/residuals/PMT_runQuality_master.dat",getenv("ANALYSIS_CODE")); 
+  sprintf(temp,"%s/residuals/PMT_EreconQuality_master.dat",getenv("ANALYSIS_CODE")); 
   ifstream pmt;
   std::cout << temp << std::endl;
   pmt.open(temp);
@@ -152,8 +152,7 @@ std::vector < std::vector <Double_t> > loadPMTpedestals(Int_t runNumber) {
 
   Char_t temp[500];
   std::vector < std::vector < Double_t > > peds (8,std::vector <Double_t> (2,0.));
-  if (runNumber>20000) sprintf(temp,"%s/PMT_pedestals_%i.dat",getenv("PEDESTALS"),runNumber);
-  else sprintf(temp,"%s/pedestal_widths_%i.dat",getenv("PEDESTALS"),runNumber);
+  sprintf(temp,"%s/PMT_pedestals_%i.dat",getenv("PEDESTALS"),runNumber);
   ifstream infile;
   infile.open(temp);
 
@@ -246,7 +245,7 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
   bool allEvtsTrigg = false; //This just removes the use of the trigger function for an initial calibration. 
                             // Once a calibration is established (or if running on Betas), you can keep this false
 
-  bool simProperStatistics = true; // If True, this uses the actual data run to determine the number of Type 0s to simulate
+  bool simProperStatistics = false; // If True, this uses the actual data run to determine the number of Type 0s to simulate
 
   bool veryHighStatistics = false; // Run 24 million events per run
   if ( octet>=0 ) veryHighStatistics = true; //This will ensure the proper 24 million events are chosen and that they don't overlap
@@ -327,12 +326,12 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
   Double_t g_rest = 12500.;
 
   /////// Loading other run dependent quantities
-  vector <Int_t> pmtQuality = getPMTQuality(runNumber); // Get the quality of the PMTs for that run
+  vector <Int_t> pmtQuality = getEreconPMTQuality(runNumber); // Get the quality of the PMTs for that run
   UInt_t calibrationPeriod = getSrcRunPeriod(runNumber); // retrieve the calibration period for this run
   UInt_t XePeriod = getXeRunPeriod(runNumber); // Get the proper Xe run period for the Trigger functions
   //GetPositionMap(XePeriod);
   PositionMap posmap(5.0,50.); //Load position map with 5 mm bins
-  posmap.readPositionMap(XePeriod);
+  posmap.readPositionMap(XePeriod,"endpoint");
   vector <Double_t> alpha = GetAlphaValues(calibrationPeriod); // fill vector with the alpha (nPE/keV) values for this run period
 
 
@@ -418,7 +417,7 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
 
   //Set random number generator
 
-  TRandom3 *seed = new TRandom3( 2*runNumber ); // seed generator
+  TRandom3 *seed = new TRandom3( 3*runNumber ); // seed generator
   TRandom3 *rand0 = new TRandom3( (unsigned int) (seed->Rndm()*10000.) );
   TRandom3 *rand1 = new TRandom3( (unsigned int) (seed->Rndm()*10000.) );
   TRandom3 *rand2 = new TRandom3( (unsigned int) (seed->Rndm()*10000.) );
@@ -795,12 +794,12 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
     
     
     for (UInt_t p=0; p<4; p++) {
-      if ( edepQ.EdepQE>0. ) { //Check to make sure that there is light to see in the scintillator
+      if ( edep.EdepE>0. ) { //Check to make sure that there is light to see in the scintillator
 	
 	if (eta[p]>0.) {
 
 	  pmt.etaEvis[p] = (1./(alpha[p]*g_d*g_rest)) * (rand3->Poisson(g_rest*rand2->Poisson(g_d*rand1->Poisson(alpha[p]*eta[p]*edepQ.EdepQE))));
-	  Double_t ADC = linCurve.applyInverseLinCurve(p, pmt.etaEvis[p]);// + rand0->Gaus(0.,pedestals[p][1]); //Take into account non-zero width of the pedestal
+	  Double_t ADC = linCurve.applyInverseLinCurve(p, pmt.etaEvis[p]) + rand0->Gaus(0.,pedestals[p][1]); //Take into account non-zero width of the pedestal
 	  ADCvecE[p] = ADC;
 	  pmt.etaEvis[p] = linCurve.applyLinCurve(p, ADC);
 	  pmt.Evis[p] = pmt.etaEvis[p]/eta[p];
@@ -853,7 +852,8 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
 
 	}
 	
-	pmt.nPE[p] = ( pmt.etaEvis[p]>0. ) ? alpha[p]*pmt.etaEvis[p] : 0.;
+	pmt.nPE[p] = alpha[p]*pmt.etaEvis[p] ;
+	//pmt.nPE[p] = ( pmt.etaEvis[p]>0. ) ? alpha[p]*pmt.etaEvis[p] : 0.;
 	old_pmt.nPE[p] = ( old_pmt.etaEvis[p]>0. ) ? alpha[p]*old_pmt.etaEvis[p] : 0.;
 	gaus_pmt.nPE[p] = ( gaus_pmt.etaEvis[p]>0. ) ? alpha[p]*gaus_pmt.etaEvis[p] : 0.;
       }
@@ -876,8 +876,8 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
   
     Double_t numer=0., denom=0.;
     for (UInt_t p=0;p<4;p++) {
-      numer += pmtQuality[p] && old_pmt.etaEvis[p]>0. ? old_pmt.nPE[p] : 0.;
-      denom += pmtQuality[p] && old_pmt.etaEvis[p]>0. ? old_eta[p]*alpha[p] : 0.;
+      numer += ( pmtQuality[p] && old_pmt.etaEvis[p]>0. ) ? old_pmt.nPE[p] : 0.;
+      denom += ( pmtQuality[p] && old_pmt.etaEvis[p]>0. ) ? old_eta[p]*alpha[p] : 0.;
     }
 
     Double_t totalEnE = denom>0. ? numer/denom : 0.;
@@ -885,8 +885,8 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
 
     numer = denom = 0.;
     for (UInt_t p=0;p<4;p++) {
-      numer += pmtQuality[p] && gaus_pmt.etaEvis[p]>0. ? gaus_pmt.nPE[p] : 0.;
-      denom += pmtQuality[p] && gaus_pmt.etaEvis[p]>0. ? gaus_eta[p]*alpha[p] : 0.;
+      numer += ( pmtQuality[p] && gaus_pmt.etaEvis[p]>0. ) ? gaus_pmt.nPE[p] : 0.;
+      denom += ( pmtQuality[p] && gaus_pmt.etaEvis[p]>0. ) ? gaus_eta[p]*alpha[p] : 0.;
     }
 
     totalEnE = denom>0. ? numer/denom : 0.;
@@ -896,8 +896,10 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
     //Calculate the weighted energy on a side
     numer = denom = 0.;
     for (UInt_t p=0;p<4;p++) {
-      numer += pmtQuality[p] && pmt.etaEvis[p]>0. ? pmt.nPE[p] : 0.;
-      denom += pmtQuality[p] && pmt.etaEvis[p]>0. ? eta[p]*alpha[p] : 0.;
+      numer += ( pmtQuality[p] ) ? pmt.nPE[p] : 0.;
+      denom += ( pmtQuality[p] ) ? eta[p]*alpha[p] : 0.;
+      //numer += ( pmtQuality[p] && pmt.etaEvis[p]>0. ) ? pmt.nPE[p] : 0.;
+      //denom += ( pmtQuality[p] && pmt.etaEvis[p]>0. ) ? eta[p]*alpha[p] : 0.;
     }
 
     
@@ -914,12 +916,12 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
       
     //West Side
     for (UInt_t p=4; p<8; p++) {
-      if ( !(p==5 && runNumber>16983 && runNumber<17249)  &&  edepQ.EdepQW>0. ) { //Check to make sure that there is light to see in the scintillator and that run isn't one where PMTW2 was dead
+      if ( !(p==5 && runNumber>16983 && runNumber<17249) &&  edep.EdepW>0. ) { //Check to make sure that there is light to see in the scintillator and that run isn't one where PMTW2 was dead
 	
 	if (eta[p]>0.) {
 
 	  pmt.etaEvis[p] = (1./(alpha[p]*g_d*g_rest)) * (rand3->Poisson(g_rest*rand2->Poisson(g_d*rand1->Poisson(alpha[p]*eta[p]*edepQ.EdepQW))));
-	  Double_t ADC = linCurve.applyInverseLinCurve(p, pmt.etaEvis[p]);// + rand0->Gaus(0.,pedestals[p][1]); //Take into account non-zero width of the pedestal
+	  Double_t ADC = linCurve.applyInverseLinCurve(p, pmt.etaEvis[p]) + rand0->Gaus(0.,pedestals[p][1]); //Take into account non-zero width of the pedestal
 	  ADCvecW[p-4] = ADC;
 	  //cout << ADCvecW[p-4] << endl;
 	  pmt.etaEvis[p] = linCurve.applyLinCurve(p, ADC);	  
@@ -973,7 +975,8 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
 
 	}
 	
-	pmt.nPE[p] = ( pmt.etaEvis[p]>0. ) ? alpha[p]*pmt.etaEvis[p] : 0.;
+	pmt.nPE[p] = alpha[p]*pmt.etaEvis[p];
+	//pmt.nPE[p] = ( pmt.etaEvis[p]>0. ) ? alpha[p]*pmt.etaEvis[p] : 0.;
 	old_pmt.nPE[p] = ( old_pmt.etaEvis[p]>0. ) ? alpha[p]*old_pmt.etaEvis[p] : 0.;
 	gaus_pmt.nPE[p] = ( gaus_pmt.etaEvis[p]>0. ) ? alpha[p]*gaus_pmt.etaEvis[p] : 0.;
       }
@@ -996,8 +999,8 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
       
     numer = denom = 0.;
     for (UInt_t p=4;p<8;p++) {
-      numer += pmtQuality[p] && old_pmt.etaEvis[p]>0. ? old_pmt.nPE[p] : 0.;
-      denom += pmtQuality[p] && old_pmt.etaEvis[p]>0. ? old_eta[p]*alpha[p] : 0.;
+      numer += ( pmtQuality[p] && old_pmt.etaEvis[p]>0. ) ? old_pmt.nPE[p] : 0.;
+      denom += ( pmtQuality[p] && old_pmt.etaEvis[p]>0. )  ? old_eta[p]*alpha[p] : 0.;
     }
 
     double totalEnW = denom>0. ? numer/denom : 0.;
@@ -1005,8 +1008,8 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
 
     numer = denom = 0.;
     for (UInt_t p=4;p<8;p++) {
-      numer += pmtQuality[p] && gaus_pmt.etaEvis[p]>0. ? gaus_pmt.nPE[p] : 0.;
-      denom += pmtQuality[p] && gaus_pmt.etaEvis[p]>0. ? gaus_eta[p]*alpha[p] : 0.;
+      numer += ( pmtQuality[p] && gaus_pmt.etaEvis[p]>0. ) ? gaus_pmt.nPE[p] : 0.;
+      denom += ( pmtQuality[p] && gaus_pmt.etaEvis[p]>0. ) ? gaus_eta[p]*alpha[p] : 0.;
     }
 
     totalEnW = denom>0. ? numer/denom : 0.;
@@ -1015,8 +1018,10 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
      //Calculate the total weighted energy
     numer=denom=0.;
     for (UInt_t p=4;p<8;p++) {
-      numer += pmtQuality[p] && pmt.etaEvis[p]>0. ? pmt.nPE[p] : 0.;
-      denom += pmtQuality[p] && pmt.etaEvis[p]>0. ? eta[p]*alpha[p] : 0.;
+      numer += ( pmtQuality[p] ) ? pmt.nPE[p] : 0.;
+      denom += ( pmtQuality[p] ) ? eta[p]*alpha[p] : 0.;
+      //numer += ( pmtQuality[p] && pmt.etaEvis[p]>0. ) ? pmt.nPE[p] : 0.;
+      //denom += ( pmtQuality[p] && pmt.etaEvis[p]>0. ) ? eta[p]*alpha[p] : 0.;
     }
     //Now we apply the trigger probability
     totalEnW = denom>0. ? numer/denom : 0.;
@@ -1186,8 +1191,8 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
 
     // Increment the event tally if the event was PID = 1 (electron) and the event was inside the fiducial radius used to determine num of events in data file
     if ( source == "Beta") {
-      if ( PID==1 && Erecon>0. && ( sqrt( mwpcAdjE[0]*mwpcAdjE[0] + mwpcAdjE[1]*mwpcAdjE[1] )<fidCut
-				    && sqrt( mwpcAdjW[0]*mwpcAdjW[0] + mwpcAdjW[1]*mwpcAdjW[1] )<fidCut ) ) evtTally++;
+      if ( PID==1 && Erecon>0. &&  sqrt( xE.center*xE.center + yE.center*yE.center )<fidCut && sqrt( xW.center*xW.center + yW.center*yW.center )<fidCut ) evtTally++; //&& ( sqrt( mwpcAdjE[0]*mwpcAdjE[0] + mwpcAdjE[1]*mwpcAdjE[1] )<fidCut
+      // && sqrt( mwpcAdjW[0]*mwpcAdjW[0] + mwpcAdjW[1]*mwpcAdjW[1] )<fidCut )
     }
 
     else {
@@ -1198,7 +1203,7 @@ void revCalSimulation (Int_t runNumber, string source, int octet=-1)
     
     if (PID>=0) tree->Fill();
     //cout << evtTally << endl;
-    if (evtTally%10000==0) {std::cout << evtTally << std::endl;}//cout << "filled event " << evt << endl;
+    if (evtTally%10000==0) {std::cout << evtTally  << "    PID=" << PID << "    Erecon=" << Erecon << std::endl;}//cout << "filled event " << evt << endl;
   }
   cout << endl;
 

@@ -22,6 +22,7 @@ public:
   Double_t ReturnMean()  { return mean; }
   Double_t ReturnMeanError()  { return meanErr; }
   Double_t ReturnSigma() { return sigma; }
+  Double_t ReturnSigmaError() { return sigmaErr; }
   Double_t ReturnScale() { return scale; }
   bool isGoodFit()       { return goodFit_new; }
   
@@ -35,6 +36,7 @@ private:
   Double_t mean;
   Double_t meanErr;
   Double_t sigma;
+  Double_t sigmaErr;
   Double_t scale;
   Double_t min; 
   Double_t max;
@@ -60,10 +62,12 @@ public:
   Double_t ReturnMean1()  { return mean1; } //This is the highest peak (Upper Bi)
   Double_t ReturnMean1Error()  { return mean1Err; }
   Double_t ReturnSigma1() { return sigma1; }
+  Double_t ReturnSigma1Error() { return sigma1Err; }
   Double_t ReturnScale1() { return scale1; }
   Double_t ReturnMean2()  { return mean2; }
   Double_t ReturnMean2Error()  { return mean2Err; }
   Double_t ReturnSigma2() { return sigma2; }
+  Double_t ReturnSigma2Error() { return sigma2Err; }
   Double_t ReturnScale2() { return scale2; }
   bool isGoodFit()       { return goodFit_new; }
 
@@ -77,10 +81,12 @@ private:
   Double_t mean1;
   Double_t mean1Err;
   Double_t sigma1;
+  Double_t sigma1Err;
   Double_t scale1;
   Double_t mean2;
   Double_t mean2Err;
   Double_t sigma2;
+  Double_t sigma2Err;
   Double_t scale2;
   Double_t min; 
   Double_t max;

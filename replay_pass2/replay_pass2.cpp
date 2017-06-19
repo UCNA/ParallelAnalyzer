@@ -69,7 +69,10 @@ vector <Int_t> getPMTQuality(Int_t runNumber) {
   cout << "Reading in PMT Quality file ...\n";
   vector <Int_t>  pmtQuality (8,0);
   Char_t temp[200];
-  sprintf(temp,"%s/residuals/PMT_runQuality_master.dat",getenv("ANALYSIS_CODE")); 
+  
+  // NOTE: for now i'm using EreconQuality until I can see if the bad EPMT4 crap 
+  // can be salvaged...
+  sprintf(temp,"%s/residuals/PMT_EreconQuality_master.dat",getenv("ANALYSIS_CODE")); 
   ifstream pmt;
   std::cout << temp << std::endl;
   pmt.open(temp);
@@ -196,7 +199,17 @@ int main(int argc, char *argv[])
     t->ScintW.q1 = t->ScintW.q1*gainCorrection[4];
     t->ScintW.q2 = t->ScintW.q2*gainCorrection[5];
     t->ScintW.q3 = t->ScintW.q3*gainCorrection[6];
-    t->ScintW.q4 = t->ScintW.q4*gainCorrection[7]; 
+    t->ScintW.q4 = t->ScintW.q4*gainCorrection[7];
+
+    t->ScintE_bare.q1 = t->ScintE_bare.q1*gainCorrection[0];
+    t->ScintE_bare.q2 = t->ScintE_bare.q2*gainCorrection[1];
+    t->ScintE_bare.q3 = t->ScintE_bare.q3*gainCorrection[2];
+    t->ScintE_bare.q4 = t->ScintE_bare.q4*gainCorrection[3];
+    
+    t->ScintW_bare.q1 = t->ScintW_bare.q1*gainCorrection[4];
+    t->ScintW_bare.q2 = t->ScintW_bare.q2*gainCorrection[5];
+    t->ScintW_bare.q3 = t->ScintW_bare.q3*gainCorrection[6];
+    t->ScintW_bare.q4 = t->ScintW_bare.q4*gainCorrection[7];
     
     if ( useBeamCuts ) {
  

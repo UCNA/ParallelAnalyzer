@@ -3,13 +3,15 @@
 {
   gStyle->SetOptStat(0);
 
-  int octetStart=0;
-  int octetEnd=59;
+  bool withEvis = true;
 
-  TString normType = "ALL";
+  int octetStart=60;
+  int octetEnd=121;
 
-  Double_t normLow = 200.;
-  Double_t normHigh = 780.;
+  TString normType = "0";
+
+  Double_t normLow = 0.;
+  Double_t normHigh = 200.;
   
   Double_t xAxisMax = 1200.;
 
@@ -17,9 +19,9 @@
   Double_t t0E_sfON, t0E_sfOFF, t1E_sfON, t1E_sfOFF, t23E_sfON, t23E_sfOFF, t0W_sfON, t0W_sfOFF, t1W_sfON, t1W_sfOFF, t23W_sfON, t23W_sfOFF;
   t0E_sfON = t0E_sfOFF = t1E_sfON = t1E_sfOFF = t23E_sfON = t23E_sfOFF = t0W_sfON = t0W_sfOFF = t1W_sfON = t1W_sfOFF = t23W_sfON = t23W_sfOFF = 0.;
   
-  TFile *fg_file = new TFile(TString::Format("ForegroundSpectra_%i-%i.root",octetStart,octetEnd),"READ");
-  TFile *bg_file = new TFile(TString::Format("BackgroundSpectra_%i-%i.root",octetStart,octetEnd),"READ");
-  TFile *sim_file = new TFile(TString::Format("SIM_ForegroundSpectra_%i-%i.root",octetStart,octetEnd),"READ");
+  TFile *fg_file = new TFile(TString::Format("ForegroundSpectra_%i-%i%s.root",octetStart,octetEnd,(withEvis?"_Evis":"")),"READ");
+  TFile *bg_file = new TFile(TString::Format("BackgroundSpectra_%i-%i%s.root",octetStart,octetEnd,(withEvis?"_Evis":"")),"READ");
+  TFile *sim_file = new TFile(TString::Format("SIM_ForegroundSpectra_%i-%i%s.root",octetStart,octetEnd,(withEvis?"_Evis":"")),"READ");
 
 
   //Load the histograms
@@ -451,7 +453,8 @@
 
 
 
-  TString pdfFile = TString::Format("spectraComp_%i-%i_Type%s_%0.0f-%0.0f.pdf",octetStart,octetEnd,normType.Data(), normLow, normHigh);
+  TString pdfFile = TString::Format("spectraComp_%i-%i_Type%s_%0.0f-%0.0f%s.pdf",
+				    octetStart,octetEnd,normType.Data(), normLow, normHigh,(withEvis?"_Evis":""));
   //TString pdfFileStart = pdfFile + TString("(");
   //TString pdfFileEnd = pdfFile + TString
   c1E->Print(TString::Format("%s(",pdfFile.Data()));

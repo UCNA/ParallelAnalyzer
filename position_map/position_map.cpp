@@ -24,6 +24,8 @@
 #include "DataTree.hh"
 #include "MBUtils.hh"
 #include "peaks.hh"
+#include "BetaDecayTools.hh"
+
 
 #include "positionMapHandler.hh"
 
@@ -264,50 +266,13 @@ int main(int argc, char *argv[])
   int maxBin[nPMT][nBinsXY][nBinsXY];
   double maxCounts[nPMT][nBinsXY][nBinsXY];
   double binCenterMax[nPMT][nBinsXY][nBinsXY];
-  double meanVal[nPMT][nBinsXY][nBinsXY];
-  double fitMean[nPMT][nBinsXY][nBinsXY];
-  double fitSigma[nPMT][nBinsXY][nBinsXY];
-
-  /*for (int p=0; p<nPMT; p++) {
-    for (int i=0; i<nBinsXY; i++) {
-      for (int j=0; j<nBinsXY; j++) {	
-	
-	double r = sqrt(power(posmap.getBinCenter(j),2)+power(posmap.getBinCenter(i),2));
-        // Find bin with maximum content
-	hisxy[p][i][j]->GetXaxis()->SetRange(2,nBinHist);
-        maxBin[p][i][j] = hisxy[p][i][j]->GetMaximumBin();
-        maxCounts[p][i][j] = hisxy[p][i][j]->GetBinContent(maxBin[p][i][j]);
-        binCenterMax[p][i][j] = hisxy[p][i][j]->GetBinCenter(maxBin[p][i][j]);
-	
-	//Determine Low edge bin
-	int counts = maxCounts[p][i][j];
-	int bin=0;
-	while (counts>0.5*maxCounts[p][i][j]) {
-	  bin++;
-	  counts = hisxy[p][i][j]->GetBinContent(maxBin[p][i][j]-bin);
-	}
-	xLowBin[p][i][j] = (maxBin[p][i][j]-bin) > 0 ? (maxBin[p][i][j]-bin): 1;
-	
-      //Determine high edge bin
-	counts = maxCounts[p][i][j];
-	bin=0;
-	while (counts>0.5*maxCounts[p][i][j]) {
-	  bin++;
-	  counts = hisxy[p][i][j]->GetBinContent(maxBin[p][i][j]+bin);
-	}
-	xHighBin[p][i][j] = (maxBin[p][i][j]+bin) < nBinHist ? (maxBin[p][i][j]+bin): nBinHist-1;
-
-	//Determine mean of range
-	//hisxy[p][i][j]->GetXaxis()->SetRange(xLowBin[p][i][j],xHighBin[p][i][j]);
-	hisxy[p][i][j]->GetXaxis()->SetRange(xHighBin[p][i][j], nBinHist);
-	meanVal[p][i][j] = hisxy[p][i][j]->GetMean();
-	hisxy[p][i][j]->GetXaxis()->SetRange(0,nBinHist);
-	
-      }
-    }
-    }*/
+  double meanVal[nPMT][nBinsXY][nBinsXY]; // Holds the mean of the distribution as defined by first fitting the peak
+  double fitMean[nPMT][nBinsXY][nBinsXY]; // Holds the mean of the low energy peak
+  double fitSigma[nPMT][nBinsXY][nBinsXY]; // Holds the sigma of the low energy peak
+  double endpoint[nPMT][nBinsXY][nBinsXY]; // Holds the endpoint
 
 
+  /////// First determine roughly where the low energy peak is
   TSpectrum *spec;
 
   for (int p=0; p<nPMT; p++) {
@@ -334,7 +299,7 @@ int main(int argc, char *argv[])
 		  }
 		else
 		  {
-		    Float_t *xpeaks = spec->GetPositionX();
+		    Float_t *xpeaks = spec->GetPositionX(); // Note that newer versions of ROOT return a pointer to double...
 		    TAxis *xaxis = (TAxis*)(hisxy[p][i][j]->GetXaxis());
 		    Int_t peakBin=0;
 		    Double_t BinSum=0.;
@@ -361,18 +326,11 @@ int main(int argc, char *argv[])
     }
   }
   
-  // Fit histograms
-  //TF1 *gaussian_fit[nPMT][nPosBinsX][nPosBinsY];
-  //double fitMean[nPMT][nPosBinsX][nPosBinsY];
-
-  double nSigmaFromMean = 1.5; // This is how far over from the peak we are starting the sum of the spectra
+  //////// Now fit the histograms for the peak
 
   for (int p=0; p<nPMT; p++) {
     for (int i=0; i<nBinsXY; i++) {
-      for (int j=0; j<nBinsXY; j++) {
-
-	double r = sqrt(power(posmap.getBinCenter(j),2)+power(posmap.getBinCenter(i),2));
-	
+      for (int j=0; j<nBinsXY; j++) {	
 
 	if ( hisxy[p][i][j]->Integral() > 500.) {// && r<=(50.+2*xBinWidth)) {
 
@@ -426,102 +384,71 @@ int main(int argc, char *argv[])
 	  int counts_check = hisxy[p][i][j]->GetBinContent(meanBin);
 	  int counts = counts_check;
 	  int bin=0;
-	  double frac = exp(-nSigmaFromMean*nSigmaFromMean/2.);
+	  double frac = exp(-1/2.); // This should be the fraction of events for a gaussian at 1 sigma
 	  if ( counts_check > 10 ) {
 	    while (counts>frac*counts_check) {
 	      bin++;
 	      counts = hisxy[p][i][j]->GetBinContent(meanBin+bin);
 	    }
-	  }
-	  
+	  }	  
 	  xHighBin[p][i][j] = (meanBin+bin) < hisxy[p][i][j]->GetNbinsX()/3 ? (meanBin+bin): meanBin;
-	  fitSigma[p][i][j] = hisxy[p][i][j]->GetBinCenter(xHighBin[p][i][j]) - fitMean[p][i][j];
-	 
+	  fitSigma[p][i][j] = hisxy[p][i][j]->GetBinCenter(xHighBin[p][i][j]) - fitMean[p][i][j];	 
 	}
 
-	hisxy[p][i][j]->GetXaxis()->SetRange(hisxy[p][i][j]->GetXaxis()->FindBin(fitMean[p][i][j]+nSigmaFromMean*fitSigma[p][i][j]), hisxy[p][i][j]->GetNbinsX()-1);
-	meanVal[p][i][j] = hisxy[p][i][j]->GetMean();
-	hisxy[p][i][j]->GetXaxis()->SetRange(0, hisxy[p][i][j]->GetNbinsX());
       }
     }
   }
 
-  //Now that you have the histogram
+  fileOut->Write(); // Writing the histograms with the peaks to file
 
-	  /*
-        char fitName[500];
-        sprintf(fitName, "gaussian_fit_%i_%i_%i.root", p, i, j);
+  ////////// Now determine the mean of the Xe distribution in every position bin above the peak to avoid
+  ////////// trigger effects
+  
+  double nSigmaFromMean = 1.5; // This is how far over from the peak we are starting the sum of the spectra
 
-        gaussian_fit[p][i][j] = new TF1(fitName,
-       	     	                        "[0]*exp(-(x-[1])*(x-[1])/(2.*[2]*[2]))",
-                                        xLow[p][i][j], xHigh[p][i][j]);
-        gaussian_fit[p][i][j]->SetParameter(0,maxCounts[p][i][j]);
-        gaussian_fit[p][i][j]->SetParameter(1,binCenterMax[p][i][j]);
-        gaussian_fit[p][i][j]->SetParameter(2,100.);
-	gaussian_fit[p][i][j]->SetParLimits(0,0.,5000.);
-	gaussian_fit[p][i][j]->SetParLimits(1,0.,4000.);	
-	gaussian_fit[p][i][j]->SetParLimits(2,0.,500.);
+  for (int p=0; p<nPMT; p++) {
+    for (int i=0; i<nBinsXY; i++) {
+      for (int j=0; j<nBinsXY; j++) {
 
-	
-
-        if (maxCounts[p][i][j] > 0. && r<=(50.+2*xBinWidth)) {
-          hisxy[p][i][j]->Fit(fitName, "LRQ");
-          fitMean[p][i][j] = gaussian_fit[p][i][j]->GetParameter(1);
-	  //attempt at manual fix of fitting problem. Constrain p1 and p2
-	  if (fitMean[p][i][j]<xLow[p][i][j] || fitMean[p][i][j]>xHigh[p][i][j])
-	    { 
-	      string pmt;
-	      if (p<4) pmt = "East";
-	      else pmt = "West";
-	      int pmtNum = p<4?p:(p-4);
-	      cout << "Bad Fit in PMT " << pmt << " " << pmtNum << " at " << xBinCenter[i] << ", " << yBinCenter[j] <<  " -> " << fitMean[p][i][j] << endl;
-	      Float_t lowerBoundPar1 = (float)xLow[p][i][j];
-	      Float_t upperBoundPar1 = (float)xHigh[p][i][j];
-	      Float_t lowerBoundPar2 = 0.;
-	      Float_t upperBoundPar2 = sigmaMax[p];
-	      gaussian_fit[p][i][j]->SetParameter(0,maxCounts[p][i][j]);
-	      gaussian_fit[p][i][j]->SetParameter(1,binCenterMax[p][i][j]);
-	      gaussian_fit[p][i][j]->SetParameter(2,100.);
-	      gaussian_fit[p][i][j]->SetParLimits(1,lowerBoundPar1,upperBoundPar1);
-	      gaussian_fit[p][i][j]->SetParLimits(2,lowerBoundPar2,upperBoundPar2);
-	      hisxy[p][i][j]->Fit(fitName, "LRQ");
-	      fitMean[p][i][j] = gaussian_fit[p][i][j]->GetParameter(1);
-	      cout << "New Fit Mean -> " << fitMean[p][i][j] << endl;
-
-	      //Check no. 2. Attempt to constrain p0 
-	      if (fitMean[p][i][j]<(1.2*xLow[p][i][j]) || fitMean[p][i][j]>(0.8*xHigh[p][i][j]))
-		{
-		  Float_t lowerBoundPar0 = (float)(0.8*maxCounts[p][i][j]);
-		  Float_t upperBoundPar0 = (float)(2.*maxCounts[p][i][j]);
-		  gaussian_fit[p][i][j]->SetParameter(0,maxCounts[p][i][j]);
-		  gaussian_fit[p][i][j]->SetParameter(1,binCenterMax[p][i][j]);
-		  gaussian_fit[p][i][j]->SetParameter(2,100.);
-		  gaussian_fit[p][i][j]->SetParLimits(0,lowerBoundPar0,upperBoundPar0);
-		  gaussian_fit[p][i][j]->SetParLimits(1,lowerBoundPar1,upperBoundPar1);	
-		  gaussian_fit[p][i][j]->SetParLimits(2,lowerBoundPar2,upperBoundPar2);
-		  hisxy[p][i][j]->Fit(fitName, "LRQ");
-		  fitMean[p][i][j] = gaussian_fit[p][i][j]->GetParameter(1);
-		  cout << "New Fit Mean -> " << fitMean[p][i][j] << endl;
-		
-		  //Checking if fit mean is still out of range. If so, set value to max bin
-		  if (fitMean[p][i][j]<xLow[p][i][j] || fitMean[p][i][j]>xHigh[p][i][j])
-		    {
-		      fitMean[p][i][j] = binCenterMax[p][i][j];
-		      cout << "**** replaced fit mean with max bin " << fitMean[p][i][j] << endl;
-		    }
-		}
-		}	      
-        }
-        else {
-          meanVal[p][i][j] = 0.;
-        }
-	//cout << "PMT " << p << " at " << xBinCenter[i] << ", " << yBinCenter[j] << " fitMean = " << fitMean[p][i][j] << endl;
+	hisxy[p][i][j]->GetXaxis()->SetRange(hisxy[p][i][j]->GetXaxis()->FindBin(fitMean[p][i][j]+nSigmaFromMean*fitSigma[p][i][j]), hisxy[p][i][j]->GetNbinsX()-1);
+	meanVal[p][i][j] = hisxy[p][i][j]->GetMean();
+	hisxy[p][i][j]->GetXaxis()->SetRange(0, hisxy[p][i][j]->GetNbinsX()); // Set the range back to the full range
 
       }
     }
-    }*/
+  }
 
-  // Extract position maps
+  ////////// Now determine the endpoint of the Xe distribution in every position bin
+
+  double lowerBoundMult = 1.;
+  double upperBoundMult = 2.;
+
+  TFile *epfile = new TFile(TString::Format("%s/%s_%smm_endpoints.root",getenv("POSITION_MAPS"),tempOutBase.c_str(),ftos(xyBinWidth).c_str()),"RECREATE");
+
+  TGraphErrors epgraph;
+  
+  KurieFitter kf;
+  
+  for (int p=0; p<nPMT; p++) {
+    for (int i=0; i<nBinsXY; i++) {
+      for (int j=0; j<nBinsXY; j++) {
+
+	kf.FitSpectrum(hisxy[p][i][j], lowerBoundMult*meanVal[p][i][j], upperBoundMult*meanVal[p][i][j], 1.);
+	endpoint[p][i][j] = kf.returnK0();
+
+	epgraph = kf.returnKuriePlot();
+	epgraph.SetName(TString::Format("pmt%i_x%0.1f_y%0.1f",p,posmap.getBinCenter(i), posmap.getBinCenter(j)));
+	epgraph.Write();
+
+      }
+    }
+  }
+
+  delete epfile;
+  delete fileOut;
+
+
+  ///////////////////////// Extract position maps for meanVal ///////////////////////////////
   double norm[nPMT];
   for (int p=0; p<nPMT; p++) {
     norm[p] = meanVal[p][nBinsXY/2][nBinsXY/2];
@@ -533,8 +460,8 @@ int main(int argc, char *argv[])
     for (int i=0; i<nBinsXY; i++) {
       for (int j=0; j<nBinsXY; j++) {
 	
-	if ( meanVal[p][i][j]<(0.25*norm[p]) || meanVal[p][i][j]>(5.*norm[p]) ) 
-	  meanVal[p][i][j] = (0.25*norm[p]);
+	if ( meanVal[p][i][j]<(0.1*norm[p]) || meanVal[p][i][j]>(8.*norm[p]) ) 
+	  meanVal[p][i][j] = (0.1*norm[p]);
 
       }
     }
@@ -550,9 +477,8 @@ int main(int argc, char *argv[])
   }
 
   // Write position maps to file
-  string tempMap;
-  tempMap =  getenv("POSITION_MAPS") + tempOutBase + "_" +ftos(xyBinWidth)+ "mm.dat";
-  ofstream outMap(tempMap.c_str());
+  TString mapFile = TString::Format("%s/%s_%0.1fmm.dat", getenv("POSITION_MAPS"),tempOutBase.c_str(),xyBinWidth);
+  ofstream outMap(mapFile.Data());
 
   for (int i=0; i<nBinsXY; i++) {
     for (int j=0; j<nBinsXY; j++) {
@@ -571,18 +497,111 @@ int main(int argc, char *argv[])
   outMap.close();
 
   // Write norms to file
-  string tempNorm;
-  tempNorm =  getenv("POSITION_MAPS") + std::string("norm_") + tempOutBase + "_" +ftos(xyBinWidth)+ "mm.dat";
-  ofstream outNorm(tempNorm.c_str());
+  TString normFile = TString::Format("%s/norm_%s_%0.1fmm.dat", getenv("POSITION_MAPS"),tempOutBase.c_str(),xyBinWidth);
+  ofstream outNorm(normFile.Data());
 
   for (int p=0; p<nPMT; p++) {
     outNorm << norm[p] << endl;
   }
   outNorm.close();
 
-  // Write output ntuple
-  fileOut->Write();
-  delete fileOut;
+  ///////////////////////// Extract position maps for peaks ///////////////////////////////
+
+  for (int p=0; p<nPMT; p++) {
+    norm[p] = fitMean[p][nBinsXY/2][nBinsXY/2];
+    cout << norm[p] << endl;
+  }
+
+  //Checking for weird outliers
+  for (int p=0; p<nPMT; p++) {
+    for (int i=0; i<nBinsXY; i++) {
+      for (int j=0; j<nBinsXY; j++) {
+	
+	if ( fitMean[p][i][j]<(0.1*norm[p]) || fitMean[p][i][j]>(8.*norm[p]) ) 
+	  fitMean[p][i][j] = (0.1*norm[p]);
+
+      }
+    }
+  }
+
+  for (int p=0; p<nPMT; p++) {
+    for (int i=0; i<nBinsXY; i++) {
+      for (int j=0; j<nBinsXY; j++) {
+        positionMap[p][i][j] = fitMean[p][i][j] / norm[p];
+      }
+    }
+  }
+
+  // Write position maps to file
+  mapFile = TString::Format("%s/%s_%0.1fmm_peakFits.dat", getenv("POSITION_MAPS"),tempOutBase.c_str(),xyBinWidth);
+  outMap.open(mapFile.Data());
+  
+
+  for (int i=0; i<nBinsXY; i++) {
+    for (int j=0; j<nBinsXY; j++) {
+      outMap << posmap.getBinCenter(i) << "  "
+             << posmap.getBinCenter(j) << "  "
+             << positionMap[0][i][j] << "  "
+             << positionMap[1][i][j] << "  "
+             << positionMap[2][i][j] << "  "
+             << positionMap[3][i][j] << "  "
+             << positionMap[4][i][j] << "  "
+             << positionMap[5][i][j] << "  "
+             << positionMap[6][i][j] << "  "
+             << positionMap[7][i][j] << endl;
+    }
+  }
+  outMap.close();
+
+
+  ///////////////////////// Extract position maps for endpoints ///////////////////////////////
+
+  for (int p=0; p<nPMT; p++) {
+    norm[p] = endpoint[p][nBinsXY/2][nBinsXY/2];
+    cout << norm[p] << endl;
+  }
+
+  //Checking for weird outliers
+  for (int p=0; p<nPMT; p++) {
+    for (int i=0; i<nBinsXY; i++) {
+      for (int j=0; j<nBinsXY; j++) {
+	
+	if ( endpoint[p][i][j]<(0.1*norm[p]) || endpoint[p][i][j]>(8.*norm[p]) ) 
+	  endpoint[p][i][j] = (0.1*norm[p]);
+
+      }
+    }
+  }
+
+  for (int p=0; p<nPMT; p++) {
+    for (int i=0; i<nBinsXY; i++) {
+      for (int j=0; j<nBinsXY; j++) {
+        positionMap[p][i][j] = endpoint[p][i][j] / norm[p];
+      }
+    }
+  }
+
+  // Write position maps to file
+  mapFile = TString::Format("%s/%s_%0.1fmm_endpoints.dat", getenv("POSITION_MAPS"),tempOutBase.c_str(),xyBinWidth);
+  outMap.open(mapFile.Data());
+
+  for (int i=0; i<nBinsXY; i++) {
+    for (int j=0; j<nBinsXY; j++) {
+      outMap << posmap.getBinCenter(i) << "  "
+             << posmap.getBinCenter(j) << "  "
+             << positionMap[0][i][j] << "  "
+             << positionMap[1][i][j] << "  "
+             << positionMap[2][i][j] << "  "
+             << positionMap[3][i][j] << "  "
+             << positionMap[4][i][j] << "  "
+             << positionMap[5][i][j] << "  "
+             << positionMap[6][i][j] << "  "
+             << positionMap[7][i][j] << endl;
+    }
+  }
+  outMap.close();
+
+
 
   return 0;
 }

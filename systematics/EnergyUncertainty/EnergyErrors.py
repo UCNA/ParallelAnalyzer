@@ -11,8 +11,9 @@ from CorrectionsPlotter import *
 # These are the error envelopes
 limdat = {2008:[(0,5.0),(250,5.0),(500,500*0.013),(900,900*0.025),(1000,1000*0.025),(1200,1200*0.025)],
           2010:[(0,2.5),(200,200*0.0125),(500,500*0.0125),(1000,500*0.0125)],
-          2011:[(0,0.017*130.3),(130.3,130.3*0.017),(368.49,0.010*368.49),(993.789,993.789*0.007),(1200,993.789*0.007)], 
-          2012:[(0,0.017*130.3),(130.3,130.3*0.017),(368.49,0.010*368.49),(993.789,993.789*0.007),(1200,993.789*0.007)]} 
+          2011:[(0,0.017*130.3),(130.3,130.3*0.017),(368.49,0.010*368.49),(993.789,993.789*0.0065),(1200,993.789*0.0065)], 
+          #2012:[(0,0.017*130.3),(130.3,130.3*0.017),(368.49,0.010*368.49),(993.789,993.789*0.007),(1200,993.789*0.007)],
+          2012:[(0,0.017*130.3+10.),(130.3,130.3*0.017+10.),(368.49,0.010*368.49+10.),(993.789,993.789*0.0065+10.),(1200,993.789*0.0065+10.)]} 
 
 def calEnvelope(E,year=2011):	
 	i = 0
@@ -60,11 +61,11 @@ def ObsAsymApprox(KE,year):
         
         elif year==2011:
                 A0 = .1184
-                p2 = .981503
-                p3 = 0.00014424
-                p4 = -28.5865
-                p5 = 12.5845
-                p6 = 199.061
+                p2 = 1.00231
+                p3 = 0.0000886218
+                p4 = 50.1891
+                p5 = 0.983511
+                p6 = -3.60345
 
         elif year==2012:
                 A0 = .1184
@@ -89,6 +90,7 @@ def simpleAsym(KE,year):
 def energyErrorA(E,year):
 	Eprim = E+calEnvelope(E,year)
 	return ObsAsymApprox(Eprim,year)/ObsAsymApprox(E,year)-1.#simpleAsym(Eprim,year)/simpleAsym(E,year)-1.
+
 
 def energyErrorSimple(E,year):
 	Eprim = E+calEnvelope(E,year)
@@ -116,6 +118,26 @@ def linearityUncertaintyTable(year=2011):
                 #print c,Eprim,simpleAsym(c,year),err,errmax
 	dat = dat[::-1]
 	fout = open(baseOutPath+"/Corrections/EnergyLinearityUncertainty_%i.txt"%year,"w")
+	fout.write("# Uncertainty from energy calibration linearity envelope for %i data\n"%year)
+	writeUncertaintyTable(fout,dat)
+
+def gainUncertaintyTable(year=2011,gainErr=0.005):
+	"""Uncertainty due to gain calibration errors; see EnergyErrorsRevis.pdf"""
+	edges = bin_edges()
+	dat = []
+	errmax = 0
+	for i in range(len(edges)-1)[-1::-1]:
+		c = 0.5*(edges[i]+edges[i+1])
+		Eprim = c+gainErr*c
+		err = ObsAsymApprox(Eprim,year)/ObsAsymApprox(c,year)-1
+		if err > errmax:
+			errmax = err
+		#dat.append((edges[i],edges[i+1],0.0,errmax))
+		dat.append((edges[i],edges[i+1],0.0,err))
+		print c,Eprim,ObsAsymApprox(c,year),err,errmax
+                #print c,Eprim,simpleAsym(c,year),err,errmax
+	dat = dat[::-1]
+	fout = open(baseOutPath+"/Corrections/gainUncertainty_%i.txt"%year,"w")
 	fout.write("# Uncertainty from energy calibration linearity envelope for %i data\n"%year)
 	writeUncertaintyTable(fout,dat)
 
@@ -192,8 +214,9 @@ def plotGainfluctErrors():
 
 
 if __name__=="__main__":
-	year = 2010
+	year = 2012
+        gainUncertaintyTable(year,0.0064)
 	#linearityUncertaintyTable(year)
 	#gainFluctsUncertaintyTable()
-	plotEnergyErrors(year)
+	#plotEnergyErrors(year)
 	#plotGainfluctErrors()

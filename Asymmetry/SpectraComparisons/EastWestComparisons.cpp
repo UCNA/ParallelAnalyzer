@@ -19,7 +19,7 @@
 #include <TLegend.h>
 #include <TPaveText.h>
 
-std::vector <Int_t> badOct = {7,9,59,60,61,62,63,64,65,66}; 
+std::vector <Int_t> badOct = {7,9,59,60,61,62,63,64,65,66,67,91,93,101,107,121}; 
 
 int main(int argc, char *argv[])
 {
@@ -53,10 +53,13 @@ int main(int argc, char *argv[])
 
   Double_t totalTimeON_E, totalTimeON_W, totalTimeOFF_E, totalTimeOFF_W;
   totalTimeON_E = totalTimeON_W = totalTimeOFF_E = totalTimeOFF_W = 0.;
-  
+
+  Double_t totalBGTimeON_E, totalBGTimeON_W, totalBGTimeOFF_E, totalBGTimeOFF_W;
+  totalBGTimeON_E = totalBGTimeON_W = totalBGTimeOFF_E = totalBGTimeOFF_W = 0.;
+ 
   //Count vectors for holding all of the total (BG subtracted) counts for each spin state
 
-  //type0=0, type1=1, type23=2, ALL=3
+  //type0=0, type1=1, type2=2, type3=3 ALL=4
   std::vector <std::vector <double> > W_TotalCountsON(5, std::vector <double>(numBins,0.)); 
   std::vector <std::vector <double> > W_TotalErrorON(5, std::vector <double>(numBins,0.));
   std::vector <std::vector <double> > W_TotalCountsOFF(5, std::vector <double>(numBins,0.)); 
@@ -66,6 +69,18 @@ int main(int argc, char *argv[])
   std::vector <std::vector <double> > E_TotalErrorON(5, std::vector <double>(numBins,0.));
   std::vector <std::vector <double> > E_TotalCountsOFF(5, std::vector <double>(numBins,0.)); 
   std::vector <std::vector <double> > E_TotalErrorOFF(5, std::vector <double>(numBins,0.));
+
+  std::vector <std::vector <double> > W_BGTotalCountsON(5, std::vector <double>(numBins,0.)); 
+  std::vector <std::vector <double> > W_BGTotalErrorON(5, std::vector <double>(numBins,0.));
+  std::vector <std::vector <double> > W_BGTotalCountsOFF(5, std::vector <double>(numBins,0.)); 
+  std::vector <std::vector <double> > W_BGTotalErrorOFF(5, std::vector <double>(numBins,0.));
+
+  std::vector <std::vector <double> > E_BGTotalCountsON(5, std::vector <double>(numBins,0.)); 
+  std::vector <std::vector <double> > E_BGTotalErrorON(5, std::vector <double>(numBins,0.));
+  std::vector <std::vector <double> > E_BGTotalCountsOFF(5, std::vector <double>(numBins,0.)); 
+  std::vector <std::vector <double> > E_BGTotalErrorOFF(5, std::vector <double>(numBins,0.));
+
+  
   
 
   for (int octetNum=octetNumStart; octetNum<octetNumEnd+1; octetNum++) {
@@ -102,27 +117,31 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  E_TotalCountsOFF[4][bin] += (fg - bg)*time;
+	  E_BGTotalCountsOFF[4][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 
 	totalTimeOFF_E += time;
+	totalBGTimeOFF_E += bg_time;
 	rateFile.close();
-	
-	
-	// Type 0 only
-	rateFile.open(TString::Format("../BinByBinComparison/%s_Erun%i_anaChD.dat", prefix.c_str(), runNumber));
-	
+
+
+	// Type 0
+	rateFile.open(TString::Format("../BinByBinComparison/%s_Erun%i_anaChD.dat", prefix.c_str(),runNumber));
 	rateFile >> txt_hold >> txt_hold >> txt_hold >> time;
 	rateFile >> txt_hold >> txt_hold >> txt_hold >> bg_time;
 	
-        bin = 0;
+	bin = 0; 
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  E_TotalCountsOFF[0][bin] += (fg - bg)*time;
+	  E_BGTotalCountsOFF[0][bin] += (bg)*bg_time;
 	  ++bin;
 	}
-	
+
 	rateFile.close();
+	
+	
 	
 	// Type 1 only
 	rateFile.open(TString::Format("../BinByBinComparison/%s_Erun%i_anaChF.dat", prefix.c_str(), runNumber));
@@ -134,6 +153,7 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  E_TotalCountsOFF[1][bin] += (fg - bg)*time;
+	  E_BGTotalCountsOFF[1][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
@@ -149,6 +169,7 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  E_TotalCountsOFF[2][bin] += (fg - bg)*time;
+	  E_BGTotalCountsOFF[2][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
@@ -164,6 +185,7 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  E_TotalCountsOFF[3][bin] += (fg - bg)*time;
+	  E_BGTotalCountsOFF[3][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
@@ -183,10 +205,12 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  W_TotalCountsOFF[4][bin] += (fg - bg)*time;
+	  W_BGTotalCountsOFF[4][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
 	totalTimeOFF_W += time;
+	totalBGTimeOFF_W += bg_time;
 	rateFile.close();
 	
 	
@@ -200,6 +224,7 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  W_TotalCountsOFF[0][bin] += (fg - bg)*time;
+	  W_BGTotalCountsOFF[0][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
@@ -215,6 +240,7 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  W_TotalCountsOFF[1][bin] += (fg - bg)*time;
+	  W_BGTotalCountsOFF[1][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
@@ -230,6 +256,7 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  W_TotalCountsOFF[2][bin] += (fg - bg)*time;
+	  W_BGTotalCountsOFF[2][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
@@ -246,6 +273,7 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  W_TotalCountsOFF[3][bin] += (fg - bg)*time;
+	  W_BGTotalCountsOFF[3][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
@@ -268,10 +296,12 @@ int main(int argc, char *argv[])
 
 	while ( rateFile >> en >> fg >> bg )  { 
 	  E_TotalCountsON[4][bin] += (fg - bg)*time;
+	  E_BGTotalCountsON[4][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 
 	totalTimeON_E += time;
+	totalBGTimeON_E += bg_time;
 	rateFile.close();
 
 
@@ -285,6 +315,7 @@ int main(int argc, char *argv[])
 
 	while ( rateFile >> en >> fg >> bg )  { 
 	  E_TotalCountsON[0][bin] += (fg - bg)*time;
+	  E_BGTotalCountsON[0][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 
@@ -300,6 +331,7 @@ int main(int argc, char *argv[])
 
 	while ( rateFile >> en >> fg >> bg )  { 
 	  E_TotalCountsON[1][bin] += (fg - bg)*time;
+	  E_BGTotalCountsON[1][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 
@@ -315,6 +347,7 @@ int main(int argc, char *argv[])
 
 	while ( rateFile >> en >> fg >> bg )  { 
 	  E_TotalCountsON[2][bin] += (fg - bg)*time;
+	  E_BGTotalCountsON[2][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 
@@ -330,6 +363,7 @@ int main(int argc, char *argv[])
 
 	while ( rateFile >> en >> fg >> bg )  { 
 	  E_TotalCountsON[3][bin] += (fg - bg)*time;
+	  E_BGTotalCountsON[3][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 
@@ -349,10 +383,12 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  W_TotalCountsON[4][bin] += (fg - bg)*time;
+	  W_BGTotalCountsON[4][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
 	totalTimeON_W += time;
+	totalBGTimeON_W += bg_time;
 	rateFile.close();
 	
 	
@@ -366,6 +402,7 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  W_TotalCountsON[0][bin] += (fg - bg)*time;
+	  W_BGTotalCountsON[0][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
@@ -381,6 +418,7 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  W_TotalCountsON[1][bin] += (fg - bg)*time;
+	  W_BGTotalCountsON[1][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
@@ -396,6 +434,7 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  W_TotalCountsON[2][bin] += (fg - bg)*time;
+	  W_BGTotalCountsON[2][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
@@ -411,6 +450,7 @@ int main(int argc, char *argv[])
 	
 	while ( rateFile >> en >> fg >> bg )  { 
 	  W_TotalCountsON[3][bin] += (fg - bg)*time;
+	  W_BGTotalCountsON[3][bin] += (bg)*bg_time;
 	  ++bin;
 	}
 	
@@ -429,13 +469,23 @@ int main(int argc, char *argv[])
       E_TotalErrorON[i][b] = sqrt( fabs(E_TotalCountsON[i][b]) );
       E_TotalErrorOFF[i][b] = sqrt( fabs(E_TotalCountsOFF[i][b]) );
       
+      W_BGTotalErrorON[i][b] = sqrt( fabs(W_BGTotalCountsON[i][b]) );
+      W_BGTotalErrorOFF[i][b] = sqrt( fabs(W_BGTotalCountsOFF[i][b]) );
+      E_BGTotalErrorON[i][b] = sqrt( fabs(E_BGTotalCountsON[i][b]) );
+      E_BGTotalErrorOFF[i][b] = sqrt( fabs(E_BGTotalCountsOFF[i][b]) );
+      
     }
   }
   
   // Calculate the super-sum in every bin
   std::vector <std::vector <double> > data_SuperSum(5, std::vector <double>(numBins,0.)); 
   std::vector <std::vector <double> > data_SuperSumError(5, std::vector <double>(numBins,0.)); 
+
+  std::vector <std::vector <double> > BGdata_SuperSum(5, std::vector <double>(numBins,0.)); 
+  std::vector <std::vector <double> > BGdata_SuperSumError(5, std::vector <double>(numBins,0.)); 
   
+
+  // First for data
   for ( unsigned int i=0; i<5; ++i ) {
     for ( unsigned int b = 0; b<120; ++b ) {
       
@@ -477,6 +527,52 @@ int main(int argc, char *argv[])
       
     }
   }
+
+  // Now for BG
+
+  if ( !sim ) {
+    for ( unsigned int i=0; i<5; ++i ) {
+      for ( unsigned int b = 0; b<120; ++b ) {
+	
+	double sfON[2]={0.};
+	double sfOFF[2]={0.};
+	double sfON_err[2]={0.};
+	double sfOFF_err[2]={0.};
+	
+	
+	// AFP Off
+	sfOFF[0] = E_BGTotalCountsOFF[i][b] / totalBGTimeOFF_E;
+	sfOFF_err[0] = E_BGTotalErrorOFF[i][b] / totalBGTimeOFF_E;
+	
+	sfOFF[1] = W_BGTotalCountsOFF[i][b] / totalBGTimeOFF_W;
+	sfOFF_err[1] = W_BGTotalErrorOFF[i][b] / totalBGTimeOFF_W;
+	
+	// AFP ON
+	sfON[0] = E_BGTotalCountsON[i][b] / totalBGTimeON_E;
+	sfON_err[0] = E_BGTotalErrorON[i][b] / totalBGTimeON_E;
+	
+	sfON[1] = W_BGTotalCountsON[i][b] / totalBGTimeON_W;
+	sfON_err[1] = W_BGTotalErrorON[i][b] / totalBGTimeON_W;
+	
+	
+	
+	//The geometric mean as defined by http://www.arpapress.com/Volumes/Vol11Issue3/IJRRAS_11_3_08.pdf
+	double R1 = (sfON[1]>0. && sfOFF[0]>0.) ? sqrt(sfOFF[0]*sfON[1]) : (sfON[1]<0. && sfOFF[0]<0.) ? -sqrt(sfOFF[0]*sfON[1]) : 0.5*(sfOFF[0]+sfON[1]); 
+	double R2 = (sfON[0]>0. && sfOFF[1]>0.) ? sqrt(sfOFF[1]*sfON[0]) : (sfON[0]<0. && sfOFF[1]<0.) ? -sqrt(sfOFF[1]*sfON[0]) : 0.5*(sfOFF[1]+sfON[0]);
+	double deltaR1 = ( ( (sfON[1]>0. && sfOFF[0]>0.) || (sfON[1]<0. && sfOFF[0]<0.) ) ? 0.5*sqrt((power(sfOFF[0]*sfON_err[1],2)+power(sfON[1]*sfOFF_err[0],2))/(sfON[1]*sfOFF[0])) : 
+			   0.5*sqrt( power(sfON_err[1],2) + power(sfOFF_err[0],2) ) );
+	double deltaR2 = ((sfON[0]>0. && sfOFF[1]>0.) || (sfON[0]<0. && sfOFF[1]<0.)) ? 0.5*sqrt((power(sfOFF[1]*sfON_err[0],2)+power(sfON[0]*sfOFF_err[1],2))/(sfON[0]*sfOFF[1])) : 
+	  0.5*sqrt(power(sfON_err[0],2) + power(sfOFF_err[1],2));
+	
+	BGdata_SuperSum[i][b] = R1 + R2;
+	//std::cout << sfOFF[0] << " " << sfOFF_err[0] << std::endl;
+	BGdata_SuperSumError[i][b] = sqrt(power(deltaR1,2) + power(deltaR2,2));
+	
+	//std::cout << data_SuperSum[i][b] << "\t" << data_SuperSumError[i][b] << "\n";
+	
+      }
+    }
+  }
   
   TFile *f2 = new TFile(TString::Format("Octets_%i-%i_%s.root", octetNumStart, octetNumEnd, sim?"SIM":"DATA"),"RECREATE");
   
@@ -490,6 +586,17 @@ int main(int argc, char *argv[])
   Erecon3.GetXaxis()->SetTitle("Energy (keV)");
   TH1D EreconALL("EreconALL","Type ALL Super-Sum",numBins,0.,1200.);
   EreconALL.GetXaxis()->SetTitle("Energy (keV)");
+
+  TH1D BG_Erecon0("BG_Erecon0","Type 0 Super-Sum",numBins,0.,1200.);
+  BG_Erecon0.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon1("BG_Erecon1","Type 1 Super-Sum",numBins,0.,1200.);
+  BG_Erecon1.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon2("BG_Erecon2","Type 2 Super-Sum",numBins,0.,1200.);
+  BG_Erecon2.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon3("BG_Erecon3","Type 3 Super-Sum",numBins,0.,1200.);
+  BG_Erecon3.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_EreconALL("BG_EreconALL","Type ALL Super-Sum",numBins,0.,1200.);
+  BG_EreconALL.GetXaxis()->SetTitle("Energy (keV)");
   
   for (int bin=0; bin<numBins; bin++) {
     Erecon0.SetBinContent(bin+1,100.*data_SuperSum[0][bin]);
@@ -503,7 +610,20 @@ int main(int argc, char *argv[])
     Erecon2.SetBinError(bin+1,100.*data_SuperSumError[2][bin]);
     Erecon3.SetBinError(bin+1,100.*data_SuperSumError[3][bin]);
     EreconALL.SetBinError(bin+1,100.*data_SuperSumError[4][bin]);
-    
+
+    if (!sim) {
+      BG_Erecon0.SetBinContent(bin+1,100.*BGdata_SuperSum[0][bin]);
+      BG_Erecon1.SetBinContent(bin+1,100.*BGdata_SuperSum[1][bin]);
+      BG_Erecon2.SetBinContent(bin+1,100.*BGdata_SuperSum[2][bin]);
+      BG_Erecon3.SetBinContent(bin+1,100.*BGdata_SuperSum[3][bin]);
+      BG_EreconALL.SetBinContent(bin+1,100.*BGdata_SuperSum[4][bin]);
+      
+      BG_Erecon0.SetBinError(bin+1,100.*BGdata_SuperSumError[0][bin]);
+      BG_Erecon1.SetBinError(bin+1,100.*BGdata_SuperSumError[1][bin]);
+      BG_Erecon2.SetBinError(bin+1,100.*BGdata_SuperSumError[2][bin]);
+      BG_Erecon3.SetBinError(bin+1,100.*BGdata_SuperSumError[3][bin]);
+      BG_EreconALL.SetBinError(bin+1,100.*BGdata_SuperSumError[4][bin]);
+    }
   }
 
   TH1D Erecon0_sfOFF_E("Erecon0_sfOFF_E","East Type 0 Spin Flipper OFF",numBins,0.,1200.);
@@ -516,6 +636,17 @@ int main(int argc, char *argv[])
   Erecon3_sfOFF_E.GetXaxis()->SetTitle("Energy (keV)");
   TH1D EreconALL_sfOFF_E("EreconALL_sfOFF_E","East Type ALL Spin Flipper OFF",numBins,0.,1200.);
   EreconALL_sfOFF_E.GetXaxis()->SetTitle("Energy (keV)");
+
+  TH1D BG_Erecon0_sfOFF_E("BG_Erecon0_sfOFF_E","East Type 0 Spin Flipper OFF",numBins,0.,1200.);
+  BG_Erecon0_sfOFF_E.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon1_sfOFF_E("BG_Erecon1_sfOFF_E","East Type 1 Spin Flipper OFF",numBins,0.,1200.);
+  BG_Erecon1_sfOFF_E.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon2_sfOFF_E("BG_Erecon2_sfOFF_E","East Type 2 Spin Flipper OFF",numBins,0.,1200.);
+  BG_Erecon2_sfOFF_E.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon3_sfOFF_E("BG_Erecon3_sfOFF_E","East Type 3 Spin Flipper OFF",numBins,0.,1200.);
+  BG_Erecon3_sfOFF_E.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_EreconALL_sfOFF_E("BG_EreconALL_sfOFF_E","East Type ALL Spin Flipper OFF",numBins,0.,1200.);
+  BG_EreconALL_sfOFF_E.GetXaxis()->SetTitle("Energy (keV)");
   
   for (int bin=0; bin<numBins; bin++) {
     Erecon0_sfOFF_E.SetBinContent(bin+1,100.*E_TotalCountsOFF[0][bin]/totalTimeOFF_E);
@@ -529,7 +660,20 @@ int main(int argc, char *argv[])
     Erecon2_sfOFF_E.SetBinError(bin+1,100.*E_TotalErrorOFF[2][bin]/totalTimeOFF_E);
     Erecon3_sfOFF_E.SetBinError(bin+1,100.*E_TotalErrorOFF[3][bin]/totalTimeOFF_E);
     EreconALL_sfOFF_E.SetBinError(bin+1,100.*E_TotalErrorOFF[4][bin]/totalTimeOFF_E);
-    
+
+    if (!sim) {
+      BG_Erecon0_sfOFF_E.SetBinContent(bin+1,100.*E_BGTotalCountsOFF[0][bin]/totalBGTimeOFF_E);
+      BG_Erecon1_sfOFF_E.SetBinContent(bin+1,100.*E_BGTotalCountsOFF[1][bin]/totalBGTimeOFF_E);
+      BG_Erecon2_sfOFF_E.SetBinContent(bin+1,100.*E_BGTotalCountsOFF[2][bin]/totalBGTimeOFF_E);
+      BG_Erecon3_sfOFF_E.SetBinContent(bin+1,100.*E_BGTotalCountsOFF[3][bin]/totalBGTimeOFF_E);
+      BG_EreconALL_sfOFF_E.SetBinContent(bin+1,100.*E_BGTotalCountsOFF[4][bin]/totalBGTimeOFF_E);
+      
+      BG_Erecon0_sfOFF_E.SetBinError(bin+1,100.*E_BGTotalErrorOFF[0][bin]/totalBGTimeOFF_E);
+      BG_Erecon1_sfOFF_E.SetBinError(bin+1,100.*E_BGTotalErrorOFF[1][bin]/totalBGTimeOFF_E);
+      BG_Erecon2_sfOFF_E.SetBinError(bin+1,100.*E_BGTotalErrorOFF[2][bin]/totalBGTimeOFF_E);
+      BG_Erecon3_sfOFF_E.SetBinError(bin+1,100.*E_BGTotalErrorOFF[3][bin]/totalBGTimeOFF_E);
+      BG_EreconALL_sfOFF_E.SetBinError(bin+1,100.*E_BGTotalErrorOFF[4][bin]/totalBGTimeOFF_E);
+    }
   }
 
   TH1D Erecon0_sfOFF_W("Erecon0_sfOFF_W","West Type 0 Spin Flipper OFF",numBins,0.,1200.);
@@ -542,6 +686,17 @@ int main(int argc, char *argv[])
   Erecon3_sfOFF_W.GetXaxis()->SetTitle("Energy (keV)");
   TH1D EreconALL_sfOFF_W("EreconALL_sfOFF_W","West Type ALL Spin Flipper OFF",numBins,0.,1200.);
   EreconALL_sfOFF_W.GetXaxis()->SetTitle("Energy (keV)");
+
+  TH1D BG_Erecon0_sfOFF_W("BG_Erecon0_sfOFF_W","West Type 0 Spin Flipper OFF",numBins,0.,1200.);
+  BG_Erecon0_sfOFF_W.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon1_sfOFF_W("BG_Erecon1_sfOFF_W","West Type 1 Spin Flipper OFF",numBins,0.,1200.);
+  BG_Erecon1_sfOFF_W.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon2_sfOFF_W("BG_Erecon2_sfOFF_W","West Type 2 Spin Flipper OFF",numBins,0.,1200.);
+  BG_Erecon2_sfOFF_W.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon3_sfOFF_W("BG_Erecon3_sfOFF_W","West Type 3 Spin Flipper OFF",numBins,0.,1200.);
+  BG_Erecon3_sfOFF_W.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_EreconALL_sfOFF_W("BG_EreconALL_sfOFF_W","West Type ALL Spin Flipper OFF",numBins,0.,1200.);
+  BG_EreconALL_sfOFF_W.GetXaxis()->SetTitle("Energy (keV)");
   
   for (int bin=0; bin<numBins; bin++) {
     Erecon0_sfOFF_W.SetBinContent(bin+1,100.*W_TotalCountsOFF[0][bin]/totalTimeOFF_W);
@@ -555,7 +710,20 @@ int main(int argc, char *argv[])
     Erecon2_sfOFF_W.SetBinError(bin+1,100.*W_TotalErrorOFF[2][bin]/totalTimeOFF_W);
     Erecon3_sfOFF_W.SetBinError(bin+1,100.*W_TotalErrorOFF[3][bin]/totalTimeOFF_W);
     EreconALL_sfOFF_W.SetBinError(bin+1,100.*W_TotalErrorOFF[4][bin]/totalTimeOFF_W);
-    
+
+    if (!sim) {
+      BG_Erecon0_sfOFF_W.SetBinContent(bin+1,100.*W_BGTotalCountsOFF[0][bin]/totalBGTimeOFF_W);
+      BG_Erecon1_sfOFF_W.SetBinContent(bin+1,100.*W_BGTotalCountsOFF[1][bin]/totalBGTimeOFF_W);
+      BG_Erecon2_sfOFF_W.SetBinContent(bin+1,100.*W_BGTotalCountsOFF[2][bin]/totalBGTimeOFF_W);
+      BG_Erecon3_sfOFF_W.SetBinContent(bin+1,100.*W_BGTotalCountsOFF[3][bin]/totalBGTimeOFF_W);
+      BG_EreconALL_sfOFF_W.SetBinContent(bin+1,100.*W_BGTotalCountsOFF[4][bin]/totalBGTimeOFF_W);
+      
+      BG_Erecon0_sfOFF_W.SetBinError(bin+1,100.*W_BGTotalErrorOFF[0][bin]/totalBGTimeOFF_W);
+      BG_Erecon1_sfOFF_W.SetBinError(bin+1,100.*W_BGTotalErrorOFF[1][bin]/totalBGTimeOFF_W);
+      BG_Erecon2_sfOFF_W.SetBinError(bin+1,100.*W_BGTotalErrorOFF[2][bin]/totalBGTimeOFF_W);
+      BG_Erecon3_sfOFF_W.SetBinError(bin+1,100.*W_BGTotalErrorOFF[3][bin]/totalBGTimeOFF_W);
+      BG_EreconALL_sfOFF_W.SetBinError(bin+1,100.*W_BGTotalErrorOFF[4][bin]/totalBGTimeOFF_W);
+    }
   }
 
   TH1D Erecon0_sfON_E("Erecon0_sfON_E","East Type 0 Spin Flipper ON",numBins,0.,1200.);
@@ -568,6 +736,17 @@ int main(int argc, char *argv[])
   Erecon3_sfON_E.GetXaxis()->SetTitle("Energy (keV)");
   TH1D EreconALL_sfON_E("EreconALL_sfON_E","East Type ALL Spin Flipper ON",numBins,0.,1200.);
   EreconALL_sfON_E.GetXaxis()->SetTitle("Energy (keV)");
+
+  TH1D BG_Erecon0_sfON_E("BG_Erecon0_sfON_E","East Type 0 Spin Flipper ON",numBins,0.,1200.);
+  BG_Erecon0_sfON_E.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon1_sfON_E("BG_Erecon1_sfON_E","East Type 1 Spin Flipper ON",numBins,0.,1200.);
+  BG_Erecon1_sfON_E.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon2_sfON_E("BG_Erecon2_sfON_E","East Type 2 Spin Flipper ON",numBins,0.,1200.);
+  BG_Erecon2_sfON_E.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon3_sfON_E("BG_Erecon3_sfON_E","East Type 3 Spin Flipper ON",numBins,0.,1200.);
+  BG_Erecon3_sfON_E.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_EreconALL_sfON_E("BG_EreconALL_sfON_E","East Type ALL Spin Flipper ON",numBins,0.,1200.);
+  BG_EreconALL_sfON_E.GetXaxis()->SetTitle("Energy (keV)");
   
   for (int bin=0; bin<numBins; bin++) {
     Erecon0_sfON_E.SetBinContent(bin+1,100.*E_TotalCountsON[0][bin]/totalTimeON_E);
@@ -581,6 +760,20 @@ int main(int argc, char *argv[])
     Erecon2_sfON_E.SetBinError(bin+1,100.*E_TotalErrorON[2][bin]/totalTimeON_E);
     Erecon3_sfON_E.SetBinError(bin+1,100.*E_TotalErrorON[3][bin]/totalTimeON_E);
     EreconALL_sfON_E.SetBinError(bin+1,100.*E_TotalErrorON[4][bin]/totalTimeON_E);
+
+    if ( !sim ) {
+      BG_Erecon0_sfON_E.SetBinContent(bin+1,100.*E_BGTotalCountsON[0][bin]/totalBGTimeON_E);
+      BG_Erecon1_sfON_E.SetBinContent(bin+1,100.*E_BGTotalCountsON[1][bin]/totalBGTimeON_E);
+      BG_Erecon2_sfON_E.SetBinContent(bin+1,100.*E_BGTotalCountsON[2][bin]/totalBGTimeON_E);
+      BG_Erecon3_sfON_E.SetBinContent(bin+1,100.*E_BGTotalCountsON[3][bin]/totalBGTimeON_E);
+      BG_EreconALL_sfON_E.SetBinContent(bin+1,100.*E_BGTotalCountsON[4][bin]/totalBGTimeON_E);
+      
+      BG_Erecon0_sfON_E.SetBinError(bin+1,100.*E_BGTotalErrorON[0][bin]/totalBGTimeON_E);
+      BG_Erecon1_sfON_E.SetBinError(bin+1,100.*E_BGTotalErrorON[1][bin]/totalBGTimeON_E);
+      BG_Erecon2_sfON_E.SetBinError(bin+1,100.*E_BGTotalErrorON[2][bin]/totalBGTimeON_E);
+      BG_Erecon3_sfON_E.SetBinError(bin+1,100.*E_BGTotalErrorON[3][bin]/totalBGTimeON_E);
+      BG_EreconALL_sfON_E.SetBinError(bin+1,100.*E_BGTotalErrorON[4][bin]/totalBGTimeON_E);
+    }
     
   }
 
@@ -595,6 +788,17 @@ int main(int argc, char *argv[])
   TH1D EreconALL_sfON_W("EreconALL_sfON_W","West Type ALL Spin Flipper ON",numBins,0.,1200.);
   EreconALL_sfON_W.GetXaxis()->SetTitle("Energy (keV)");
   
+  TH1D BG_Erecon0_sfON_W("BG_Erecon0_sfON_W","West Type 0 Spin Flipper ON",numBins,0.,1200.);
+  BG_Erecon0_sfON_W.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon1_sfON_W("BG_Erecon1_sfON_W","West Type 1 Spin Flipper ON",numBins,0.,1200.);
+  BG_Erecon1_sfON_W.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon2_sfON_W("BG_Erecon2_sfON_W","West Type 2 Spin Flipper ON",numBins,0.,1200.);
+  BG_Erecon2_sfON_W.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_Erecon3_sfON_W("BG_Erecon3_sfON_W","West Type 3 Spin Flipper ON",numBins,0.,1200.);
+  BG_Erecon3_sfON_W.GetXaxis()->SetTitle("Energy (keV)");
+  TH1D BG_EreconALL_sfON_W("BG_EreconALL_sfON_W","West Type ALL Spin Flipper ON",numBins,0.,1200.);
+  BG_EreconALL_sfON_W.GetXaxis()->SetTitle("Energy (keV)");
+  
   for (int bin=0; bin<numBins; bin++) {
     Erecon0_sfON_W.SetBinContent(bin+1,100.*W_TotalCountsON[0][bin]/totalTimeON_W);
     Erecon1_sfON_W.SetBinContent(bin+1,100.*W_TotalCountsON[1][bin]/totalTimeON_W);
@@ -607,6 +811,20 @@ int main(int argc, char *argv[])
     Erecon2_sfON_W.SetBinError(bin+1,100.*W_TotalErrorON[2][bin]/totalTimeON_W);
     Erecon3_sfON_W.SetBinError(bin+1,100.*W_TotalErrorON[3][bin]/totalTimeON_W);
     EreconALL_sfON_W.SetBinError(bin+1,100.*W_TotalErrorON[4][bin]/totalTimeON_W);
+    
+    if ( !sim ) {
+      BG_Erecon0_sfON_W.SetBinContent(bin+1,100.*W_BGTotalCountsON[0][bin]/totalBGTimeON_W);
+      BG_Erecon1_sfON_W.SetBinContent(bin+1,100.*W_BGTotalCountsON[1][bin]/totalBGTimeON_W);
+      BG_Erecon2_sfON_W.SetBinContent(bin+1,100.*W_BGTotalCountsON[2][bin]/totalBGTimeON_W);
+      BG_Erecon3_sfON_W.SetBinContent(bin+1,100.*W_BGTotalCountsON[3][bin]/totalBGTimeON_W);
+      BG_EreconALL_sfON_W.SetBinContent(bin+1,100.*W_BGTotalCountsON[4][bin]/totalBGTimeON_W);
+      
+      BG_Erecon0_sfON_W.SetBinError(bin+1,100.*W_BGTotalErrorON[0][bin]/totalBGTimeON_W);
+      BG_Erecon1_sfON_W.SetBinError(bin+1,100.*W_BGTotalErrorON[1][bin]/totalBGTimeON_W);
+      BG_Erecon2_sfON_W.SetBinError(bin+1,100.*W_BGTotalErrorON[2][bin]/totalBGTimeON_W);
+      BG_Erecon3_sfON_W.SetBinError(bin+1,100.*W_BGTotalErrorON[3][bin]/totalBGTimeON_W);
+      BG_EreconALL_sfON_W.SetBinError(bin+1,100.*W_BGTotalErrorON[4][bin]/totalBGTimeON_W);
+    }
     
   }
     

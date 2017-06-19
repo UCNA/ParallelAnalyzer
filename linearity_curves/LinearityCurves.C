@@ -141,14 +141,14 @@ void LinearityCurves(Int_t runPeriod, bool useTanh=false)
 	 >> ADC_hold[0] >> ADC_hold[1] >> ADC_hold[2] >> ADC_hold[3]
 	 >> ADC_hold[4] >> ADC_hold[5] >> ADC_hold[6] >> ADC_hold[7]) {
 
-    adcE1[i] = TMath::IsNaN(atof(ADC_hold[0].Data())) || atof(ADC_hold[0].Data())<0.01 ? -10000. : atof(ADC_hold[0].Data()); // if these are bad, we make them -10000
-    adcE2[i] = TMath::IsNaN(atof(ADC_hold[1].Data())) || atof(ADC_hold[1].Data())<0.01 ? -10000. : atof(ADC_hold[1].Data()); // so that they don't affect the fits right away and have
-    adcE3[i] = TMath::IsNaN(atof(ADC_hold[2].Data())) || atof(ADC_hold[2].Data())<0.01 ? -10000. : atof(ADC_hold[2].Data()); // a chance to recover on the next go around
-    adcE4[i] = TMath::IsNaN(atof(ADC_hold[3].Data())) || atof(ADC_hold[3].Data())<0.01 ? -10000. : atof(ADC_hold[3].Data());
-    adcW1[i] = TMath::IsNaN(atof(ADC_hold[4].Data())) || atof(ADC_hold[4].Data())<0.01 ? -10000. : atof(ADC_hold[4].Data());
-    adcW2[i] = TMath::IsNaN(atof(ADC_hold[5].Data())) || atof(ADC_hold[5].Data())<0.01 ? -10000. : atof(ADC_hold[5].Data());
-    adcW3[i] = TMath::IsNaN(atof(ADC_hold[6].Data())) || atof(ADC_hold[6].Data())<0.01 ? -10000. : atof(ADC_hold[6].Data());
-    adcW4[i] = TMath::IsNaN(atof(ADC_hold[7].Data())) || atof(ADC_hold[7].Data())<0.01 ? -10000. : atof(ADC_hold[7].Data());
+    adcE1[i] = TMath::IsNaN(atof(ADC_hold[0].Data())) || atof(ADC_hold[0].Data())<5.0 ? -10000. : atof(ADC_hold[0].Data()); // if these are bad, we make them -10000
+    adcE2[i] = TMath::IsNaN(atof(ADC_hold[1].Data())) || atof(ADC_hold[1].Data())<5.0 ? -10000. : atof(ADC_hold[1].Data()); // so that they don't affect the fits right away and have
+    adcE3[i] = TMath::IsNaN(atof(ADC_hold[2].Data())) || atof(ADC_hold[2].Data())<5.0 ? -10000. : atof(ADC_hold[2].Data()); // a chance to recover on the next go around
+    adcE4[i] = TMath::IsNaN(atof(ADC_hold[3].Data())) || atof(ADC_hold[3].Data())<5.0 ? -10000. : atof(ADC_hold[3].Data());
+    adcW1[i] = TMath::IsNaN(atof(ADC_hold[4].Data())) || atof(ADC_hold[4].Data())<5.0 ? -10000. : atof(ADC_hold[4].Data());
+    adcW2[i] = TMath::IsNaN(atof(ADC_hold[5].Data())) || atof(ADC_hold[5].Data())<5.0 ? -10000. : atof(ADC_hold[5].Data());
+    adcW3[i] = TMath::IsNaN(atof(ADC_hold[6].Data())) || atof(ADC_hold[6].Data())<5.0 ? -10000. : atof(ADC_hold[6].Data());
+    adcW4[i] = TMath::IsNaN(atof(ADC_hold[7].Data())) || atof(ADC_hold[7].Data())<5.0 ? -10000. : atof(ADC_hold[7].Data());
 
     while (!(run_hold==run[i] && sourceName_hold==sourceName[i])) {
       simFileIn >> run_hold >> sourceName_hold >> Eq_hold[0] >> Eq_hold[1] >> Eq_hold[2]
@@ -157,14 +157,14 @@ void LinearityCurves(Int_t runPeriod, bool useTanh=false)
     //cout << run_hold << " " << sourceName_hold << " ";
     if (run_hold==run[i] && sourceName_hold==sourceName[i]) {
       
-      EqE1[i] = TMath::IsNaN(atof(Eq_hold[0].Data())) || atof(Eq_hold[0].Data())<0.01 ? 0. : atof(Eq_hold[0].Data()); // If these are bad, we make them zero so we can see the issue
-      EqE2[i] = TMath::IsNaN(atof(Eq_hold[1].Data())) || atof(Eq_hold[1].Data())<0.01 ? 0. : atof(Eq_hold[1].Data());
-      EqE3[i] = TMath::IsNaN(atof(Eq_hold[2].Data())) || atof(Eq_hold[2].Data())<0.01 ? 0. : atof(Eq_hold[2].Data());
-      EqE4[i] = TMath::IsNaN(atof(Eq_hold[3].Data())) || atof(Eq_hold[3].Data())<0.01 ? 0. : atof(Eq_hold[3].Data());
-      EqW1[i] = TMath::IsNaN(atof(Eq_hold[4].Data())) || atof(Eq_hold[4].Data())<0.01 ? 0. : atof(Eq_hold[4].Data());
-      EqW2[i] = TMath::IsNaN(atof(Eq_hold[5].Data())) || atof(Eq_hold[5].Data())<0.01 ? 0. : atof(Eq_hold[5].Data());
-      EqW3[i] = TMath::IsNaN(atof(Eq_hold[6].Data())) || atof(Eq_hold[6].Data())<0.01 ? 0. : atof(Eq_hold[6].Data());
-      EqW4[i] = TMath::IsNaN(atof(Eq_hold[7].Data())) || atof(Eq_hold[7].Data())<0.01 ? 0. : atof(Eq_hold[7].Data());
+      EqE1[i] = TMath::IsNaN(atof(Eq_hold[0].Data())) || atof(Eq_hold[0].Data())<5.0 ? 0. : atof(Eq_hold[0].Data()); // If these are bad, we make them zero so we can see the issue
+      EqE2[i] = TMath::IsNaN(atof(Eq_hold[1].Data())) || atof(Eq_hold[1].Data())<5.0 ? 0. : atof(Eq_hold[1].Data());
+      EqE3[i] = TMath::IsNaN(atof(Eq_hold[2].Data())) || atof(Eq_hold[2].Data())<5.0 ? 0. : atof(Eq_hold[2].Data());
+      EqE4[i] = TMath::IsNaN(atof(Eq_hold[3].Data())) || atof(Eq_hold[3].Data())<5.0 ? 0. : atof(Eq_hold[3].Data());
+      EqW1[i] = TMath::IsNaN(atof(Eq_hold[4].Data())) || atof(Eq_hold[4].Data())<5.0 ? 0. : atof(Eq_hold[4].Data());
+      EqW2[i] = TMath::IsNaN(atof(Eq_hold[5].Data())) || atof(Eq_hold[5].Data())<5.0 ? 0. : atof(Eq_hold[5].Data());
+      EqW3[i] = TMath::IsNaN(atof(Eq_hold[6].Data())) || atof(Eq_hold[6].Data())<5.0 ? 0. : atof(Eq_hold[6].Data());
+      EqW4[i] = TMath::IsNaN(atof(Eq_hold[7].Data())) || atof(Eq_hold[7].Data())<5.0 ? 0. : atof(Eq_hold[7].Data());
 
 
       //simFileIn >> EqE1[i] >> EqE2[i] >> EqE3[i] >> EqE4[i]
@@ -338,14 +338,15 @@ void LinearityCurves(Int_t runPeriod, bool useTanh=false)
 
     if ( isSourceInFidCut(run[i],sourceName[i].substr(0,2), fiducialCut, 1) ) {
 
-      //if (pmtQuality[runPos][4]) {
+      //if (pmtQuality[runPos][4]) 
+      if (run[i]!=17361 && run[i]!=17360) {
       runW1.push_back(run[i]);
       EQW1.push_back(EqW1[i]);
       EQW1_err.push_back(EqW1_err[i]);
       nameW1.push_back(sourceName[i]);
       ADCW1.push_back(adcW1[i]);
       ADCW1_err.push_back(adcW1_err[i]);
-      //}
+      }
       if (run[i]<16983 || run[i]>17249) { //pmtQuality[runPos][5]) {
 	runW2.push_back(run[i]);
 	EQW2.push_back(EqW2[i]);
@@ -827,8 +828,11 @@ void LinearityCurves(Int_t runPeriod, bool useTanh=false)
     grE3->SetMaximum(maxEQ+40.);
     grE3->Draw("AP");
 
+    //fitADC->SetParLimits(0, 0., 20.);
 
     grE3->Fit("fitADC", "","", 0., maxADC+40.);
+
+    //fitADC->SetParLimits(0, -20., 20.);
 
     offset = fitADC->GetParameter(0);
     slope = fitADC->GetParameter(1);

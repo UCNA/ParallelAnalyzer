@@ -16,7 +16,7 @@ CXXFLAGS      = -O2 -Wall -fPIC -std=c++11 -g
 LD            = g++
 SOFLAGS       = -shared
 LIBS          = $(ROOTLIBS) $(ROOTGLIBS)
-CXXFLAGS     += $(ROOTCFLAGS) -I../../include
+CXXFLAGS     += $(ROOTCFLAGS) -I../../include 
 LIBS         += -lSpectrum -lMinuit
 
 objects = positionMapHandler.o calibrationTools.o MBUtils.o TriggerMap.o BetaSpectrum.o MWPCPositionResponse.o
@@ -29,6 +29,15 @@ XuanStyle_DeltaExpProcessor.exe: XuanStyle_DeltaExpProcessor.o positionMapHandle
 	$(CXX) $(CXXFLAGS) -o XuanStyle_DeltaExpProcessor.exe XuanStyle_DeltaExpProcessor.o MBUtils.o calibrationTools.o positionMapHandler.o TriggerMap.o BetaSpectrum.o ../Asymmetry/SQLinterface.o $(LIBS)
 	@echo "Done"
 
+AsymmCalculator.exe: AsymmCalculator.o BetaSpectrum.o MBUtils.o
+	$(CXX) $(CXXFLAGS) -o AsymmCalculator.exe AsymmCalculator.o BetaSpectrum.o MBUtils.o $(LIBS) 
+	@echo "Done"
+
+EventShuffle.exe: EventShuffle.o BetaSpectrum.o MBUtils.o
+	$(CXX) $(CXXFLAGS) -o EventShuffle.exe EventShuffle.o BetaSpectrum.o MBUtils.o  $(LIBS) 
+	@echo "Done"
+
+
 MBUtils.o: MBUtils.hh
 
 BetaSpectrum.o: BetaSpectrum.hh
@@ -40,6 +49,7 @@ TriggerMap.o: TriggerMap.hh MBUtils.o
 calibrationTools.o: calibrationTools.hh
 
 MWPCPositionResponse.o: MWPCPositionResponse.hh
+
 
 
 # -------------------------------------------------------------------------------

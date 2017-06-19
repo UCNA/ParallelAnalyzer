@@ -45,6 +45,8 @@ class BetaReplayManager:
         self.AnalysisResultsPath = os.getenv("ANALYSIS_RESULTS")
         self.SimAnalysisResultsPath = os.getenv("SIM_ANALYSIS_RESULTS")
         self.MPMAnalysisResultsPath = os.getenv("MPM_ANALYSIS_RESULTS")
+        self.endpointAnaDir = os.getenv("ENDPOINT_ANALYSIS")
+                
 
     def makeAllDirectories(self):
         os.system("mkdir -p %s"%os.getenv("PEDESTALS"))
@@ -73,6 +75,8 @@ class BetaReplayManager:
         os.system("mkdir -p %s/cathode_model"%self.mwpcCalPath)        
         os.system("mkdir -p %s/octets"%self.gainCathodesPath)
         os.system("mkdir -p %s/runs"%self.gainCathodesPath)
+        os.system("mkdir -p %s/FinalEndpoints"%self.endpointAnaDir)
+        os.system("mkdir -p %s/EndpointGain"%self.endpointAnaDir)
 
     def createOctetLists(self): #This creates lists of runs and type of run for each octet. There are 122 octets in the combined datasets
         octet=0
@@ -194,6 +198,28 @@ class BetaReplayManager:
                 print "Running gain_bismuth for run %i"%run
                 os.system("cd ../gain_bismuth/; ./gain_bismuth.exe %i"%run)
                 os.system("root -l -b -q '../gain_bismuth/plot_gain_bismuth.C(\"%i\")'"%run)
+        print "DONE"
+
+    def runEndpointGain(self,octet):
+    
+        print "Running endpoint gain for octet %i"%octet
+        os.system("cd ../endpointAnalysis/; ./endpointGain.exe %i"%octet)
+
+        runs = []
+         
+        filename = "All_Octets/octet_list_%i.dat"%(octet)
+        infile = open(self.octetListPath+filename,'r')
+        
+        for line in infile:      
+            words=line.split()
+            if words[0] in betaRunTypes or words[0] in bgRunTypes: # Avoids depol runs
+                runs.append(int(words[1]))
+                    
+        
+        for run in runs:
+            shutil.copy(self.endpointAnaDir+"/EndpointGain/endpointGain_octet-%i.dat"%octet,
+                        self.endpointAnaDir+"/EndpointGain/run-%i_epGain.dat"%run)
+        
         print "DONE"
 
 
@@ -319,11 +345,11 @@ class BetaReplayManager:
         print "DONE"
 
         
-    def runReplayPass3(self,runORoctet):
+    def runReplayPass3(self,runORoctet, applyEndpointGain=False):
         runs = []
         if runORoctet > 16000:
             print "Running replay_pass3 for run %i"%runORoctet
-            os.system("cd ../replay_pass3/; ./replay_pass3.exe %i"%runORoctet)
+            os.system("cd ../replay_pass3/; ./replay_pass3.exe %i %i"%(runORoctet,applyEndpointGain))
         else: 
             filename = "All_Octets/octet_list_%i.dat"%(runORoctet)
             infile = open(self.octetListPath+filename,'r')
@@ -337,7 +363,8 @@ class BetaReplayManager:
         
             for run in runs:
                 print "Running replay_pass3 for run %i"%run
-                os.system("cd ../replay_pass3/; ./replay_pass3.exe %i"%run)
+                os.system("cd ../replay_pass3/; ./replay_pass3.exe %i %i"%(run,applyEndpointGain))
+                #print("cd ../replay_pass3/; ./replay_pass3.exe %i %i"%(run,applyEndpointGain))
         print "DONE"
 
     
@@ -505,21 +532,27 @@ if __name__ == "__main__":
             beta.makeBasicHistograms(octet)
 
 
+
+    ####### Complete list of processing beta runs assuming calibration and position maps are in place
     if 1: 
-        octet_range =[109,121]#[20,28]#[45,50]#[38,40]#[0,59];
+        octet_range =[50,59]
         beta = BetaReplayManager()
         for octet in range(octet_range[0],octet_range[1]+1,1):
             #beta.findPedestals(octet)
             #beta.runReplayPass1(octet)
             #beta.findBeamDrops(octet)
             #beta.runGainBismuth(octet)
-            #beta.findTriggerFunctions(octet)
             #beta.runReplayPass2(octet)
-            beta.runReplayPass3(octet)
+            #beta.findTriggerFunctions(octet)
+            beta.runReverseCalibration(octet)
+            #beta.runReplayPass3(octet,applyEndpointGain=False)
+            #beta.runEndpointGain(octet)
+            #beta.runReplayPass3(octet,applyEndpointGain=True)
+            #beta.runWirechamberCal(octet)
+            #beta.runReplayPass3(octet,applyEndpointGain=True)
             #beta.runRootfileTranslator(octet)
             #beta.removeDepolRunFiles(octet)
-            beta.runReverseCalibration(octet)
-
+            
 
     # Wirechamber stuff
     if 0:

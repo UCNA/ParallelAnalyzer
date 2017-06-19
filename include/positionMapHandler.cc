@@ -6,10 +6,13 @@
 #include "MBUtils.hh"
 
 #include <TMath.h>
+#include <TString.h>
 
 
 
-PositionMap::PositionMap(Double_t bin_width, Double_t r_max) : binWidth(bin_width), rmax(r_max), bUseRC(useRC) {
+PositionMap::PositionMap(Double_t bin_width, Double_t r_max) : binWidth(bin_width), rmax(r_max) {
+  
+  bUseRC = false;
   
   Int_t nBinsHold = (int)(110./binWidth);
   nBinsXY = ((int)nBinsHold%2)==0 ? (int)nBinsHold+1 : (int)nBinsHold;
@@ -45,13 +48,23 @@ void PositionMap::setBinValues() {
   }
 };
 
-void PositionMap::readPositionMap(Int_t XeRunPeriod) {
+void PositionMap::readPositionMap(Int_t XeRunPeriod, TString fitType ) {
   XePeriod = XeRunPeriod;
-  std::string file = "";
-  if ( bUseRC ) file = std::string(getenv("POSITION_MAPS")) + "/position_map_" + itos(XePeriod) + "_" + "RC_123_" + ftos(binWidth) +  "mm.dat";
-  else file = std::string(getenv("POSITION_MAPS")) + "/position_map_" + itos(XePeriod) + "_" + ftos(binWidth) +  "mm.dat";
-  std::cout << "Reading position map from " << file << std::endl;
-  std::ifstream infile(file.c_str());
+
+  TString fileSuffix = ( fitType==TString("ave") ? "" :
+			 fitType==TString("peak") ? "_peakFits" :
+			 fitType==TString("endpoint") ? "_endpoints" : "wrong" ) ;
+
+  if ( fileSuffix==TString("wrong") ) { std::cout << "bad fit choice\n"; exit(1); }
+  
+  TString file;
+  if ( bUseRC ) file = TString::Format("%s/position_map_%i_RC_123_%0.1fmm%s.dat",getenv("POSITION_MAPS"),
+				       XePeriod,binWidth,fileSuffix.Data());
+  else file = TString::Format("%s/position_map_%i_%0.1fmm%s.dat",getenv("POSITION_MAPS"),
+				       XePeriod,binWidth,fileSuffix.Data());
+
+  std::cout << "Reading position map from " << file.Data() << std::endl;
+  std::ifstream infile(file.Data());
   
   Int_t binValx, binValy;
   std::vector <Double_t> p(8,0.);

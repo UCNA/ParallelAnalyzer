@@ -30,6 +30,7 @@
 #include <TString.h>
 #include <TStyle.h>
 
+const bool useEvis = true;           // Uses Evis rather than Erecon
 
 const bool useRCclasses = true;      // If this is true, we only use "good" response class 
                                      // events as defined by C. Swank (triangular MWPC responses)
@@ -154,7 +155,7 @@ void doForegroundSpectra (int octetMin, int octetMax)
   char temp[200];
 
   //Root file to output to
-  TFile *outfile = new TFile(TString::Format("ForegroundSpectra_%i-%i.root",octetMin,octetMax),"RECREATE");
+  TFile *outfile = new TFile(TString::Format("ForegroundSpectra_%i-%i%s.root",octetMin,octetMax,(useEvis?"_Evis":"")),"RECREATE");
 
   //Make all the pertinent histograms
 
@@ -228,7 +229,7 @@ void doForegroundSpectra (int octetMin, int octetMax)
     for (unsigned int n=0 ; n<nevents ; n++ ) {
       
       
-      t.getEvent(n);
+      t.getEvent(n); 
 
       if ( t.PID==1 && t.Side<2 && t.Type<4 && t.Erecon>0. ) {
 
@@ -273,7 +274,7 @@ void doForegroundSpectra (int octetMin, int octetMax)
 	if ( r2E<(fiducialCut*fiducialCut) && r2W<(fiducialCut*fiducialCut) )	  {
 		
 	  //Type 0
-	  if (t.Type==0) histOFF[0][t.Side]->Fill(t.Erecon);
+	  if (t.Type==0) histOFF[0][t.Side]->Fill( !useEvis ? t.Erecon : ( t.Side==0 ? t.EvisE : t.EvisW ) );
 	
 	  //Type 1
 	  if (t.Type==1) histOFF[1][t.Side]->Fill(t.Erecon);
@@ -381,7 +382,7 @@ void doForegroundSpectra (int octetMin, int octetMax)
 	if ( r2E<(fiducialCut*fiducialCut) && r2W<(fiducialCut*fiducialCut) )	  {
 		
 	  //Type 0
-	  if (t.Type==0) histON[0][t.Side]->Fill(t.Erecon);
+	  if (t.Type==0) histON[0][t.Side]->Fill( !useEvis ? t.Erecon : ( t.Side==0 ? t.EvisE : t.EvisW ) );
 	
 	  //Type 1
 	  if (t.Type==1) histON[1][t.Side]->Fill(t.Erecon);

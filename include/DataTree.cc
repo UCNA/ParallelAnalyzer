@@ -86,6 +86,8 @@ void DataTree::makeOutputTree(std::string outputFileName, std::string outputTree
   outputTree->Branch("Cathodes_Wy",Cathodes_Wy,"Cathodes_Wy[16]/D");
   outputTree->Branch("ScintE", &ScintE, "q1/D:q2:q3:q4:e1:de1:e2:de2:e3:de3:e4:de4:energy:denergy:nPE1:nPE2:nPE3:nPE4");
   outputTree->Branch("ScintW", &ScintW, "q1/D:q2:q3:q4:e1:de1:e2:de2:e3:de3:e4:de4:energy:denergy:nPE1:nPE2:nPE3:nPE4");
+  outputTree->Branch("ScintE_bare", &ScintE_bare, "q1/D:q2:q3:q4:e1:de1:e2:de2:e3:de3:e4:de4:energy:denergy:nPE1:nPE2:nPE3:nPE4");
+  outputTree->Branch("ScintW_bare", &ScintW_bare, "q1/D:q2:q3:q4:e1:de1:e2:de2:e3:de3:e4:de4:energy:denergy:nPE1:nPE2:nPE3:nPE4");
   outputTree->Branch("EvisE",&EvisE,"EvisE/D");
   outputTree->Branch("EvisW",&EvisW,"EvisW/D");
   outputTree->Branch("CathSumE",&CathSumE,"CathSumE/D");
@@ -205,6 +207,8 @@ void DataTree::setupInputTree(std::string inputFileName, std::string inputTreeNa
   inputTree->SetBranchAddress("Cathodes_Wy",Cathodes_Wy);
   inputTree->SetBranchAddress("ScintE", &ScintE);
   inputTree->SetBranchAddress("ScintW", &ScintW);
+  inputTree->SetBranchAddress("ScintE_bare", &ScintE_bare);
+  inputTree->SetBranchAddress("ScintW_bare", &ScintW_bare);
   inputTree->SetBranchAddress("EvisE",&EvisE);
   inputTree->SetBranchAddress("EvisW",&EvisW);
   inputTree->SetBranchAddress("CathSumE",&CathSumE);
